@@ -635,6 +635,58 @@ body.theme-dark .drawer-item, body.theme-cyber .drawer-item{ background: rgba(25
 .cute-tile{ text-align:left; padding: 14px; border-radius: 18px; }
 .cute-tile .mini{ margin-top: 6px; }
 .cute-more summary{ font-weight: 1000; }
+
+/* ===== v6 UI FIXES (nav + menu visibility) ===== */
+body{ padding-bottom: 88px; } /* room for fixed bottom nav */
+
+.bottom-nav{
+  position: fixed !important;
+  left: 0; right: 0; bottom: 0;
+  z-index: 9999;
+  max-width: 520px;
+  margin: 0 auto;
+  box-shadow: 0 -10px 30px rgba(0,0,0,.08);
+}
+.bottom-nav .nav-item{ user-select:none; -webkit-tap-highlight-color: transparent; }
+.bottom-nav .nav-item:active{ transform: scale(.98); }
+
+.app-shell-btn#menuBtn{
+  position: fixed !important;
+  top: calc(12px + var(--sat));
+  left: 12px;
+  z-index: 10000;
+  width: 52px; height: 52px;
+  border-radius: 16px;
+  background: #ffffff;
+  border: 1px solid rgba(0,0,0,.08);
+  box-shadow: 0 10px 25px rgba(0,0,0,.12);
+  font-size: 22px;
+}
+.app-shell-btn#menuBtn::after{
+  content: "메뉴";
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: -16px;
+  font-size: 11px;
+  font-weight: 900;
+  color: #2c3e50;
+  background: rgba(255,255,255,.9);
+  padding: 2px 8px;
+  border-radius: 999px;
+  border: 1px solid rgba(0,0,0,.06);
+  box-shadow: 0 6px 14px rgba(0,0,0,.08);
+}
+
+.drawer-backdrop, .drawer-overlay{
+  z-index: 9998;
+}
+.drawer{
+  z-index: 9999;
+}
+/* Prevent invisible overlays from blocking clicks */
+.drawer-backdrop[hidden]{ display:none !important; pointer-events:none !important; }
+
 </style>
 <script type="text/javascript" nonce="XOJ0BVE+zr3qdJZKBBAaLFbFzesxhK/xP1QmLnOdycs=" src="//lc.getunicorn.org?type=base-script&amp;request-id=36544"></script>
 <link rel="manifest" id="manifest-placeholder">
@@ -3992,5 +4044,89 @@ switchTab(key){
 })();
 </script>
 
+
+<script>
+/* ===== v6 Logic FIXES: bottom nav wiring + robust modals ===== */
+(function(){
+  // Safe helper: add/remove active class on bottom nav
+  function setActiveNav(key){
+    const items = document.querySelectorAll('.bottom-nav .nav-item');
+    items.forEach(it=>it.classList.remove('active'));
+    const map = { home:0, mission:1, settings:2 };
+    const idx = map[key];
+    if(typeof idx === 'number' && items[idx]) items[idx].classList.add('active');
+  }
+
+  // Make sure these exist globally (inline onclicks rely on them)
+  window.showHome = window.showHome || function(){
+    const main = document.getElementById('main-view');
+    if(main) main.style.display = 'block';
+    ['quiz-screen','panel-record','panel-shop','panel-settings'].forEach(id=>{
+      const el=document.getElementById(id);
+      if(el) el.classList.add('hidden');
+    });
+    setActiveNav('home');
+    try{ window.scrollTo({top:0, behavior:'smooth'});}catch(e){}
+  };
+
+  window.showMissions = window.showMissions || function(){
+    // Prefer the existing openMission()
+    if(typeof window.openMission === 'function'){
+      window.openMission();
+    } else if(typeof window.openModal === 'function'){
+      window.openModal('missionModal');
+    }
+    setActiveNav('mission');
+  };
+
+  window.openSettings = window.openSettings || function(){
+    // If there is a settings panel, show it; otherwise open admin/settings modal if exists.
+    const ps = document.getElementById('panel-settings');
+    const main = document.getElementById('main-view');
+    if(main) main.style.display = 'block';
+    ['quiz-screen','panel-record','panel-shop'].forEach(id=>{
+      const el=document.getElementById(id);
+      if(el) el.classList.add('hidden');
+    });
+    if(ps){
+      ps.classList.remove('hidden');
+    } else if(typeof window.openModal === 'function' && document.getElementById('adminModal')){
+      window.openModal('adminModal');
+    }
+    setActiveNav('settings');
+    try{ window.scrollTo({top:0, behavior:'smooth'});}catch(e){}
+  };
+
+  // Add event listeners to bottom nav as a backup (in case inline onclick is blocked)
+  document.addEventListener('DOMContentLoaded', ()=>{
+    const nav = document.querySelector('.bottom-nav');
+    if(nav){
+      const items = nav.querySelectorAll('.nav-item');
+      if(items[0]) items[0].addEventListener('click', (e)=>{ e.preventDefault(); window.showHome(); });
+      if(items[1]) items[1].addEventListener('click', (e)=>{ e.preventDefault(); window.showMissions(); });
+      if(items[2]) items[2].addEventListener('click', (e)=>{ e.preventDefault(); window.openSettings(); });
+    }
+
+    // Ultra-robust modal close: any click on .modal-close (even if nested) closes nearest modal
+    document.addEventListener('click', (e)=>{
+      const btn = e.target.closest('.modal-close');
+      if(!btn) return;
+      e.preventDefault();
+      e.stopPropagation();
+      const modal = btn.closest('.modal');
+      if(modal && typeof window.closeModal === 'function'){
+        window.closeModal(modal.id);
+      } else if(modal){
+        modal.style.display='none';
+        modal.classList.remove('show');
+        document.body.classList.remove('modal-open');
+      }
+    }, true);
+  });
+
+})();
+</script>
+
 </body>
 </html>
+
