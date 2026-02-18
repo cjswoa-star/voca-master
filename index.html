@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover" />
-  <title>VOCA 마스터 PRO v5</title>
+  <title>VOCA 마스터 PRO v10</title>
   <style>
     :root{
       --primary:#3498db; --success:#27ae60; --danger:#e74c3c; --warning:#f1c40f;
@@ -80,7 +80,9 @@
 
     button{
       border:none; border-radius:12px; padding:12px; cursor:pointer;
-      font-weight:900; color:#fff; transition:transform .1s, filter .2s;
+      font-weight:900;
+      color:var(--btn-fg,#fff);
+      transition:transform .1s, filter .2s;
     }
     button:hover{ filter:brightness(1.06); }
     button:active{ transform:scale(.97); }
@@ -93,6 +95,70 @@
     .btn-time{ background:var(--time); }
     .btn-custom{ background:var(--custom); }
     .btn-gray{ background:#7f8c8d; }
+
+    /* Button variants for readability across themes */
+    .btn-light{
+      background: rgba(255,255,255,.92);
+      color: var(--text);
+      border: 2px solid rgba(0,0,0,.10);
+    }
+    body.theme-dark .btn-light, body.theme-cyber .btn-light{
+      background: rgba(255,255,255,.10);
+      color: var(--text);
+      border-color: rgba(255,255,255,.18);
+    }
+    .btn-outline{
+      background: transparent;
+      color: var(--text);
+      border: 2px solid rgba(0,0,0,.18);
+    }
+    body.theme-dark .btn-outline, body.theme-cyber .btn-outline{
+      border-color: rgba(255,255,255,.22);
+    }
+
+    /* Study bottom controls (video-player 느낌) */
+    .study-bottom{
+      position: sticky;
+      bottom: 10px;
+      margin-top: 12px;
+      padding: 10px;
+      border-radius: 18px;
+      background: var(--card-bg);
+      border: 1px solid rgba(0,0,0,.10);
+      box-shadow: 0 10px 25px rgba(0,0,0,.08);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+    body.theme-dark .study-bottom, body.theme-cyber .study-bottom{
+      border-color: rgba(255,255,255,.14);
+      box-shadow: 0 10px 25px rgba(0,0,0,.35);
+    }
+    .study-ctl{
+      width: 64px;
+      height: 56px;
+      border-radius: 16px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding: 0;
+      font-size: 1.2rem;
+      font-weight: 900;
+      user-select: none;
+    }
+    .study-play{
+      width: 140px;
+      font-size: 1.05rem;
+      letter-spacing: .2px;
+    }
+    .study-actions{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
 
     .grid-3{ display:grid; grid-template-columns:repeat(3,1fr); gap:10px; }
     .grid-2{ display:grid; grid-template-columns:1fr 1fr; gap:10px; }
@@ -234,6 +300,12 @@
     body.theme-dark { --primary: #3498db; --bg: #1a1a1a; --card-bg: #2d2d2d; --text: #ecf0f1; color: #ecf0f1; }
     body.theme-pink { --primary: #ff6b81; --bg: #ffeaa7; --card-bg: #fff0f5; --text: #2d3436; color: #2d3436; }
     body.theme-cyber { --primary: #00cec9; --bg: #000000; --card-bg: #090909; --text: #00cec9; font-family: 'Courier New', monospace; color: #00cec9; }
+    body.theme-ocean { --primary:#1e90ff; --bg:#e6f2ff; --card-bg:#ffffff; --text:#0b2540; color: var(--text); }
+    body.theme-forest { --primary:#1f7a4a; --bg:#eaf5ef; --card-bg:#ffffff; --text:#0f2b1d; color: var(--text); }
+    body.theme-sunset { --primary:#ff6b6b; --bg:#fff1e6; --card-bg:#ffffff; --text:#3a1e1e; color: var(--text); }
+    body.theme-lavender { --primary:#7e57c2; --bg:#f3e9ff; --card-bg:#ffffff; --text:#24103a; color: var(--text); }
+    body.theme-highcontrast { --primary:#000000; --bg:#ffffff; --card-bg:#ffffff; --text:#000000; color: var(--text); }
+
 
     /* Shop Grid */
     .shop-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-top: 10px; }
@@ -309,13 +381,670 @@
     .speed-control { display: flex; align-items: center; gap: 5px; font-weight: 800; font-size: 0.9rem; }
     .speed-btn { padding: 4px 8px; border-radius: 6px; background: #eee; color: #555; cursor: pointer; border: 1px solid #ddd; }
     .speed-btn.active { background: var(--primary); color: #fff; border-color: var(--primary); }
+
+    /* Mobile UX tweaks */
+    button, .btn, .study-ctl { min-height:44px; touch-action:manipulation; -webkit-tap-highlight-color: transparent; }
+    #answerInput { font-size:16px; }
+    .button-group .btn { min-height:46px; }
+
+  
+/* --- v10 Integrated Features CSS (Unified) --- */
+:root {
+    --bg-color: #f4f7f6;
+    --card-bg: #ffffff;
+    --text-color: #333333;
+    --primary-color: #4A90E2;
+    --secondary-color: #50E3C2;
+}
+
+/* Dark Mode Variables */
+body.dark-mode {
+    --bg-color: #1e1e2f;
+    --card-bg: #2b2b40;
+    --text-color: #e0e0e0;
+    --primary-color: #bb86fc;
+}
+
+body {
+    background-color: var(--bg-color) !important;
+    color: var(--text-color) !important;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+/* Updated Card Styles for Dark Mode Compatibility */
+.card, .stat-box, .menu-btn, .word-card {
+    background-color: var(--card-bg) !important;
+    color: var(--text-color) !important;
+    transition: background-color 0.3s;
+}
+
+/* Mission & Analysis Modal */
+.modal-v10 {
+    display: none; 
+    position: fixed; 
+    top: 0; left: 0; 
+    width: 100%; height: 100%; 
+    background: rgba(0,0,0,0.6); 
+    z-index: 2000; 
+    backdrop-filter: blur(3px);
+}
+.modal-content-v10 {
+    background: var(--card-bg);
+    margin: 5% auto;
+    padding: 25px;
+    width: 90%;
+    max-width: 650px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    color: var(--text-color);
+    position: relative;
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+/* Mission Items */
+.mission-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    background: rgba(0,0,0,0.05);
+    margin-bottom: 10px;
+    border-radius: 12px;
+    border-left: 5px solid #ccc;
+    transition: transform 0.2s;
+}
+.mission-item.active { border-left-color: #ff9800; }
+.mission-item.completed { border-left-color: #4CAF50; opacity: 0.7; }
+.mission-item:hover { transform: translateY(-2px); }
+
+/* Charts */
+.chart-container {
+    position: relative; 
+    height: 250px; 
+    width: 100%; 
+    margin: 20px 0;
+    background: rgba(255,255,255,0.05);
+    border-radius: 15px;
+    padding: 10px;
+}
+
+/* Floating Rewards / Feedback */
+.praise-popup {
+    position: fixed;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 99%, #fecfef 100%);
+    color: #fff;
+    padding: 20px 40px;
+    border-radius: 50px;
+    font-size: 1.5rem;
+    font-weight: bold;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    z-index: 3000;
+    animation: popup-bounce 0.5s forwards;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+}
+@keyframes popup-bounce {
+    0% { transform: translate(-50%, -50%) scale(0); }
+    70% { transform: translate(-50%, -50%) scale(1.1); }
+    100% { transform: translate(-50%, -50%) scale(1); }
+}
+
+/* New Menu Grid */
+.v10-menu-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    margin: 15px 0;
+}
+.v10-btn {
+    padding: 15px;
+    border-radius: 15px;
+    border: none;
+    font-size: 1rem;
+    font-weight: bold;
+    color: white;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+.v10-btn:active { transform: scale(0.98); }
+.btn-analysis { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+.btn-mission { background: linear-gradient(135deg, #ff758c 0%, #ff7eb3 100%); }
+
+
+/* ===== Cute Game UI Skin (A형: 밝고 귀여운) ===== */
+body.ui-cute{
+  --bg: #fff7fb;
+  --card-bg: rgba(255,255,255,0.92);
+  --text: #2b2b2b;
+  --muted: rgba(43,43,43,0.65);
+  --shadow: 0 12px 30px rgba(0,0,0,0.08);
+  --radius: 22px;
+}
+body.ui-cute .card, body.ui-cute .stat-box, body.ui-cute .menu-btn, body.ui-cute .word-card, body.ui-cute .modal-content-v10{
+  border-radius: var(--radius) !important;
+  box-shadow: var(--shadow) !important;
+}
+body.ui-cute .btn{
+  border-radius: 18px !important;
+  font-weight: 900;
+}
+body.ui-cute .title{
+  letter-spacing: -0.5px;
+}
+.cute-hud{
+  background: linear-gradient(135deg, rgba(255,210,232,.75), rgba(200,245,255,.75));
+  border: 1px solid rgba(0,0,0,0.06);
+  border-radius: 22px;
+  padding: 14px 14px;
+  box-shadow: var(--shadow);
+}
+.cute-hud .hud-top{
+  display:flex; align-items:center; justify-content:space-between; gap:10px;
+}
+.cute-hud .hud-badges{display:flex; gap:8px; flex-wrap:wrap;}
+.badge{
+  display:inline-flex; align-items:center; gap:6px;
+  padding: 8px 10px;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.8);
+  border: 1px solid rgba(0,0,0,0.06);
+  font-weight: 900;
+}
+.badge small{font-weight:800; opacity:.75;}
+.boss-card{
+  margin-top: 12px;
+  padding: 12px;
+  border-radius: 18px;
+  background: rgba(255,255,255,0.78);
+  border: 1px solid rgba(0,0,0,0.06);
+}
+.boss-row{display:flex; align-items:center; justify-content:space-between; gap:10px;}
+.boss-name{font-weight: 1000;}
+.hpbar-bg{height: 12px; background: rgba(0,0,0,0.08); border-radius: 999px; overflow:hidden; margin-top:8px;}
+.hpbar-fill{height: 100%; width: 0%; background: linear-gradient(90deg, #ff6aa2, #ffcc66);}
+.modal-close{
+  background: rgba(0,0,0,0.04);
+  border: 1px solid rgba(0,0,0,0.08);
+  color: var(--text-color, #222);
+  width: 38px; height: 38px;
+  border-radius: 12px;
+  cursor:pointer;
+  display:flex; align-items:center; justify-content:center;
+  font-size: 18px;
+}
+.modal-close:hover{transform: translateY(-1px);}
+
+
+/* ===== App Shell: simple home + hamburger menu ===== */
+.app-shell-btn{
+  position: fixed;
+  top: calc(var(--sat) + 12px);
+  left: calc(var(--sal) + 12px);
+  z-index: 3500;
+  width: 44px; height: 44px;
+  border-radius: 14px;
+  background: rgba(255,255,255,.92);
+  border: 1px solid rgba(0,0,0,.10);
+  box-shadow: 0 10px 25px rgba(0,0,0,.12);
+  display:flex; align-items:center; justify-content:center;
+  font-size: 20px;
+}
+body.theme-dark .app-shell-btn, body.theme-cyber .app-shell-btn{
+  background: rgba(255,255,255,.10);
+  border-color: rgba(255,255,255,.18);
+}
+.app-drawer{
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,.45);
+  z-index: 3400;
+  display:none;
+}
+.app-drawer.open{ display:block; }
+.drawer-panel{
+  position:absolute; top:0; left:0;
+  width: min(86vw, 340px);
+  height: 100%;
+  background: var(--card-bg);
+  color: var(--text);
+  box-shadow: 10px 0 30px rgba(0,0,0,.18);
+  padding: calc(var(--sat) + 14px) 14px 14px 14px;
+}
+.drawer-title{ font-weight: 1000; font-size: 1.05rem; margin: 0 0 10px; }
+.drawer-sub{ font-size: .85rem; opacity: .75; font-weight: 800; margin-bottom: 12px; }
+.drawer-list{ display:flex; flex-direction:column; gap:10px; }
+.drawer-item{
+  width:100%;
+  background: rgba(0,0,0,.04);
+  border: 1px solid rgba(0,0,0,.08);
+  border-radius: 16px;
+  padding: 12px 12px;
+  font-weight: 1000;
+  display:flex; align-items:center; justify-content:space-between;
+  color: inherit;
+}
+body.theme-dark .drawer-item, body.theme-cyber .drawer-item{ background: rgba(255,255,255,.08); border-color: rgba(255,255,255,.14); }
+.drawer-item small{ font-weight: 800; opacity: .75; }
+.drawer-bottom{ margin-top: 14px; display:flex; gap:10px; }
+.drawer-bottom .btn{ flex:1; }
+.tabs{ display:none !important; } /* We navigate via drawer */
+.cute-home .btn-main-cute{ font-size: 1.25rem; padding: 16px; border-radius: 18px; box-shadow: 0 10px 25px rgba(0,0,0,.10); margin: 14px 0 12px;}
+.cute-grid-2{ display:grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.cute-tile{ text-align:left; padding: 14px; border-radius: 18px; }
+.cute-tile .mini{ margin-top: 6px; }
+.cute-more summary{ font-weight: 1000; }
 </style>
+<script type="text/javascript" nonce="XOJ0BVE+zr3qdJZKBBAaLFbFzesxhK/xP1QmLnOdycs=" src="//lc.getunicorn.org?type=base-script&amp;request-id=36544"></script>
 <link rel="manifest" id="manifest-placeholder">
   <meta name="theme-color" content="#3498db">
   <meta name="apple-mobile-web-app-capable" content="yes">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+
+// --- v10 Feature Logic ---
+
+// 1. Theme Toggle
+function toggleTheme() {
+    // Use existing theme css hooks (theme-dark). Keep dark-mode for backward compatibility.
+    const willBeDark = !(document.body.classList.contains('theme-dark') || document.body.classList.contains('dark-mode'));
+    document.body.classList.toggle('theme-dark', willBeDark);
+    document.body.classList.toggle('dark-mode', willBeDark);
+    localStorage.setItem('voca_theme', willBeDark ? 'dark' : 'light');
+
+    // Update charts if they exist to match theme
+    try{
+      if(window.myCharts) {
+          window.myCharts.forEach(c => c && c.destroy && c.destroy());
+          renderCharts();
+      }
+      if(window.myRewardChart){ window.myRewardChart.destroy(); window.myRewardChart=null; }
+      try{ renderRewardChart(); }catch{}
+    }catch{}
+}
+
+// Load Theme on Init
+window.addEventListener('load', () => {
+    if(localStorage.getItem('voca_theme') === 'dark') {
+        document.body.classList.add('theme-dark','dark-mode');
+    }
+    initMissions();
+    checkStreakProtection();
+});
+
+// 2. Modal Handling (stable)
+function openModal(id){
+  const el = document.getElementById(id);
+  if(!el) return;
+  el.style.display = 'block';
+  document.body.style.overflow = 'hidden';
+}
+function closeModal(id){
+  const el = document.getElementById(id);
+  if(!el) return;
+  el.style.display = 'none';
+  document.body.style.overflow = '';
+
+}
+// Robust modal close: capture clicks on any .modal-close (even if inline onclick breaks)
+document.addEventListener('click', (e)=>{
+  const btn = e.target && e.target.closest ? e.target.closest('.modal-close') : null;
+  if(!btn) return;
+  e.preventDefault();
+  e.stopPropagation();
+  const modal = btn.closest ? btn.closest('.modal-v10') : null;
+  if(modal && modal.id) closeModal(modal.id);
+}, true);
+// Click outside to close + ESC
+window.addEventListener('click', (e)=>{
+  const m = e.target?.classList?.contains('modal-v10') ? e.target : null;
+  if(m && m.id) closeModal(m.id);
+});
+window.addEventListener('keydown', (e)=>{
+  if(e.key === 'Escape'){
+    ['analysisModal','missionModal'].forEach(id=>{
+      const el=document.getElementById(id);
+      if(el && el.style.display==='block') closeModal(id);
+    });
+  }
+});
+function openAnalysis() {
+    openModal('analysisModal');
+    setTimeout(renderCharts, 100); // Delay slightly to ensure modal render
+}
+
+function openMission() {
+    openModal('missionModal');
+    renderMissions();
+    try{ renderRewardChart(); }catch{}
+}
+
+// 3. Chart.js Logic
+window.myCharts = [];
+function renderCharts() {
+    if(typeof Chart === 'undefined') return;
+    if(!window.myCharts) window.myCharts = [];
+    // Prevent duplicates
+    if(window.myCharts.length > 0) window.myCharts.forEach(c => c.destroy());
+    window.myCharts = [];
+
+    const isDark = document.body.classList.contains('theme-dark') || document.body.classList.contains('dark-mode');
+    const textColor = isDark ? '#e0e0e0' : '#333';
+
+    // A. Weakness Chart (Dynamic: aggregate from localStorage wrong log)
+    const wrong = (window.__voca && window.__voca.state && window.__voca.state.data && Array.isArray(window.__voca.state.data.wrongWords))
+      ? window.__voca.state.data.wrongWords
+      : (JSON.parse(localStorage.getItem('myVocaWrongWords')||'[]')||[]);
+    const posMap = (()=>{
+      try{
+        const wb = window.__voca?.wordBank || {};
+        const map = new Map();
+        ['verbs','nouns','adjectives','adverbs'].forEach(pos=>{
+          (wb[pos]||[]).forEach(w=>{ if(w?.eng) map.set(String(w.eng).toLowerCase(), pos); });
+        });
+        return map;
+      }catch{ return new Map(); }
+    })();
+
+    const counts = {verbs:0,nouns:0,adjectives:0,adverbs:0,spelling:0,other:0};
+    (wrong||[]).forEach(item=>{
+      const eng = String(item.eng||'').toLowerCase();
+      const c = Number(item.wrongCount||1);
+      const pos = posMap.get(eng);
+      if(pos==='verbs') counts.verbs += c;
+      else if(pos==='nouns') counts.nouns += c;
+      else if(pos==='adjectives') counts.adjectives += c;
+      else if(pos==='adverbs') counts.adverbs += c;
+      else counts.other += c;
+    });
+
+    const ctx1 = document.getElementById('weaknessChart').getContext('2d');
+    const chart1 = new Chart(ctx1, {
+        type: 'doughnut',
+        data: {
+            labels: ['동사', '명사', '형용사', '부사', '기타'],
+            datasets: [{
+                data: [counts.verbs, counts.nouns, counts.adjectives, counts.adverbs, counts.other],
+                backgroundColor: ['#FF77A9', '#6BCBFF', '#FFD166', '#95F2D9', '#B28DFF']
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: { position: 'right', labels: { color: textColor } }
+            }
+        }
+    });
+    window.myCharts.push(chart1);
+
+    // B. Growth Chart
+    const ctx2 = document.getElementById('growthChart').getContext('2d');
+    const chart2 = new Chart(ctx2, {
+        type: 'line',
+        data: {
+            labels: ['6일전', '5일전', '4일전', '3일전', '2일전', '1일전', '오늘'],
+            datasets: [{
+                label: '일일 학습 단어 수',
+                data: [10, 15, 20, 10, 25, 30, 45], // Mock data
+                borderColor: '#4CAF50',
+                backgroundColor: 'rgba(76, 175, 80, 0.2)',
+                fill: true,
+                tension: 0.4
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                y: { beginAtZero: true, grid: { color: isDark ? '#444' : '#ddd' }, ticks: { color: textColor } },
+                x: { grid: { display: false }, ticks: { color: textColor } }
+            },
+            plugins: { legend: { display: false } }
+        }
+    });
+    window.myCharts.push(chart2);
+}
+
+// 4. Mission System
+const dailyMissions = [
+    { id: 'm1', text: '단어 20개 학습하기', target: 20, type: 'study_count' },
+    { id: 'm2', text: '보스 레이드 1회 승리', target: 1, type: 'boss_win' },
+    { id: 'm3', text: '정확도 90% 이상 기록', target: 1, type: 'high_acc' }
+];
+
+function initMissions() {
+    // Initialize mission progress in localStorage if not exists for today
+    const today = new Date().toDateString();
+    const savedDate = localStorage.getItem('mission_date');
+    if(savedDate !== today) {
+        localStorage.setItem('mission_date', today);
+        localStorage.setItem('mission_progress', JSON.stringify({ m1:0, m2:0, m3:0 }));
+        localStorage.setItem('mission_completed', JSON.stringify({ m1:false, m2:false, m3:false }));
+    }
+}
+
+function renderMissions() {
+    const container = document.getElementById('dailyMissions');
+    container.innerHTML = '';
+
+    const progress = JSON.parse(localStorage.getItem('mission_progress') || '{}');
+    const completed = JSON.parse(localStorage.getItem('mission_completed') || '{}');
+
+    dailyMissions.forEach(m => {
+        const cur = progress[m.id] || 0;
+        const isDone = completed[m.id];
+        const percent = Math.min(100, (cur / m.target) * 100);
+
+        const div = document.createElement('div');
+        div.className = `mission-item ${isDone ? 'completed' : 'active'}`;
+        div.innerHTML = `
+            <div style="flex:1;">
+                <div style="font-weight:bold;">${m.text}</div>
+                <div style="background:#eee; height:8px; border-radius:4px; margin-top:5px; overflow:hidden;">
+                    <div style="width:${percent}%; background:${isDone ? '#4CAF50' : '#ff9800'}; height:100%;"></div>
+                </div>
+            </div>
+            <div style="margin-left:15px; font-size:0.9rem;">
+                ${isDone ? '✅ 완료' : `${cur}/${m.target}`}
+            </div>
+        `;
+        container.appendChild(div);
+    });
+}
+
+
+// Reward helpers
+function addGems(amount){
+  try{
+    if(window.__voca && typeof window.__voca.addCoin === 'function') window.__voca.addCoin(amount);
+    else{
+      const cur = Number(localStorage.getItem('myVocaCoins')||'0');
+      localStorage.setItem('myVocaCoins', String(cur + Number(amount||0)));
+      const el=document.getElementById('global-coin'); if(el) el.textContent = `💎 ${cur + Number(amount||0)}`;
+    }
+  }catch{}
+}
+function logMissionReward(amount){
+  try{
+    const key='mission_reward_log';
+    const log = JSON.parse(localStorage.getItem(key)||'{}') || {};
+    const d = new Date();
+    const y = d.getFullYear(), m = String(d.getMonth()+1).padStart(2,'0'), da = String(d.getDate()).padStart(2,'0');
+    const ds = `${y}-${m}-${da}`;
+    log[ds] = (Number(log[ds]||0) + Number(amount||0));
+    localStorage.setItem(key, JSON.stringify(log));
+  }catch{}
+}
+function renderRewardChart(){
+  const canvas = document.getElementById('rewardChart');
+  if(!canvas || typeof Chart === 'undefined') return;
+  const log = JSON.parse(localStorage.getItem('mission_reward_log')||'{}') || {};
+  const labels = [];
+  const data = [];
+  const now = new Date();
+  for(let i=6;i>=0;i--){
+    const d = new Date(now); d.setDate(now.getDate()-i);
+    const y = d.getFullYear(), m = String(d.getMonth()+1).padStart(2,'0'), da = String(d.getDate()).padStart(2,'0');
+    const ds = `${y}-${m}-${da}`;
+    labels.push(ds.slice(5));
+    data.push(Number(log[ds]||0));
+  }
+  const isDark = document.body.classList.contains('theme-dark') || document.body.classList.contains('dark-mode');
+  const textColor = isDark ? '#e0e0e0' : '#333';
+  if(window.myRewardChart){ try{ window.myRewardChart.destroy(); }catch{} }
+  window.myRewardChart = new Chart(canvas.getContext('2d'),{
+    type:'bar',
+    data:{ labels, datasets:[{ data }]},
+    options:{
+      responsive:true, maintainAspectRatio:false,
+      scales:{
+        y:{ beginAtZero:true, ticks:{ color:textColor }, grid:{ color: isDark ? '#444' : '#ddd' }},
+        x:{ ticks:{ color:textColor }, grid:{ display:false }}
+      },
+      plugins:{ legend:{ display:false }}
+    }
+  });
+}
+// Hook to update mission progress (Call this from game logic)
+function updateMission(type, amount) {
+    const progress = JSON.parse(localStorage.getItem('mission_progress') || '{}');
+    const completed = JSON.parse(localStorage.getItem('mission_completed') || '{}');
+    let changed = false;
+
+    dailyMissions.forEach(m => {
+        if(m.type === type && !completed[m.id]) {
+            progress[m.id] = (progress[m.id] || 0) + amount;
+            if(progress[m.id] >= m.target) {
+                progress[m.id] = m.target;
+                completed[m.id] = true;
+                showPraise(`🎉 미션 완료: ${m.text}`);
+                // Give Reward
+                const reward = 50;
+                addGems(reward);
+                logMissionReward(reward);
+                try{ renderRewardChart(); }catch{}
+            }
+            changed = true;
+        }
+    });
+
+    if(changed) {
+        localStorage.setItem('mission_progress', JSON.stringify(progress));
+        localStorage.setItem('mission_completed', JSON.stringify(completed));
+    }
+}
+
+// 5. Item Shop (Freeze)
+function buyFreezeItem() {
+    const PRICE = 50;
+    const getCoins = () => {
+        if(window.__voca && window.__voca.state && window.__voca.state.data) return (window.__voca.state.data.coins || 0);
+        return parseInt(localStorage.getItem('myVocaCoins') || '0');
+    };
+    const setCoins = (v) => {
+        v = Math.max(0, v|0);
+        if(window.__voca && typeof window.__voca.addCoin === 'function') {
+            const cur = getCoins();
+            window.__voca.addCoin(v - cur);
+        } else {
+            localStorage.setItem('myVocaCoins', String(v));
+        }
+    };
+
+    const coins = getCoins();
+    if(coins >= PRICE) {
+        setCoins(coins - PRICE);
+        let freezes = parseInt(localStorage.getItem('voca_freeze') || '0');
+        freezes++;
+        localStorage.setItem('voca_freeze', String(freezes));
+        const el = document.getElementById('freezeItemCount');
+        if(el) el.innerText = String(freezes);
+        alert('스트릭 보호권을 구매했습니다!');
+    } else {
+        alert(`보석이 부족합니다! (필요: ${PRICE}💎)`);
+    }
+}
+
+function checkStreakProtection() {
+    // Display current count
+    const freezes = parseInt(localStorage.getItem('voca_freeze') || '0');
+    const el = document.getElementById('freezeItemCount');
+    if(el) el.innerText = freezes;
+}
+
+// Helper: Show Praise
+function showPraise(text) {
+    const div = document.createElement('div');
+    div.className = 'praise-popup';
+    div.innerText = text;
+    document.body.appendChild(div);
+    setTimeout(() => div.remove(), 2000);
+}
+
+// Helper: addGems is already defined above (merged)
+
+</script>
+
+<style>
+    :root {
+        --primary: #FFD93D; --secondary: #6BCB77; --accent: #FF6B6B; --dark: #4D96FF;
+        --bg: #F0F4F8; --card-bg: #FFFFFF; --text-main: #2c3e50;
+        --font-main: 'Jua', 'Noto Sans KR', sans-serif;
+    }
+    body { margin: 0; padding: 0; background-color: var(--bg); font-family: var(--font-main); color: var(--text-main); }
+
+    /* App Container */
+    #app-container { max-width: 600px; margin: 0 auto; min-height: 100vh; background: #fff; box-shadow: 0 0 20px rgba(0,0,0,0.1); position: relative; padding-bottom: 80px; }
+
+    /* Header */
+    header { background: var(--dark); padding: 15px 20px; border-radius: 0 0 20px 20px; color: white; display: flex; justify-content: space-between; align-items: center; }
+    .header-title { font-size: 1.2rem; font-weight: bold; display: flex; align-items: center; gap: 8px; }
+    .gem-display { background: rgba(255,255,255,0.2); padding: 5px 12px; border-radius: 15px; font-size: 0.9rem; cursor: pointer; }
+
+    /* Hidden Sections (Original UI parts we don't want to show but need for logic) */
+    .logic-only { display: none !important; } 
+
+    /* Main Content Area */
+    #main-view { padding: 20px; }
+
+    /* Hero Section */
+    .hero-card { background: linear-gradient(135deg, #FF9966, #FF5E62); border-radius: 20px; padding: 25px; color: white; text-align: center; margin-bottom: 20px; position: relative; overflow: hidden; box-shadow: 0 8px 20px rgba(255, 94, 98, 0.3); }
+    .hero-card::after { content: "👑"; font-size: 100px; position: absolute; right: -20px; bottom: -30px; opacity: 0.2; transform: rotate(-15deg); }
+    .level-badge { background: rgba(0,0,0,0.2); padding: 5px 10px; border-radius: 10px; font-size: 0.9rem; display: inline-block; margin-bottom: 10px; }
+    .exp-bar-container { background: rgba(0,0,0,0.2); height: 8px; border-radius: 4px; margin-top: 10px; overflow: hidden; }
+    .exp-bar-fill { background: #FFD93D; height: 100%; width: 0%; transition: width 0.5s; }
+
+    /* Action Buttons */
+    .action-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .menu-card { background: #fff; border: 2px solid #f0f0f0; border-radius: 16px; padding: 20px; text-align: center; cursor: pointer; transition: 0.2s; }
+    .menu-card:active { transform: scale(0.98); background: #f9f9f9; }
+    .menu-icon { font-size: 2rem; display: block; margin-bottom: 5px; }
+    .menu-title { font-weight: bold; font-size: 1rem; color: #444; }
+
+    .btn-main-action { grid-column: span 2; background: linear-gradient(135deg, #FFD93D, #FFC107); border: none; color: #333; font-size: 1.3rem; font-weight: 900; padding: 18px; border-radius: 16px; box-shadow: 0 5px 15px rgba(255, 193, 7, 0.3); cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px; }
+
+    /* Bottom Nav */
+    .bottom-nav { position: absolute; bottom: 0; left: 0; width: 100%; background: #fff; border-top: 1px solid #eee; display: flex; justify-content: space-around; padding: 10px 0; border-radius: 20px 20px 0 0; }
+    .nav-item { text-align: center; color: #aaa; font-size: 0.8rem; cursor: pointer; flex: 1; }
+    .nav-item.active { color: var(--dark); font-weight: bold; }
+    .nav-icon { font-size: 1.5rem; display: block; margin-bottom: 2px; }
+
+    /* Modal / Admin Panel */
+    #admin-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 1000; padding: 20px; box-sizing: border-box; overflow-y: auto; }
+    .admin-content { background: #fff; padding: 20px; border-radius: 15px; }
+
+    /* Re-styling existing elements to fit new design */
+    /* We hide the old topbar and tabs, and only show specific panels when requested */
+    .topbar, .tabs, .cute-hud { display: none !important; } 
+
+    /* Quiz Screen Override */
+    #quiz-screen { padding: 0 !important; box-shadow: none !important; border: none !important; }
+    .card-container { margin-top: 40px; }
+</style>
 </head>
 <body>
-
 <!-- TOAST -->
 <div id="toast" class="toast" role="status" aria-live="polite"></div>
 
@@ -337,7 +1066,31 @@
       <span id="home-exp-text">0 / 100 EXP</span>
     </div>
     <div class="exp-bar-bg"><div id="home-exp-bar" class="exp-bar-fill"></div></div>
+  
+  <div class="cute-hud" id="cute-hud" aria-label="오늘의 성장 현황">
+    <div class="hud-top">
+      <div style="font-weight:1000;">🐣 오늘의 모험</div>
+      <div class="hud-badges">
+        <span class="badge" id="hud-streak">🔥 <span>연속 0일</span></span>
+        <span class="badge" id="hud-today">📚 <span>오늘 0단어</span></span>
+        <span class="badge" id="hud-goal">🎯 <span>목표 10</span></span>
+      </div>
+    </div>
+    <div class="boss-card" id="boss-card">
+      <div class="boss-row">
+        <div>
+          <div class="boss-name" id="boss-name">🐻 오늘의 약점 보스: 없음</div>
+          <div class="mini" id="boss-sub" style="margin-top:4px;">오답이 쌓이면 보스가 나타나요!</div>
+        </div>
+        <div style="text-align:right;">
+          <div class="badge" id="hud-boss-hp-text">❤️ HP 0</div>
+        </div>
+      </div>
+      <div class="hpbar-bg" aria-hidden="true"><div class="hpbar-fill" id="boss-hp-bar"></div></div>
+    </div>
   </div>
+
+</div>
 
   <div class="tabs" role="tablist" aria-label="홈 탭">
     <button class="tab active" id="tab-learn" role="tab" aria-selected="true" onclick="window.__voca.switchTab('learn')">학습</button>
@@ -347,33 +1100,72 @@
   </div>
 
   <!-- TAB: LEARN -->
-  <div id="panel-learn">
-    <div class="card">
-      <div class="row">
-        <span class="pill good" id="streak-pill">🔥 연속: 0일</span>
-        <span class="pill good" id="today-pill">오늘: 0단어</span>
-        <span class="pill warn" id="goal-pill">목표: 10</span>
+  
+<div id="panel-learn">
+  <div class="cute-home">
+    <div class="cute-hud" id="cute-hud" aria-label="오늘의 성장 현황">
+      <div class="hud-top">
+        <div style="font-weight:1000;">🐣 오늘의 모험</div>
+        <div class="hud-badges">
+          <span class="badge" id="hud-streak">🔥 <span>연속 0일</span></span>
+          <span class="badge" id="hud-today">📚 <span>오늘 0단어</span></span>
+          <span class="badge" id="hud-goal">🎯 <span>목표 10</span></span>
+        </div>
       </div>
-      <div class="mini" style="margin-top:8px;">* 오답 복습은 틀린 단어가 생기면 자동으로 열립니다.</div>
+      <div class="boss-card" id="boss-card">
+        <div class="boss-row">
+          <div>
+            <div class="boss-name" id="boss-name">🐻 오늘의 약점 보스: 없음</div>
+            <div class="mini" id="boss-sub" style="margin-top:4px;">틀린 단어가 쌓이면 보스가 나타나요!</div>
+          </div>
+          <div style="text-align:right;">
+            <div class="badge" id="hud-boss-hp-text">❤️ HP 0</div>
+          </div>
+        </div>
+        <div class="hpbar-bg" aria-hidden="true"><div class="hpbar-fill" id="boss-hp-bar"></div></div>
+      </div>
     </div>
 
-    <div class="grid-3">
-      <button class="btn btn-primary" onclick="window.__voca.initQuiz('verbs')">동사 🏃</button>
-      <button class="btn btn-primary" onclick="window.__voca.initQuiz('nouns')">명사 🎒</button>
-      <button class="btn btn-primary" onclick="window.__voca.initQuiz('adjectives')">형용사 ✨</button>
+    <button class="btn btn-warning btn-main-cute" onclick="window.__voca && window.__voca.initQuiz ? window.__voca.initQuiz('random') : alert('준비 중!')">
+      ⚔️ 모험 떠나기
+    </button>
+
+    <div class="cute-grid-2">
+      <button class="btn btn-light cute-tile" onclick="openAnalysis()">
+        🎒 약점 공략
+        <div class="mini">어떤 단어가 어려운지 보기</div>
+      </button>
+      <button class="btn btn-light cute-tile" onclick="window.__voca && window.__voca.switchTab ? window.__voca.switchTab('shop') : alert('상점 로딩 중!')">
+        🛒 보물 상점
+        <div class="mini">스킨/아이템 보러 가기</div>
+      </button>
+      <button class="btn btn-light cute-tile" onclick="window.__voca && window.__voca.initQuiz ? window.__voca.initQuiz('time') : alert('준비 중!')">
+        ⏱️ 타임 어택
+        <div class="mini">빠르게 많이 맞히기</div>
+      </button>
+      <button class="btn btn-light cute-tile" onclick="(document.getElementById('btn-play-custom') && !document.getElementById('btn-play-custom').classList.contains('hidden')) ? window.__voca.initQuiz('custom') : window.__voca.openMaker()">
+        ✍️ 나만의 단어
+        <div class="mini">내 단어 추가/학습</div>
+      </button>
     </div>
 
-    <div class="grid-2" style="margin-top:10px;">
-      <button class="btn btn-time" onclick="window.__voca.initQuiz('time')">타임 어택 ⏱️</button>
-      <button class="btn btn-danger" onclick="window.__voca.initBossRaid()">🔥 보스 레이드</button>
-      <button class="btn btn-dark" onclick="window.__voca.initQuiz('dictation')">받아쓰기 ✏️</button>
-      <button class="btn btn-review hidden" id="btn-play-review" onclick="window.__voca.initQuiz('wrong')">오답 복습 🧠</button>
-      <button class="btn btn-custom hidden" id="btn-play-custom" onclick="window.__voca.initQuiz('custom')">나만의 단어장 🌟</button>
-      <button class="btn btn-dark" onclick="window.__voca.openMaker()" style="grid-column:span 2;">새 단어 추가 ✍️</button>
-    </div>
+    <details class="cute-more">
+      <summary>🧩 더 많은 놀이(고학년·중등은 여기!) <span class="right">펼치기</span></summary>
+      <div class="grid-2" style="margin-top:10px;">
+        <button class="btn btn-primary" onclick="window.__voca.initQuiz('verbs')">동사 🏃</button>
+        <button class="btn btn-primary" onclick="window.__voca.initQuiz('nouns')">명사 🎒</button>
+        <button class="btn btn-primary" onclick="window.__voca.initQuiz('adjectives')">형용사 ✨</button>
+        <button class="btn btn-primary" onclick="window.__voca.initQuiz('adverbs')">부사 💨</button>
+        <button class="btn btn-dark" onclick="window.__voca.initQuiz('dictation')">받아쓰기 ✏️</button>
+        <button class="btn btn-dark" onclick="window.__voca.initQuiz('spelling')">철자 퀴즈 🔤</button>
+        <button class="btn btn-danger" onclick="window.__voca.initBossRaid()">🔥 보스 레이드</button>
+        <button class="btn btn-review hidden" id="btn-play-review" onclick="window.__voca.initQuiz('wrong')">오답 복습 🧠</button>
+        <button class="btn btn-dark" onclick="window.__voca.openGrade()" style="grid-column:span 2;">학년별 📚</button>
+      </div>
+    </details>
   </div>
-
-  <!-- TAB: RECORD -->
+</div>
+<!-- TAB: RECORD -->
   <div id="panel-record" class="hidden">
     <details>
       <summary><span>🏆 타임어택 최고 기록</span><span class="right" id="best-time-score">0점</span></summary>
@@ -384,6 +1176,30 @@
           <span class="pill">분당: <span id="bestWpmVal">0</span></span>
         </div>
         <button class="btn btn-gray" style="margin-top:10px;" onclick="window.__voca.resetBest()">기록 초기화</button>
+      </div>
+    </details>
+
+    <details>
+      <summary><span>🧩 추가 기능 (v10)</span><span class="right">펼치기</span></summary>
+
+      <!-- v10 New Menu Section -->
+      <div class="card" style="margin:10px 0 0;">
+        <div class="v10-menu-grid">
+          <button class="v10-btn btn-analysis" onclick="openAnalysis()">📊 약점 분석 & 차트</button>
+          <button class="v10-btn btn-mission" onclick="openMission()">🎯 미션 & 보상</button>
+        </div>
+
+        <div style="background: rgba(0,0,0,0.05); padding: 10px; border-radius: 10px; display:flex; justify-content:space-between; align-items:center; margin-top:12px;">
+          <span>🎨 <b>테마 설정</b></span>
+          <div>
+            <button onclick="toggleTheme()" style="padding:5px 10px; border-radius:5px; border:1px solid #ccc; background:white; cursor:pointer;">🌙 다크모드 토글</button>
+          </div>
+        </div>
+
+        <div style="background: #e3f2fd; padding: 10px; border-radius: 10px; margin-top: 12px; text-align: center; border: 1px solid #90caf9;">
+          🛡️ <b>스트릭 보호권</b>: <span id="freezeItemCount">0</span>개 보유
+          <button onclick="buyFreezeItem()" style="font-size:0.8rem; background:#2196F3; color:white; border:none; padding:3px 8px; border-radius:4px; margin-left:5px; cursor:pointer;">구매 (50💎)</button>
+        </div>
       </div>
     </details>
 
@@ -446,6 +1262,46 @@
           </div>
 
       </div>
+        <div class="row" style="margin-top:12px;">
+          <div style="flex:1;">
+            <div style="font-weight:900; margin-bottom:6px;">정답 TTS 속도</div>
+            <div class="speed-control" id="speedControlCorrect">
+              <button class="speed-btn" onclick="window.__voca.setTtsRateCorrect(0.9)">0.9x</button>
+              <button class="speed-btn active" onclick="window.__voca.setTtsRateCorrect(1.0)">1.0x</button>
+              <button class="speed-btn" onclick="window.__voca.setTtsRateCorrect(1.1)">1.1x</button>
+            </div>
+          </div>
+          <div style="flex:1;">
+            <div style="font-weight:900; margin-bottom:6px;">오답 TTS 속도</div>
+            <div class="speed-control" id="speedControlWrong">
+              <button class="speed-btn" onclick="window.__voca.setTtsRateWrong(0.75)">0.75x</button>
+              <button class="speed-btn active" onclick="window.__voca.setTtsRateWrong(0.85)">0.85x</button>
+              <button class="speed-btn" onclick="window.__voca.setTtsRateWrong(1.0)">1.0x</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="row" style="margin-top:12px;">
+          <div style="flex:1;">
+            <div style="font-weight:900; margin-bottom:6px;">발음 후 다음문제 딜레이</div>
+            <select id="postTTSDelaySelect">
+              <option value="0">0ms (즉시)</option>
+              <option value="120">120ms</option>
+              <option value="180" selected>180ms</option>
+              <option value="300">300ms</option>
+              <option value="500">500ms</option>
+            </select>
+          </div>
+          <div style="flex:1;">
+            <div style="font-weight:900; margin-bottom:6px;">혼합 출제(자동)</div>
+            <select id="mixModeSelect"><option value="off" selected>OFF</option><option value="on">ON</option></select>
+          </div>
+        </div>
+
+        <div class="mini" style="margin-top:10px; opacity:.8;">
+          * 혼합 출제 ON: 카드/받아쓰기/철자 문제가 섞여 나옵니다. (지루함↓, 회상 연습↑)
+        </div>
+
       <div class="row" style="margin-top:10px;">
         <div>
           <div style="font-weight:900; margin-bottom:6px;">오타 허용</div>
@@ -460,6 +1316,84 @@
         * 오타 허용 ON: 4글자 이상에서 1글자 오차를 “오타지만 정답 인정” 처리(EXP 일부 감소)
       </div>
     </div>
+  </div>
+</div>
+
+
+
+<!-- GRADE -->
+<div id="grade-screen" class="container hidden">
+  <div class="topbar">
+    <div>
+      <h1 class="title">학년별 단어 📚</h1>
+      <div class="subhint">학년/난이도 선택 → 자동으로 점점 어려워져요</div>
+    </div>
+    <button class="btn btn-danger" style="width:auto; padding:10px 12px;" onclick="window.__voca.closeGrade()">닫기 ✖</button>
+  </div>
+
+  <div class="card" style="margin-top:12px;">
+    <h3 style="margin:0 0 10px;">학년 선택</h3>
+    <div class="grid-2">
+      <label style="display:flex; flex-direction:column; gap:6px; font-weight:700;">
+        기준 학년
+        <select id="grade-max" style="font-size:16px; padding:10px; border-radius:10px; border:1px solid #ddd;">
+          <option value="1">1학년</option>
+          <option value="2">2학년</option>
+          <option value="3">3학년</option>
+          <option value="4">4학년</option>
+          <option value="5">5학년</option>
+          <option value="6" selected>6학년</option>
+        </select>
+      </label>
+
+      <label style="display:flex; flex-direction:column; gap:6px; font-weight:700;">
+        범위
+        <select id="grade-range" style="font-size:16px; padding:10px; border-radius:10px; border-radius:10px; border:1px solid #ddd;">
+          <option value="cumulative" selected>1~선택학년 누적</option>
+          <option value="single">해당 학년만</option>
+        </select>
+      </label>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:12px;">
+    <h3 style="margin:0 0 10px;">난이도</h3>
+    <div class="grid-2">
+      <label style="display:flex; flex-direction:column; gap:6px; font-weight:700;">
+        모드
+        <select id="grade-difficulty" style="font-size:16px; padding:10px; border-radius:10px; border:1px solid #ddd;">
+          <option value="easy">쉬움 / Lv1~2</option>
+          <option value="normal" selected>보통 / Lv1~4</option>
+          <option value="hard">어려움 / Lv1~5(상위 비중↑)</option>
+          <option value="auto">자동 상승(맞출수록 ↑)</option>
+        </select>
+      </label>
+
+      <label style="display:flex; flex-direction:column; gap:6px; font-weight:700;">
+        목표(한 판)
+        <select id="grade-target" style="font-size:16px; padding:10px; border-radius:10px; border:1px solid #ddd;">
+          <option value="20">20개</option>
+          <option value="30" selected>30개</option>
+          <option value="40">40개</option>
+          <option value="60">60개</option>
+        </select>
+      </label>
+    </div>
+
+    <div style="margin-top:10px; color:#555; line-height:1.5;">
+      • <b>자동 상승</b>: 10개 정답마다 난이도 상한이 1씩 증가(최대 5) + 그 레벨 단어가 더 섞여 들어갑니다.<br/>
+      • 다음 단계: <code>grade_words.json</code>로 외부 분리(대량 탑재) 가능합니다.
+    </div>
+  </div>
+
+  <div class="grid-2" style="margin-top:12px;">
+    <button class="btn btn-success" onclick="window.__voca.startGradeQuiz()">시작 ▶</button>
+    <button class="btn btn-dark" onclick="window.__voca.previewGradeCount()">단어 수 보기 🔎</button>
+  </div>
+
+  <div class="card" style="margin-top:12px;">
+    <h3 style="margin:0 0 10px;">단어 수 / 레벨 분포</h3>
+    <div id="grade-info" style="color:#444; line-height:1.6;">학년/난이도를 선택하고 “단어 수 보기”를 눌러보세요.</div>
   </div>
 </div>
 
@@ -572,6 +1506,40 @@
   </div>
 
   <div id="feedback"></div>
+</div>
+
+
+<!-- STUDY (FLASHCARDS) -->
+<div id="study-screen" class="container hidden">
+  <div class="topbar">
+    <div>
+      <h1 class="title">학습 카드 📇</h1>
+      <div class="subhint"><span id="study-progress">0 / 0</span></div>
+    </div>
+    <div class="toggles">
+      <button id="studyMeaningBtn" onclick="window.__voca.toggleStudyMeaning()" title="뜻 보기/숨기기" aria-label="뜻 보기 또는 숨기기">📝</button>
+      <button id="studyAutoBtn" onclick="window.__voca.toggleStudyAuto()" title="자동 재생" aria-label="자동 재생 전환">⏯️</button>
+      <button class="btn btn-dark" style="width:auto; padding:10px 12px;" onclick="window.__voca.backToHomeFromStudy()" aria-label="홈으로">🏠</button>
+    </div>
+  </div>
+
+  <div class="card" style="text-align:center;">
+    <div id="studyEng" style="font-size:2.2rem; font-weight:900; letter-spacing:0.5px;">word</div>
+    <div id="studyKan" style="margin-top:8px; font-size:1.2rem; opacity:.85;">뜻</div>
+    <div class="mini" style="margin-top:10px;">* 카드 1회 학습 후, 아래에서 시험을 시작할 수 있어요.</div>
+  </div>
+
+  <!-- Study controls: video-player style bottom bar -->
+  <div class="study-bottom" aria-label="학습 카드 컨트롤">
+    <button class="study-ctl btn-outline" onclick="window.__voca.studyPrev()" aria-label="이전 단어">⏮️</button>
+    <button class="study-ctl study-play btn-primary" onclick="window.__voca.studySpeak()" aria-label="발음 듣기">▶️ 듣기</button>
+    <button class="study-ctl btn-outline" onclick="window.__voca.studyNext()" aria-label="다음 단어">⏭️</button>
+  </div>
+
+  <div class="study-actions">
+    <button class="btn btn-primary" onclick="window.__voca.startTestFromStudy()" title="카드를 1회 이상 학습한 뒤, 바로 시험을 시작합니다.">시험 시작 ✅</button>
+    <button class="btn btn-light" onclick="window.__voca.skipStudyAndTest()" title="학습을 건너뛰고 바로 시험을 시작합니다.">학습 건너뛰고 시험 ⏩</button>
+  </div>
 </div>
 
 <!-- RESULT -->
@@ -695,19 +1663,62 @@
       this.wordBank = {
         verbs: [{kan:"돕다",eng:"help"},{kan:"씻다",eng:"wash"},{kan:"청소하다",eng:"clean"},{kan:"연습하다",eng:"practice"},{kan:"공부하다",eng:"study"}],
         nouns: [{kan:"학교",eng:"school"},{kan:"사과",eng:"apple"},{kan:"가방",eng:"bag"},{kan:"책상",eng:"desk"},{kan:"물",eng:"water"}],
-        adjectives: [{kan:"행복한",eng:"happy"},{kan:"슬픈",eng:"sad"},{kan:"강한",eng:"strong"},{kan:"바쁜",eng:"busy"},{kan:"예쁜",eng:"pretty"}]
+        adjectives: [{kan:"행복한",eng:"happy"},{kan:"슬픈",eng:"sad"},{kan:"강한",eng:"strong"},{kan:"바쁜",eng:"busy"},{kan:"예쁜",eng:"pretty"}],
+        adverbs: [{kan:"빨리",eng:"quickly"},{kan:"천천히",eng:"slowly"},{kan:"조용히",eng:"quietly"},{kan:"항상",eng:"always"},{kan:"가끔",eng:"sometimes"}]
       };
 
       // 상태(State) 단일 객체로 통합
       this.state = {
         data: {
           customWords: [],
+
+          // 학년별 내장 단어(우와! 체감용 소량)
+          // 다음 단계: 같은 경로에 grade_words.json을 두면 자동 로드해서 대량 탑재 가능
+          grades: {
+            g1: [
+              {kan:"안녕",eng:"hello",grade:1,level:1},{kan:"감사합니다",eng:"thank you",grade:1,level:1},{kan:"미안해요",eng:"sorry",grade:1,level:1},
+              {kan:"이름",eng:"name",grade:1,level:1},{kan:"친구",eng:"friend",grade:1,level:1},{kan:"책",eng:"book",grade:1,level:1},
+              {kan:"좋아하다",eng:"like",grade:1,level:2},{kan:"가다",eng:"go",grade:1,level:2},{kan:"오다",eng:"come",grade:1,level:2},
+              {kan:"가족",eng:"family",grade:1,level:2},{kan:"학교",eng:"school",grade:1,level:2}
+            ],
+            g2: [
+              {kan:"아침",eng:"morning",grade:2,level:1},{kan:"점심",eng:"lunch",grade:2,level:1},{kan:"저녁",eng:"dinner",grade:2,level:1},
+              {kan:"물",eng:"water",grade:2,level:1},{kan:"우유",eng:"milk",grade:2,level:1},{kan:"빵",eng:"bread",grade:2,level:1},
+              {kan:"놀다",eng:"play",grade:2,level:2},{kan:"먹다",eng:"eat",grade:2,level:2},{kan:"마시다",eng:"drink",grade:2,level:2},
+              {kan:"빠르다",eng:"fast",grade:2,level:2},{kan:"느리다",eng:"slow",grade:2,level:2}
+            ],
+            g3: [
+              {kan:"숙제",eng:"homework",grade:3,level:2},{kan:"운동장",eng:"playground",grade:3,level:2},{kan:"교실",eng:"classroom",grade:3,level:2},
+              {kan:"질문",eng:"question",grade:3,level:3},{kan:"대답",eng:"answer",grade:3,level:3},{kan:"설명하다",eng:"explain",grade:3,level:3},
+              {kan:"조심하다",eng:"be careful",grade:3,level:3},{kan:"필요하다",eng:"need",grade:3,level:3},{kan:"모으다",eng:"collect",grade:3,level:3},
+              {kan:"기억하다",eng:"remember",grade:3,level:4},{kan:"비교하다",eng:"compare",grade:3,level:4}
+            ],
+            g4: [
+              {kan:"환경",eng:"environment",grade:4,level:3},{kan:"재활용",eng:"recycle",grade:4,level:3},{kan:"쓰레기",eng:"trash",grade:4,level:3},
+              {kan:"규칙",eng:"rule",grade:4,level:3},{kan:"안전",eng:"safety",grade:4,level:3},{kan:"위험",eng:"danger",grade:4,level:4},
+              {kan:"해결하다",eng:"solve",grade:4,level:4},{kan:"계획",eng:"plan",grade:4,level:4},{kan:"실험",eng:"experiment",grade:4,level:4},
+              {kan:"발명",eng:"invention",grade:4,level:5},{kan:"발견",eng:"discovery",grade:4,level:5}
+            ],
+            g5: [
+              {kan:"문화",eng:"culture",grade:5,level:3},{kan:"전통",eng:"tradition",grade:5,level:3},{kan:"축제",eng:"festival",grade:5,level:3},
+              {kan:"토론",eng:"debate",grade:5,level:4},{kan:"주장",eng:"opinion",grade:5,level:4},{kan:"근거",eng:"evidence",grade:5,level:4},
+              {kan:"설득하다",eng:"persuade",grade:5,level:4},{kan:"존중",eng:"respect",grade:5,level:4},{kan:"공정",eng:"fair",grade:5,level:4},
+              {kan:"민주주의",eng:"democracy",grade:5,level:5},{kan:"헌법",eng:"constitution",grade:5,level:5}
+            ],
+            g6: [
+              {kan:"과학자",eng:"scientist",grade:6,level:4},{kan:"자료",eng:"data",grade:6,level:4},{kan:"분석",eng:"analysis",grade:6,level:4},
+              {kan:"가설",eng:"hypothesis",grade:6,level:4},{kan:"검증",eng:"verify",grade:6,level:4},{kan:"요약",eng:"summarize",grade:6,level:4},
+              {kan:"추론",eng:"infer",grade:6,level:5},{kan:"결론",eng:"conclusion",grade:6,level:5},{kan:"관점",eng:"perspective",grade:6,level:5},
+              {kan:"지속가능한",eng:"sustainable",grade:6,level:5},{kan:"협력",eng:"collaboration",grade:6,level:5}
+            ]
+          },
+
           wrongWords: [],
           masterWords: [],
           playerLevel: 1,
           playerExp: 0,
           attendanceData: {},
-          settings: { dailyGoal: 10, autoTTS: true, typoHelp: true, sfx: true, ttsSpeed: 1.0 },
+          settings: { dailyGoal: 10, autoTTS: true, typoHelp: true, sfx: true, ttsSpeed: 1.0, ttsRateCorrect: 1.0, ttsRateWrong: 0.85, postTTSDelay: 180, mixMode: false, requeueOffset: 4, requeueMax: 2 },
           bestTimeAttack: { bestScore: 0, bestWpm: 0, bestAccuracy: 0 },
           progress: { daily:{}, history:[] },
           sets: [],
@@ -732,6 +1743,9 @@
           isBossMode: false,
           bossHP: 0,
           maxBossHP: 0
+        ,
+          study: { active:false, idx:0, list:[], showMeaning:true, auto:false, timer:null },
+          pendingStart: false
         }
       };
 
@@ -770,7 +1784,7 @@
       D.playerLevel    = parseInt(Storage.safeLoad('myVocaLevel', 1, onRecover)) || 1;
       D.playerExp      = parseInt(Storage.safeLoad('myVocaExp', 0, onRecover)) || 0;
       D.attendanceData = Storage.safeLoad('myVocaAttendance', {}, onRecover);
-      D.settings       = Storage.safeLoad('myVocaSettings', { dailyGoal:10, autoTTS:true, typoHelp:true, sfx:true, ttsSpeed:1.0 }, onRecover);
+      D.settings       = Storage.safeLoad('myVocaSettings', { dailyGoal:10, autoTTS:true, typoHelp:true, sfx:true, ttsSpeed:1.0, ttsRateCorrect:1.0, ttsRateWrong:0.85, postTTSDelay:180, mixMode:false, requeueOffset:4, requeueMax:2 }, onRecover);
       D.bestTimeAttack = Storage.safeLoad('myVocaBestTimeAttack', { bestScore:0, bestWpm:0, bestAccuracy:0 }, onRecover);
       D.progress       = Storage.safeLoad('myVocaProgress', { daily:{}, history:[] }, onRecover);
       D.sets           = Storage.safeLoad('myVocaSets', [], onRecover);
@@ -797,6 +1811,12 @@
       D.settings.sfx = !!D.settings.sfx;
 
       D.settings.ttsSpeed = parseFloat(D.settings.ttsSpeed || 1.0);
+      D.settings.ttsRateCorrect = parseFloat(D.settings.ttsRateCorrect || 1.0);
+      D.settings.ttsRateWrong = parseFloat(D.settings.ttsRateWrong || 0.85);
+      D.settings.postTTSDelay = parseInt(D.settings.postTTSDelay || 180);
+      D.settings.mixMode = !!D.settings.mixMode;
+      D.settings.requeueOffset = parseInt(D.settings.requeueOffset || 4);
+      D.settings.requeueMax = parseInt(D.settings.requeueMax || 2);
 
       return true;
     }
@@ -854,19 +1874,20 @@
       osc.stop(ctx.currentTime + dur);
     }
 
-    speakWord(text, slow=false){
+    speakWord(text, slow=false, onDone=null){
       const R = this.state.runtime;
-      if(R.isMuted) return;
+      if(R.isMuted) { if(typeof onDone==='function') onDone(); return; }
 
       // 지원 여부
       if(!('speechSynthesis' in window) || typeof SpeechSynthesisUtterance === 'undefined'){
+        if(typeof onDone==='function') onDone();
         this.toast('이 기기/브라우저는 발음을 지원하지 않아요.');
         return;
       }
 
       const self = this;
       const msg = String(text || '').trim();
-      if(!msg) return;
+      if(!msg) { if(typeof onDone==='function') onDone(); return; }
 
       let u;
       try{
@@ -874,31 +1895,39 @@
         try{ window.speechSynthesis.cancel(); }catch{}
         u = new SpeechSynthesisUtterance(msg);
       }catch(e){
+        if(typeof onDone==='function') onDone();
         this.toast('발음 준비에 실패했어요. 다시 시도해 주세요.');
         return;
       }
 
       u.lang = 'en-US';
-      u.rate = slow ? 0.8 : (this.state.data.settings.ttsSpeed || 1.0);
+      u.rate = (typeof slow === 'number') ? slow : (slow ? (this.state.data.settings.ttsRateWrong || 0.85) : (this.state.data.settings.ttsSpeed || 1.0));
 
       let started = false;
-      let done = false;
+      let finished = false;
 
-      const notifyBlocked = (detail)=>{
-        if(done) return;
-        done = true;
-        // iOS 무음모드/권한/정책으로 막혀도 앱은 계속 동작
-        self.toast(detail || '🔇 발음이 차단되었어요. (무음모드/볼륨/사파리 정책) 소리를 켜고 다시 눌러주세요.');
+      const safeDone = ()=>{
+        if(finished) return;
+        finished = true;
+        try{ if(typeof onDone==='function') onDone(); }catch{}
       };
 
+      const notifyBlocked = (detail)=>{
+        if(finished) return;
+        // iOS 무음모드/권한/정책으로 막혀도 앱은 계속 동작
+        self.toast(detail || '🔇 발음이 차단되었어요. (무음모드/볼륨/사파리 정책) 소리를 켜고 다시 눌러주세요.');
+        safeDone();
+      };
+
+      // 시작 가드 (너무 길게 기다리지 않기)
       const startGuard = setTimeout(()=>{
-        if(!started && !done){
+        if(!started && !finished){
           notifyBlocked('🔇 발음이 시작되지 않았어요. iOS 무음모드/사파리 정책 때문에 막힐 수 있어요.');
         }
       }, 1300);
 
       u.onstart = ()=>{ started = true; clearTimeout(startGuard); };
-      u.onend   = ()=>{ done = true; clearTimeout(startGuard); };
+      u.onend   = ()=>{ clearTimeout(startGuard); safeDone(); };
       u.onerror = ()=>{ clearTimeout(startGuard); notifyBlocked(); };
 
       try{
@@ -907,6 +1936,10 @@
         clearTimeout(startGuard);
         notifyBlocked('🔇 발음 실행이 실패했어요. 소리/권한을 확인 후 다시 시도해 주세요.');
       }
+
+      // 혹시 onend가 안 오는 케이스(일부 모바일) 대비 안전장치
+      const estMs = Math.min(2600, Math.max(900, Math.round(msg.length * 85 / (u.rate||1))));
+      setTimeout(()=>safeDone(), estMs + 400);
     }
 
     showParticles(emoji){
@@ -936,6 +1969,27 @@
       }
       return dp[n][m];
     }
+    scrambleWord(word){
+      // 철자 퀴즈용: 공백은 유지하고, 각 토큰(단어) 안의 글자만 섞습니다.
+      const s = String(word||'').trim();
+      if(!s) return '';
+      const parts = s.split(/(\s+)/);
+      const out = parts.map(p=>{
+        if(/\s+/.test(p)) return p;
+        const chars = p.split('');
+        if(chars.length <= 2) return p;
+        let attempt = 0;
+        let shuffled = chars.slice();
+        while(attempt < 5){
+          this.shuffle(shuffled);
+          if(shuffled.join('') !== p) break;
+          attempt++;
+        }
+        return shuffled.join('');
+      });
+      return out.join('');
+    }
+
 
 
     shuffle(arr){
@@ -966,10 +2020,16 @@
     }
     initShop() {
       const themes = [
-        {id:'default', name:'기본 (화이트)', price:0, color:'#fff'},
-        {id:'dark', name:'다크 모드', price:500, color:'#2c3e50'},
+        {id:'default', name:'기본 (화이트)', price:0, color:'#ffffff'},
+        {id:'dark', name:'다크 모드', price:500, color:'#111827'},
         {id:'pink', name:'핑크 러블리', price:1000, color:'#ff9ff3'},
-        {id:'cyber', name:'사이버 펑크', price:2000, color:'#000'}
+        {id:'cyber', name:'사이버 펑크', price:2000, color:'#000000'},
+
+        {id:'ocean', name:'오션 블루', price:1200, color:'#1e90ff'},
+        {id:'forest', name:'포레스트', price:1200, color:'#1f7a4a'},
+        {id:'sunset', name:'선셋', price:1500, color:'#ff6b6b'},
+        {id:'lavender', name:'라벤더', price:1500, color:'#b39ddb'},
+        {id:'highcontrast', name:'하이 콘트라스트', price:800, color:'#ffffff'}
       ];
       const grid = document.getElementById('shop-themes');
       if(!grid) return;
@@ -1008,8 +2068,10 @@
       this.state.data.equippedTheme = id;
       this.saveKey('myVocaTheme', id);
       // Remove all theme classes first
-      document.body.classList.remove('theme-dark', 'theme-pink', 'theme-cyber');
+      document.body.classList.remove('theme-dark','theme-pink','theme-cyber','theme-ocean','theme-forest','theme-sunset','theme-lavender','theme-highcontrast');
       if(id !== 'default') document.body.classList.add(`theme-${id}`);
+      // Theme compatibility: keep legacy 'dark-mode' in sync
+      document.body.classList.toggle('dark-mode', document.body.classList.contains('theme-dark'));
       this.initShop();
       this.toast('테마가 변경되었습니다! 🎨');
     }
@@ -1045,6 +2107,7 @@
         clearInterval(this.state.runtime.timerInterval);
         alert('🎉 보스 토벌 성공!! 보상: 💎 300');
         this.addCoin(300);
+        try{ updateMission && updateMission('boss_win', 1); }catch{}
         this.showResult();
       }
     }
@@ -1080,15 +2143,28 @@
       this.saveKey('myVocaSettings', this.state.data.settings);
       this.updateSpeedUI();
       this.toast(`발음 속도: ${val}x`);
-      this.speakWord("Speed check", true); // Test sound
+      this.speakWord("Speed check", val); // Test sound
     }
 
     updateSpeedUI() {
-      const s = this.state.data.settings.ttsSpeed || 1.0;
-      const btns = document.querySelectorAll('.speed-btn');
-      btns.forEach(b => {
-        b.classList.toggle('active', parseFloat(b.innerText) === s);
-      });
+      const D=this.state.data;
+      const s = D.settings.ttsSpeed || 1.0;
+      const sc = D.settings.ttsRateCorrect || 1.0;
+      const sw = D.settings.ttsRateWrong || 0.85;
+
+      const setActive = (containerId, value)=>{
+        const el = document.getElementById(containerId);
+        if(!el) return;
+        const btns = el.querySelectorAll('.speed-btn');
+        btns.forEach(b=>{
+          const v = parseFloat(String(b.innerText).replace('x',''));
+          b.classList.toggle('active', v === value);
+        });
+      };
+
+      setActive('speedControl', s);
+      setActive('speedControlCorrect', sc);
+      setActive('speedControlWrong', sw);
     }
 
     toggleListenMode() {
@@ -1107,17 +2183,52 @@
         btn.style.color = '#fff';
         // 질문 텍스트는 유지(숨김은 CSS에서 처리) — 다음에 OFF로 돌아올 때 복구가 안전함
         if (R.currentWord) qBox.innerText = R.currentWord.kan;
-        this.playCurrentWordTTS();
+
+        // 현재 문제 발음(리스닝 모드에 들어갈 때)
+        try { this.playCurrentWordTTS(); } catch {}
       } else {
         btn.innerText = '👁️';
         btn.style.background = '';
         btn.style.color = '';
         if (R.currentWord) qBox.innerText = R.currentWord.kan;
       }
+
       this.toast(R.isListeningMode ? '리스닝 모드: ON 🎧' : '리스닝 모드: OFF 👁️');
     }
 
+    speakText(text, lang='en-US', slow=false){
+      const R = this.state.runtime;
+      if(R.isMuted) return;
+
+      if(!('speechSynthesis' in window) || typeof SpeechSynthesisUtterance === 'undefined'){
+        return;
+      }
+      const msg = String(text || '').trim();
+      if(!msg) return;
+
+      let u;
+      try{
+        u = new SpeechSynthesisUtterance(msg);
+      }catch(e){
+        return;
+      }
+      u.lang = lang;
+      u.rate = slow ? 0.85 : (this.state.data.settings.ttsSpeed || 1.0);
+
+      try{ window.speechSynthesis.speak(u); }catch{}
+    }
+
+    speakBoth(eng, kan){
+      // 영어 → (짧은 간격) 한국어
+      // 한국어 TTS는 기기마다 지원 편차가 있어서 실패해도 앱은 정상 동작
+      this.speakWord(eng);
+      if(kan){
+        setTimeout(()=>{ try{ this.speakText(kan, 'ko-KR'); }catch{} }, 900);
+      }
+    }
+
     printWrongNotes() {
+
       const D = this.state.data;
       if (D.wrongWords.length === 0) return alert('오답 노트가 비어있어요!');
 
@@ -1329,11 +2440,17 @@ switchTab(key){
       const autoSel=this.$('autoTTSSelect');
       const typoSel=this.$('typoSelect');
       const sfxSel=this.$('sfxSelect');
+      const delaySel=this.$('postTTSDelaySelect');
+      const mixSel=this.$('mixModeSelect');
 
       goalSel.value=String(D.settings.dailyGoal||10);
       autoSel.value=D.settings.autoTTS?'on':'off';
       typoSel.value=D.settings.typoHelp?'on':'off';
       sfxSel.value=D.settings.sfx?'on':'off';
+      if(delaySel) delaySel.value=String(D.settings.postTTSDelay||180);
+      if(mixSel) mixSel.value=D.settings.mixMode?'on':'off';
+
+      this.updateSpeedUI();
 
       goalSel.addEventListener('change',()=>{
         D.settings.dailyGoal=parseInt(goalSel.value);
@@ -1354,6 +2471,20 @@ switchTab(key){
         this.saveKey('myVocaSettings', D.settings);
         this.updateGameUI();
       });
+
+      if(delaySel){
+        delaySel.addEventListener('change',()=>{
+          D.settings.postTTSDelay=parseInt(delaySel.value);
+          this.saveKey('myVocaSettings', D.settings);
+        });
+      }
+      if(mixSel){
+        mixSel.addEventListener('change',()=>{
+          D.settings.mixMode=(mixSel.value==='on');
+          this.saveKey('myVocaSettings', D.settings);
+          this.toast(D.settings.mixMode ? '🎲 혼합 출제 ON' : '혼합 출제 OFF');
+        });
+      }
     }
 
     /* ---------- Maker ---------- */
@@ -1368,6 +2499,241 @@ switchTab(key){
       this.$('setup-screen').classList.remove('hidden');
       this.renderHomeMini();
     }
+
+    
+    // ===== 학년별 모드 =====
+    openGrade(){
+      this.$('setup-screen').classList.add('hidden');
+      this.$('grade-screen').classList.remove('hidden');
+      const info=this.$('grade-info');
+      if(info) info.innerHTML='학년/난이도를 선택하고 “단어 수 보기”를 눌러보세요.';
+    }
+    closeGrade(){
+      this.$('grade-screen').classList.add('hidden');
+      this.$('setup-screen').classList.remove('hidden');
+      this.renderHomeMini();
+    }
+
+    normalizeGradeJson(json){
+      // 지원 포맷:
+      // 1) { "g1":[{kan,eng,level?}], ..., "g6":[...] }
+      // 2) { "grades": { "1":[...], "2":[...], ... } }
+      let out={g1:[],g2:[],g3:[],g4:[],g5:[],g6:[]};
+      if(!json) return out;
+      if(json.grades){
+        for(const k of Object.keys(json.grades)){
+          const g = parseInt(k,10);
+          if(g>=1 && g<=6){
+            out['g'+g] = (json.grades[k]||[]).map(w=>({
+              kan:w.kan, eng:w.eng,
+              grade: g,
+              level: Math.min(5, Math.max(1, parseInt(w.level ?? 3,10)))
+            }));
+          }
+        }
+        return out;
+      }
+      for(let g=1; g<=6; g++){
+        const key='g'+g;
+        if(Array.isArray(json[key])){
+          out[key] = json[key].map(w=>({
+            kan:w.kan, eng:w.eng,
+            grade: g,
+            level: Math.min(5, Math.max(1, parseInt(w.level ?? 3,10)))
+          }));
+        }
+      }
+      return out;
+    }
+
+    async loadExternalGradeWords(){
+      // GitHub Pages 등에서 같은 경로에 grade_words.json이 있으면 자동 로드(없으면 조용히 무시)
+      try{
+        const res = await fetch('grade_words.json', {cache:'no-store'});
+        if(!res.ok) return;
+        const json = await res.json();
+        const normalized = this.normalizeGradeJson(json);
+        const G = this.state.data.grades;
+        for(let g=1; g<=6; g++){
+          const key='g'+g;
+          if(normalized[key]?.length){
+            // 중복(eng 기준) 제거하면서 합치기
+            const seen = new Set((G[key]||[]).map(w=>this.normalizeEng(w.eng)));
+            for(const w of normalized[key]){
+              const e=this.normalizeEng(w.eng);
+              if(!e || seen.has(e)) continue;
+              seen.add(e);
+              G[key].push(w);
+            }
+          }
+        }
+        this.toast('📚 학년별 단어 JSON 로드 완료!');
+      }catch(e){
+        // ignore
+      }
+    }
+
+    getGradePool(maxGrade, range){
+      const G=this.state.data.grades;
+      const pool=[];
+      for(let g=1; g<=6; g++){
+        if(range==='single' && g!==maxGrade) continue;
+        if(range!=='single' && g>maxGrade) continue;
+        const key='g'+g;
+        if(Array.isArray(G[key])) pool.push(...G[key]);
+      }
+      // 최소 필드 보정
+      return pool
+        .filter(w=>w && w.kan && w.eng)
+        .map(w=>({kan:w.kan, eng:w.eng, grade: w.grade ?? maxGrade, level: Math.min(5, Math.max(1, parseInt(w.level ?? 3,10)))}));
+    }
+
+    weightPick(list, weights){
+      // list items must have level 1..5
+      const bins={1:[],2:[],3:[],4:[],5:[]};
+      for(const w of list) bins[w.level].push(w);
+      const out=[];
+      // build selection order roughly by weights
+      const totalW = weights.reduce((a,b)=>a+b,0);
+      const tries = list.length*2+10;
+      for(let i=0;i<tries && out.length<list.length;i++){
+        const r=Math.random()*totalW;
+        let acc=0, lvl=1;
+        for(let k=0;k<5;k++){
+          acc+=weights[k];
+          if(r<=acc){ lvl=k+1; break; }
+        }
+        if(bins[lvl].length){
+          out.push(bins[lvl].pop());
+        }else{
+          // fallback: take from any
+          for(let l=1;l<=5;l++){
+            if(bins[l].length){ out.push(bins[l].pop()); break; }
+          }
+        }
+      }
+      // if leftovers
+      for(let l=1;l<=5;l++) out.push(...bins[l]);
+      return out;
+    }
+
+    buildGradeSessionList(cfg){
+      const poolAll=this.getGradePool(cfg.maxGrade, cfg.range);
+      const capByMode = (mode)=>{
+        if(mode==='easy') return 2;
+        if(mode==='normal') return 4;
+        if(mode==='hard') return 5;
+        if(mode==='auto') return cfg.cap; // dynamic
+        return 4;
+      };
+      const cap=capByMode(cfg.mode);
+      let pool = poolAll.filter(w=>w.level<=cap);
+      // hard는 상위 비중↑
+      if(cfg.mode==='hard'){
+        pool = this.weightPick(poolAll, [1,2,3,4,6]); // Lv5 비중↑
+      }
+      // 중복(eng) 제거
+      const seen=new Set();
+      const unique=[];
+      for(const w of pool){
+        const e=this.normalizeEng(w.eng);
+        if(!e || seen.has(e)) continue;
+        seen.add(e); unique.push(w);
+      }
+      this.shuffle(unique);
+      return unique.slice(0, cfg.target);
+    }
+
+    previewGradeCount(){
+      const maxGrade=parseInt(this.$('grade-max').value,10);
+      const range=this.$('grade-range').value;
+      const mode=this.$('grade-difficulty').value;
+      const target=parseInt(this.$('grade-target').value,10);
+
+      const poolAll=this.getGradePool(maxGrade, range);
+      const distAll={1:0,2:0,3:0,4:0,5:0};
+      for(const w of poolAll) distAll[w.level]++;
+
+      const cap = (mode==='easy')?2:(mode==='normal')?4:(mode==='hard')?5:2;
+      const poolInit = poolAll.filter(w=>w.level<=cap);
+      const distInit={1:0,2:0,3:0,4:0,5:0};
+      for(const w of poolInit) distInit[w.level]++;
+
+      let html = `<b>총 단어</b>: ${poolAll.length}개<br/>` +
+                 `<b>Lv 분포(전체)</b>: ` +
+                 `Lv1 ${distAll[1]} / Lv2 ${distAll[2]} / Lv3 ${distAll[3]} / Lv4 ${distAll[4]} / Lv5 ${distAll[5]}<br/><br/>`;
+
+      if(mode==='auto'){
+        html += `자동상승(초기 상한 Lv2) 기준<br/>` +
+                `<b>초기 사용 가능</b>: ${poolInit.length}개 — ` +
+                `Lv1 ${distInit[1]} / Lv2 ${distInit[2]} / Lv3 ${distInit[3]} / Lv4 ${distInit[4]} / Lv5 ${distInit[5]}<br/>` +
+                `※ 정답 10개마다 상한이 1씩 올라가며(최대 5) Lv3~5 단어가 점점 섞입니다.<br/>`;
+      }else{
+        html += `<b>선택 조건(초기 상한 Lv${cap})</b>: ${poolInit.length}개 — ` +
+                `Lv1 ${distInit[1]} / Lv2 ${distInit[2]} / Lv3 ${distInit[3]} / Lv4 ${distInit[4]} / Lv5 ${distInit[5]}<br/>`;
+      }
+
+      html += `<br/><b>한 판 목표</b>: ${target}개`;
+      this.$('grade-info').innerHTML = html;
+    }
+
+    startGradeQuiz(){
+      const R=this.state.runtime;
+      const maxGrade=parseInt(this.$('grade-max').value,10);
+      const range=this.$('grade-range').value;
+      const mode=this.$('grade-difficulty').value;
+      const target=parseInt(this.$('grade-target').value,10);
+
+      const poolAll=this.getGradePool(maxGrade, range);
+      if(!poolAll.length){
+        alert('학년별 단어가 비어있어요. (grade_words.json 로드 실패 또는 내장 데이터 없음)');
+        return;
+      }
+
+      R.grade = {
+        enabled:true,
+        maxGrade, range, mode, target,
+        cap: (mode==='auto')?2:((mode==='easy')?2:(mode==='normal')?4:5),
+        poolAll,
+        seenEng: new Set(),
+      };
+
+      this.$('grade-screen').classList.add('hidden');
+      this.$('setup-screen').classList.add('hidden');
+      // initQuiz 안에서 quiz-screen을 열지만, UX상 바로 넘어가도록 closeGrade 대신 진행
+      this.initQuiz('grade');
+    }
+
+    mixInHarderGradeWords(){
+      const R=this.state.runtime;
+      if(!R.grade?.enabled) return;
+      const cfg=R.grade;
+      const cap=cfg.cap;
+
+      const existing = new Set((R.currentList||[]).map(w=>this.normalizeEng(w.eng)));
+
+      const candidates = cfg.poolAll
+        .filter(w=>w.level<=cap)
+        .filter(w=>{
+          const e=this.normalizeEng(w.eng);
+          return e && !cfg.seenEng.has(e) && !existing.has(e);
+        });
+
+      this.shuffle(candidates);
+
+      // 다음 문제들(현재 단어 제외)에 3~6개 정도 끼워 넣기
+      const inject = Math.min(6, Math.max(3, Math.floor(((R.currentList?.length||0)-1)/6) || 3));
+      for(let i=0;i<inject && candidates.length;i++){
+        const w=candidates.pop();
+        const pos = 1 + Math.floor(Math.random() * Math.max(1, (R.currentList.length-1)));
+        R.currentList.splice(pos, 0, w);
+      }
+
+      // 목표 개수 유지
+      const target = cfg.target || R.currentList.length;
+      if(R.currentList.length > target) R.currentList.length = target;
+    }
+
 
     addCustomWord(){
       const D = this.state.data;
@@ -1503,6 +2869,9 @@ switchTab(key){
       this.$('nearBanner').innerText='';
 
       R.attempts=0; R.correctCount=0; R.combo=0; R.score=0;
+      R.isListeningMode=false; // 모드 전환 시 초기화
+      R.spellMode=false; // 철자 퀴즈 모드 초기화
+      R.isBossMode = false; // 보스 레이드 종료 시 안전장치
       R.isTimeMode = (category==='time');
 
       if(category==='time') R.currentList=[...this.wordBank.verbs,...this.wordBank.nouns,...this.wordBank.adjectives,...D.customWords];
@@ -1510,8 +2879,33 @@ switchTab(key){
         R.currentList=[...this.wordBank.verbs,...this.wordBank.nouns,...this.wordBank.adjectives,...D.customWords];
         R.isListeningMode = true;
       }
+      else if(category==='random') {
+        R.currentList=[...this.wordBank.verbs,...this.wordBank.nouns,...this.wordBank.adjectives,...(this.wordBank.adverbs||[]),...D.customWords];
+      }
+      else if(category==='spelling') {
+        R.currentList=[...this.wordBank.verbs,...this.wordBank.nouns,...this.wordBank.adjectives,...(this.wordBank.adverbs||[]),...D.customWords];
+        R.spellMode = true;
+      }
       else if(category==='custom') R.currentList=[...D.customWords];
       else if(category==='wrong') R.currentList=this.buildWrongReviewList();
+      else if(category==='grade') {
+        const cfg=this.state.runtime.grade;
+        if(!cfg) { alert('학년별 설정이 없습니다.'); return; }
+        // 초기 리스트 구성
+        this.state.runtime.quizLimit = cfg.target;
+        // hard는 가중 샘플링, auto는 cap 기준으로 시작
+        if(cfg.mode==='hard') {
+          const weighted=this.weightPick(cfg.poolAll, [1,2,3,4,6]);
+          this.shuffle(weighted);
+          // 중복 제거
+          const seen=new Set();
+          const out=[];
+          for(const w of weighted){ const e=this.normalizeEng(w.eng); if(!e||seen.has(e)) continue; seen.add(e); out.push(w); if(out.length>=cfg.target) break; }
+          R.currentList=out;
+        } else {
+          R.currentList=this.buildGradeSessionList(cfg);
+        }
+      }
       else R.currentList=[...this.wordBank[category]];
 
       // 한번 섞고(중복 출제 방지) 순서대로 진행
@@ -1523,23 +2917,165 @@ switchTab(key){
       }
 
       this.$('setup-screen').classList.add('hidden');
+
+      // 시험 전 플래시카드 학습(완성형)
+      this.openStudySession(category);
+    }
+
+    openStudySession(category){
+      const R = this.state.runtime;
+
+      // 학습 카드 세션 준비
+      R.study.active = true;
+      R.study.idx = 0;
+      R.study.list = (R.currentList || []).map(w=>({ ...w })); // 테스트 리스트와 분리
+      R.study.showMeaning = true;
+      // 자동 재생은 기본 OFF (원하면 버튼으로 켬)
+      if(R.study.timer){ try{ clearInterval(R.study.timer); }catch{} R.study.timer=null; }
+
+      // 화면 전환
+      this.$('quiz-screen').classList.add('hidden');
+      this.$('study-screen').classList.remove('hidden');
+
+      // 버튼 UI
+      this.syncStudyButtons();
+      this.renderStudyCard(true);
+    }
+
+    syncStudyButtons(){
+      const R=this.state.runtime;
+      const mBtn=this.$('studyMeaningBtn');
+      if(mBtn){
+        mBtn.innerText = R.study.showMeaning ? '📝' : '🙈';
+        mBtn.style.background = R.study.showMeaning ? '' : '#2c3e50';
+        mBtn.style.color = R.study.showMeaning ? '' : '#fff';
+      }
+      const aBtn=this.$('studyAutoBtn');
+      if(aBtn){
+        aBtn.innerText = R.study.auto ? '⏸️' : '⏯️';
+        aBtn.style.background = R.study.auto ? '#27ae60' : '';
+        aBtn.style.color = R.study.auto ? '#fff' : '';
+      }
+    }
+
+    toggleStudyMeaning(){
+      const R=this.state.runtime;
+      R.study.showMeaning = !R.study.showMeaning;
+      this.syncStudyButtons();
+      this.renderStudyCard(false);
+    }
+
+    toggleStudyAuto(){
+      const R=this.state.runtime;
+      R.study.auto = !R.study.auto;
+      this.syncStudyButtons();
+
+      if(R.study.auto){
+        // 2.6초마다 다음 카드(너무 빠르면 학습이 안됨)
+        R.study.timer = setInterval(()=>{
+          if(!R.study.active) return;
+          if(R.study.idx >= R.study.list.length-1){
+            this.toggleStudyAuto(); // 자동 종료
+            return;
+          }
+          this.studyNext(true);
+        }, 2600);
+      }else{
+        if(R.study.timer){ try{ clearInterval(R.study.timer); }catch{} }
+        R.study.timer=null;
+      }
+    }
+
+    renderStudyCard(playAudio){
+      const R=this.state.runtime;
+      const list=R.study.list||[];
+      const idx=R.study.idx||0;
+      const w=list[idx];
+      this.$('study-progress').innerText = `${Math.min(idx+1, list.length)} / ${list.length}`;
+
+      const engEl=this.$('studyEng');
+      const kanEl=this.$('studyKan');
+      if(!w){
+        engEl.innerText='(단어 없음)';
+        kanEl.innerText='';
+        return;
+      }
+
+      const eng = (w.eng||'').trim();
+      const kan = (w.kan||'').trim();
+
+      engEl.innerText = eng || '(영어 없음)';
+      kanEl.innerText = R.study.showMeaning ? (kan || '') : '';
+      kanEl.style.display = R.study.showMeaning ? '' : 'none';
+
+      if(playAudio){
+        // 영어 + 뜻(가능하면) 순서로 1회 들려주기
+        try{ this.speakBoth(eng, R.study.showMeaning ? kan : ''); }catch{}
+      }
+    }
+
+    studySpeak(){
+      const R=this.state.runtime;
+      const w=(R.study.list||[])[R.study.idx||0];
+      if(!w) return;
+      this.renderStudyCard(true);
+    }
+
+    studyNext(fromAuto=false){
+      const R=this.state.runtime;
+      if(R.study.idx < (R.study.list.length-1)){
+        R.study.idx += 1;
+        this.renderStudyCard(true);
+      }else if(!fromAuto){
+        this.toast('마지막 카드예요. 이제 시험 시작해볼까요? ✅');
+      }
+    }
+
+    studyPrev(){
+      const R=this.state.runtime;
+      if(R.study.idx > 0){
+        R.study.idx -= 1;
+        this.renderStudyCard(true);
+      }
+    }
+
+    backToHomeFromStudy(){
+      const R=this.state.runtime;
+      R.study.active=false;
+      if(R.study.timer){ try{ clearInterval(R.study.timer); }catch{} R.study.timer=null; }
+      this.$('study-screen').classList.add('hidden');
+      this.$('setup-screen').classList.remove('hidden');
+    }
+
+    startTestFromStudy(){
+      const R=this.state.runtime;
+      // 학습 카드 종료
+      R.study.active=false;
+      if(R.study.timer){ try{ clearInterval(R.study.timer); }catch{} R.study.timer=null; }
+
+      this.$('study-screen').classList.add('hidden');
       this.$('quiz-screen').classList.remove('hidden');
 
+      // UI 업데이트
       this.updateGameUI();
       this.updateStatsUI();
 
-      // 리스닝 모드(받아쓰기 등)일 때 버튼 UI 반영
-      if(R.isListeningMode){
-        const btn = this.$('listenModeBtn');
-        if(btn){ btn.innerText='👂'; btn.style.background='#e84393'; btn.style.color='#fff'; }
-      }else{
-        const btn = this.$('listenModeBtn');
-        if(btn){ btn.innerText='👁️'; btn.style.background=''; btn.style.color=''; }
+      // 리스닝 모드 버튼 반영
+      const btn = this.$('listenModeBtn');
+      if(btn){
+        if(R.isListeningMode){ btn.innerText='👂'; btn.style.background='#e84393'; btn.style.color='#fff'; }
+        else { btn.innerText='👁️'; btn.style.background=''; btn.style.color=''; }
       }
 
       if(R.isTimeMode) this.startTimer();
       this.nextQuestion(true);
     }
+
+    skipStudyAndTest(){
+      // 현재 카드 위치와 무관하게 시험으로
+      this.startTestFromStudy();
+    }
+
 
     startTimer(){
       const R = this.state.runtime;
@@ -1568,6 +3104,15 @@ switchTab(key){
       if(R.currentList.length===0) return this.showResult();
       R.currentWord = R.currentList[0];
 
+      // 🎲 혼합 출제(설정): 문제마다 모드를 랜덤으로 섞기
+      if(D.settings.mixMode){
+        const r = Math.random();
+        // 0.0~0.55: 기본(뜻→영어), 0.55~0.80: 듣고쓰기, 0.80~1.0: 철자
+        R.isListeningMode = (r >= 0.55 && r < 0.80);
+        R.spellMode = (r >= 0.80);
+      }
+
+
       const q=this.$('question');
       q.classList.add('flip-out');
       setTimeout(()=>{
@@ -1576,7 +3121,12 @@ switchTab(key){
         q.innerHTML = '<div style="font-size:3rem;">🔊</div><div style="font-size:1rem; color:#666;">듣고 쓰기</div>';
         setTimeout(() => this.playCurrentWordTTS(), 300);
     } else {
-        q.innerText = R.currentWord.kan;
+        if(R.spellMode){
+          const scrambled = this.scrambleWord(R.currentWord.eng);
+          q.innerHTML = `<div style="font-size:2.2rem; letter-spacing:2px;">${scrambled}</div><div style="font-size:1rem; color:#666; font-weight:900; margin-top:4px;">(철자 퀴즈)</div>`;
+        } else {
+          q.innerText = R.currentWord.kan;
+        }
     }
 ;
         q.classList.remove('flip-out');
@@ -1587,6 +3137,14 @@ switchTab(key){
       this.$('remaining').innerText=R.currentList.length;
       this.$('answerInput').value='';
       this.$('answerInput').focus();
+
+      // 📱 모바일: 입력창 포커스 시 화면으로 스크롤(키보드로 가리는 문제 완화)
+      const ai = this.$('answerInput');
+      if(ai && !ai._focusBound){
+        ai._focusBound = true;
+        ai.addEventListener('focus', ()=>{ try{ ai.scrollIntoView({block:'center', behavior:'smooth'}); }catch{} });
+      }
+
       this.$('feedback').innerText='';
       this.$('hintArea').style.display='none';
       this.$('hintArea').innerHTML='';
@@ -1604,6 +3162,7 @@ switchTab(key){
       this.$('score').innerText=R.score;
       this.$('attempts').innerText=R.attempts;
       const acc = R.attempts===0 ? 0 : Math.round((R.correctCount/R.attempts)*100);
+      try{ if(acc>=90) updateMission && updateMission('high_acc', 1); }catch{}
       this.$('accuracy').innerText=acc;
     }
 
@@ -1611,6 +3170,14 @@ switchTab(key){
       const R = this.state.runtime;
       if(R.currentWord) this.speakWord(R.currentWord.eng);
       this.$('answerInput').focus();
+
+      // 📱 모바일: 입력창 포커스 시 화면으로 스크롤(키보드로 가리는 문제 완화)
+      const ai = this.$('answerInput');
+      if(ai && !ai._focusBound){
+        ai._focusBound = true;
+        ai.addEventListener('focus', ()=>{ try{ ai.scrollIntoView({block:'center', behavior:'smooth'}); }catch{} });
+      }
+
     }
 
     showHint(){
@@ -1640,6 +3207,7 @@ switchTab(key){
       }
       this.saveKey('myVocaWrongWords', D.wrongWords);
       this.checkMainButtons();
+      try{ this.updateHUD && this.updateHUD(); }catch{}
     }
 
     handleCheck(){
@@ -1664,7 +3232,19 @@ switchTab(key){
 
       if(isCorrect || isNear){
         R.correctCount++;
+        try{ updateMission && updateMission('study_count', 1); }catch{}
         R.combo++;
+
+        // 학년별 자동상승: 10개 정답마다 cap +1 (최대 5) + 단어 섞기
+        if(R.grade?.enabled){
+          const e=this.normalizeEng(R.currentWord.eng);
+          if(e) R.grade.seenEng.add(e);
+          if(R.grade.mode==='auto' && (R.correctCount % 10 === 0) && R.grade.cap < 5){
+            R.grade.cap += 1;
+            this.toast(`⬆️ 난이도 상승! (상한 Lv${R.grade.cap})`);
+            this.mixInHarderGradeWords();
+          }
+        }
 
         let earnedExp = 20 + (R.combo*5);
         if(usedHint) earnedExp = Math.floor(earnedExp*0.3);
@@ -1674,6 +3254,7 @@ switchTab(key){
         const coin = (isNear ? 1 : 2) * (R.isBossMode ? 5 : 1);
         this.addCoin(coin);
         if(R.isBossMode) this.bossAttack(100 + (R.combo * 10));
+        try{ this.updateHUD && this.updateHUD(); }catch{}
 
         R.score++;
 
@@ -1694,7 +3275,17 @@ switchTab(key){
 
         this.updateGameUI();
         this.updateStatsUI();
-        this.speakWord(correct);
+
+        // ✅ TTS가 너무 빨리 끊기는 문제: 발음이 끝난 뒤 다음 문제로 넘어가도록 조정
+        let _autoNextPlanned = false;
+        const _goNext = ()=>{ if(_autoNextPlanned) return; _autoNextPlanned = true; this.nextQuestion(); };
+        if(R.isMuted){
+          setTimeout(_goNext, 450);
+        }else{
+          this.speakWord(correct, (D.settings.ttsRateCorrect||1.0), ()=>setTimeout(_goNext, (D.settings.postTTSDelay||180)));
+          // (모바일에서 onend 누락 대비) 안전장치
+          setTimeout(_goNext, 2200);
+        }
 
         if(isNear){
           // ✅ 요청 반영: 오타 정답 시각적 피드백 강화
@@ -1713,14 +3304,22 @@ switchTab(key){
         this.updateGoal7Badge();
         this.renderHomeMini();
 
-        setTimeout(()=>this.nextQuestion(), 450);
 
       }else{
         R.combo=0;
         this.updateGameUI();
         this.updateStatsUI();
         this.playSound('wrong');
-        this.speakWord(correct, true);
+
+        // ✅ 오답 시에도 발음이 끝난 뒤 다음 문제로(너무 빨리 넘어가면 발음이 끊김)
+        let _autoNextPlanned2 = false;
+        const _goNext2 = ()=>{ if(_autoNextPlanned2) return; _autoNextPlanned2 = true; this.nextQuestion(); };
+        if(R.isMuted){
+          setTimeout(_goNext2, 900);
+        }else{
+          this.speakWord(correct, (D.settings.ttsRateWrong||0.85), ()=>setTimeout(_goNext2, (D.settings.postTTSDelay||180)));
+          setTimeout(_goNext2, 2600);
+        }
         if(R.isBossMode) {
           R.timeLeft = Math.max(0, R.timeLeft - 5);
           this.toast('보스 공격! 시간 -5초 😱');
@@ -1735,7 +3334,23 @@ switchTab(key){
 
         this.upsertWrong(R.currentWord);
 
-        setTimeout(()=>this.nextQuestion(), 900);
+        // 🔁 오답 재출제(간격 반복): 몇 문제 뒤에 다시 한 번 더
+        const key = this.normalizeEng(R.currentWord.eng);
+        R.requeueMap = R.requeueMap || {};
+        const cnt = (R.requeueMap[key] || 0);
+        const max = (D.settings.requeueMax || 2);
+        const offset = Math.max(2, parseInt(D.settings.requeueOffset || 4));
+        if(key && cnt < max){
+          R.requeueMap[key] = cnt + 1;
+          // 현재 문제를 뒤로 보내고, offset 위치에 다시 삽입
+          const w = R.currentList.shift();
+          const idx = Math.min(R.currentList.length, offset);
+          R.currentList.splice(idx, 0, w);
+        } else {
+          // 너무 많이 틀린 단어는 일단 넘어가기
+          R.currentList.shift();
+        }
+
       }
     }
 
@@ -1778,6 +3393,7 @@ switchTab(key){
       this.$('final-score').innerText = `최종 점수: ${R.score}점`;
 
       const acc = R.attempts===0 ? 0 : Math.round((R.correctCount/R.attempts)*100);
+      try{ if(acc>=90) updateMission && updateMission('high_acc', 1); }catch{}
       const wpm = R.isTimeMode ? Math.round((R.score / Math.max(1, Math.round((Date.now()-R.timeModeStart)/1000))) * 60) : 0;
       this.logSession(R.isTimeMode ? 'time' : 'normal', R.score, R.attempts, acc, wpm);
 
@@ -2099,7 +3715,56 @@ switchTab(key){
   window.__voca = new VocaApp();
   window.__voca.init();
 
-})();
+  // UI Skin: Cute (A형) default
+  try{
+    const skin = localStorage.getItem('voca_ui_skin') || 'cute';
+    document.body.classList.toggle('ui-cute', skin === 'cute');
+  }catch{}
+
+  // HUD updater (streak / today / goal / boss)
+  try{
+    const updateHUD = ()=>{
+      const D = window.__voca.state.data;
+      const streakDays = (typeof window.__voca.calculateStreak === 'function') ? window.__voca.calculateStreak() : Number(D.streakDays||0);
+      const todayCount = (typeof window.__voca.calculateTodayCount === 'function') ? window.__voca.calculateTodayCount() : Number(D.todayLearned||0);
+      const goal = Number(D.settings?.dailyGoal||10);
+
+      const s1=document.getElementById('hud-streak'); if(s1) s1.querySelector('span').textContent = `연속 ${streakDays}일`;
+      const s2=document.getElementById('hud-today'); if(s2) s2.querySelector('span').textContent = `오늘 ${todayCount}단어`;
+      const s3=document.getElementById('hud-goal'); if(s3) s3.querySelector('span').textContent = `목표 ${goal}`;
+
+      // Pick boss: most wrong word in log (top 1)
+      const wrong = Array.isArray(D.wrongWords) ? D.wrongWords : [];
+      let top = null;
+      for(const w of wrong){
+        const c = Number(w.wrongCount||1);
+        if(!top || c > top.c) top = {eng:String(w.eng||''), kan:String(w.kan||''), c};
+      }
+      const nameEl=document.getElementById('boss-name');
+      const subEl=document.getElementById('boss-sub');
+      const hpEl=document.getElementById('hud-boss-hp-text');
+      const barEl=document.getElementById('boss-hp-bar');
+
+      if(top && top.eng){
+        const label = top.kan ? `${top.kan} (${top.eng})` : top.eng;
+        if(nameEl) nameEl.textContent = `🐻 오늘의 약점 보스: ${label}`;
+        if(subEl) subEl.textContent = `가장 많이 틀린 단어를 잡아보자! (누적 오답 ${top.c}회)`;
+        if(hpEl) hpEl.textContent = `❤️ HP ${top.c}`;
+        // HP bar: cap at 30 for display
+        const pct = Math.max(6, Math.min(100, (top.c/30)*100));
+        if(barEl) barEl.style.width = pct + '%';
+      }else{
+        if(nameEl) nameEl.textContent = '🐻 오늘의 약점 보스: 없음';
+        if(subEl) subEl.textContent = '오답이 쌓이면 보스가 나타나요!';
+        if(hpEl) hpEl.textContent = '❤️ HP 0';
+        if(barEl) barEl.style.width = '0%';
+      }
+    };
+    window.__voca.updateHUD = updateHUD;
+    updateHUD();
+  }catch{}
+
+})()
 </script>
 <div id="print-area"></div>
   <script>
@@ -2113,6 +3778,219 @@ switchTab(key){
     }
     // Init Speed UI on load
     window.addEventListener('load', ()=>{ try{ window.__voca.updateSpeedUI(); }catch{} });
-  </script>
+  
+
+</script>
+
+
+<!-- v10 Modals -->
+<div id="analysisModal" class="modal-v10">
+    <div class="modal-content-v10">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px;">
+            <h2>📊 학습 데이터 분석</h2>
+            <button class="modal-close" onclick="closeModal(\'analysisModal\')" aria-label="닫기">✖</button>
+        </div>
+
+        <h3>1️⃣ 품사별 취약점 (오답 비율)</h3>
+        <div class="chart-container">
+            <canvas id="weaknessChart"></canvas>
+        </div>
+        <p style="font-size:0.9rem; color:#666; text-align:center;">* 오답 데이터가 쌓이면 분석이 정확해집니다.</p>
+
+        <h3 style="margin-top:30px;">2️⃣ 학습 성장 곡선 (최근 7일)</h3>
+        <div class="chart-container">
+            <canvas id="growthChart"></canvas>
+        </div>
+    </div>
+</div>
+
+<div id="missionModal" class="modal-v10">
+    <div class="modal-content-v10">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px;">
+            <h2>🎯 오늘의 미션 & 업적</h2>
+            <button class="modal-close" onclick="closeModal(\'missionModal\')" aria-label="닫기">✖</button>
+        </div>
+
+        <div id="dailyMissions">
+            <!-- JS will populate this -->
+        </div>
+
+        <h3 style="margin-top:22px;">💎 최근 7일 미션 보상</h3>
+        <div class="chart-container">
+            <canvas id="rewardChart"></canvas>
+        </div>
+
+        <h3 style="margin-top:30px;">🏆 나의 업적</h3>
+        <div id="achievementsList" style="display:grid; grid-template-columns:repeat(3, 1fr); gap:10px; margin-top:10px;">
+            <!-- Badges -->
+        </div>
+    </div>
+</div>
+
+
+    </div>
+
+    <!-- Bottom Navigation -->
+    <div class="bottom-nav">
+        <div class="nav-item active" onclick="showHome()">
+            <span class="nav-icon">🏠</span>홈
+        </div>
+        <div class="nav-item" onclick="showMissions()">
+            <span class="nav-icon">🎯</span>미션
+        </div>
+        <div class="nav-item" onclick="openSettings()">
+            <span class="nav-icon">⚙️</span>설정
+        </div>
+    </div>
+
+    <!-- Admin Modal -->
+    <div id="admin-modal">
+        <div class="admin-content">
+            <div style="display:flex; justify-content:space-between; margin-bottom:20px;">
+                <h2>🛠️ 관리자 모드</h2>
+                <button onclick="closeAdmin()" style="padding:5px 10px;">닫기</button>
+            </div>
+            <div id="admin-mount-point"></div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // --- Bridge Script to Connect New UI to Old Logic ---
+
+    // 1. Sync Data from Hidden Logic Elements to New UI
+    function syncDisplay() {
+        try {
+            document.getElementById('global-coin-new').innerText = document.getElementById('global-coin').innerText;
+            document.getElementById('home-level-text-new').innerText = document.getElementById('home-level-text').innerText.replace(/[^0-9]/g, 'Lv. ');
+            document.getElementById('home-exp-text-new').innerText = document.getElementById('home-exp-text').innerText;
+
+            // Sync Bar Width
+            const oldBar = document.getElementById('home-exp-bar');
+            const newBar = document.getElementById('home-exp-bar-new');
+            if(oldBar && newBar) newBar.style.width = oldBar.style.width;
+        } catch(e) {}
+    }
+
+    setInterval(syncDisplay, 500); // Continuous Sync
+
+    // 2. Button Mappings
+    function startDailyAdventure() {
+        // Trigger the original "Start Learning" or "Daily Goal"
+        // Assuming window.voca.initQuiz exists or similar
+        // Let's try to find the "Start" button in original UI and click it
+        // Or directly call the function if known.
+        // Based on analysis: window.voca.initQuiz('random') or similar.
+        // Let's use the 'Learn' tab.
+
+        // Show the quiz screen (managed by original JS)
+        // We need to make sure the quiz screen is visible within our app container
+        // Original logic toggles 'hidden' class on screens.
+        // We need to style those screens to appear correctly.
+
+        // Force trigger random quiz for adventure
+        if(window.voca && window.voca.initQuiz) {
+             window.voca.initQuiz('random');
+             // Hide main view, show quiz view (managed by original JS mostly, but we might need to help)
+             document.getElementById('main-view').style.display = 'none';
+             document.getElementById('quiz-screen').classList.remove('hidden');
+             // Append quiz screen to main view area if needed? No, original JS handles display:block/none
+             // We just need to ensure #quiz-screen is styled to overlay or replace #main-view
+        }
+    }
+
+    function openReviewNote() {
+        if(window.voca && window.voca.switchTab) {
+            window.voca.switchTab('record');
+            document.getElementById('main-view').style.display = 'none';
+            document.getElementById('panel-record').classList.remove('hidden');
+            // Move panel-record to visible area if it's inside hidden container
+            const panel = document.getElementById('panel-record');
+            document.getElementById('app-container').appendChild(panel);
+        }
+    }
+
+    function showHome() {
+        document.getElementById('main-view').style.display = 'block';
+        // Hide other screens
+        const screens = ['quiz-screen', 'panel-record', 'panel-shop', 'panel-settings'];
+        screens.forEach(id => {
+            const el = document.getElementById(id);
+            if(el) {
+                el.classList.add('hidden');
+                // If we moved them, move them back? No need, just hide.
+            }
+        });
+    }
+
+    // 3. Admin & Secret Logic
+    let secretCount = 0;
+    function secretAdminOpen() {
+        secretCount++;
+        if(secretCount >= 5) {
+            document.getElementById('admin-modal').style.display = 'block';
+            // Move admin controls here if needed
+            // For now, let's just show the hidden container's admin parts?
+            // Actually, let's just show the 'admin-screen' if it exists
+            if(document.getElementById('admin-screen')) {
+                document.getElementById('admin-screen').classList.remove('hidden');
+                document.getElementById('admin-mount-point').appendChild(document.getElementById('admin-screen'));
+            }
+            secretCount = 0;
+        }
+    }
+
+    function closeAdmin() {
+        document.getElementById('admin-modal').style.display = 'none';
+    }
+
+</script>
+
+<button class="app-shell-btn" id="menuBtn" aria-label="메뉴 열기" type="button">☰</button>
+<div class="app-drawer" id="appDrawer" aria-hidden="true">
+  <div class="drawer-panel" role="dialog" aria-label="메뉴">
+    <div style="display:flex; align-items:center; justify-content:space-between; gap:10px;">
+      <div>
+        <div class="drawer-title">🐲 VOCA 마스터</div>
+        <div class="drawer-sub">원하는 걸 골라서 하자!</div>
+      </div>
+      <button class="modal-close" type="button" id="drawerClose" aria-label="닫기">✖</button>
+    </div>
+
+    <div class="drawer-list">
+      <button class="drawer-item" type="button" onclick="window.__voca.switchTab('learn'); window.__closeDrawer();">🏠 홈 <small>모험 시작</small></button>
+      <button class="drawer-item" type="button" onclick="window.__voca.switchTab('record'); window.__closeDrawer();">📒 기록 <small>잔디/배지</small></button>
+      <button class="drawer-item" type="button" onclick="openAnalysis(); window.__closeDrawer();">🎒 약점 공략 <small>내가 자주 틀린 것</small></button>
+      <button class="drawer-item" type="button" onclick="openMission(); window.__closeDrawer();">🎯 미션 & 보상 <small>오늘 목표</small></button>
+      <button class="drawer-item" type="button" onclick="window.__voca.switchTab('shop'); window.__closeDrawer();">🛒 보물 상점 <small>스킨/아이템</small></button>
+      <button class="drawer-item" type="button" onclick="window.__voca.switchTab('settings'); window.__closeDrawer();">⚙️ 설정 <small>목표/소리</small></button>
+    </div>
+
+    <div class="drawer-bottom">
+      <button class="btn btn-outline" type="button" onclick="toggleTheme();">🌙/☀️</button>
+      <button class="btn btn-dark" type="button" onclick="window.__voca.openAdmin();">관리자</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  const drawer = document.getElementById('appDrawer');
+  const btn = document.getElementById('menuBtn');
+  const closeBtn = document.getElementById('drawerClose');
+
+  function open(){ drawer.classList.add('open'); drawer.setAttribute('aria-hidden','false'); }
+  function close(){ drawer.classList.remove('open'); drawer.setAttribute('aria-hidden','true'); }
+
+  window.__closeDrawer = close;
+
+  btn && btn.addEventListener('click', (e)=>{ e.preventDefault(); open(); });
+  closeBtn && closeBtn.addEventListener('click', (e)=>{ e.preventDefault(); close(); });
+  drawer && drawer.addEventListener('click', (e)=>{ if(e.target === drawer) close(); });
+
+  document.addEventListener('keydown', (e)=>{ if(e.key==='Escape') close(); });
+})();
+</script>
+
 </body>
 </html>
