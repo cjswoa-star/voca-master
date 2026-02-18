@@ -1,0 +1,2118 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover" />
+  <title>VOCA 마스터 PRO v5</title>
+  <style>
+    :root{
+      --primary:#3498db; --success:#27ae60; --danger:#e74c3c; --warning:#f1c40f;
+      --custom:#9b59b6; --review:#e67e22; --time:#e84393; --dark:#2c3e50;
+      --bg:#f0f2f5;
+      /* Safe-area (iOS notch/home bar) */
+      --sat: env(safe-area-inset-top);
+      --sar: env(safe-area-inset-right);
+      --sab: env(safe-area-inset-bottom);
+      --sal: env(safe-area-inset-left);
+    }
+    body{
+      font-family:'Malgun Gothic',sans-serif;
+      background:var(--bg);
+      display:flex; justify-content:center; align-items:center;
+      min-height:100vh; min-height:100dvh;
+      margin:0;
+      overflow:auto;
+      box-sizing:border-box;
+      padding: calc(var(--sat) + 10px) calc(var(--sar) + 10px) calc(var(--sab) + 10px) calc(var(--sal) + 10px);
+      transition:background-color .35s;
+      -webkit-overflow-scrolling: touch;
+    }
+    body.fever{ background:#fff0c2; }
+    .container{
+      background:#fff; padding:16px; border-radius:18px;
+      box-shadow:0 8px 24px rgba(0,0,0,.1);
+      width:92%; max-width:520px; max-height:88vh; max-height:calc(100dvh - var(--sat) - var(--sab) - 24px); overflow-y:auto;
+      border:2px solid transparent; transition:box-shadow .25s,border .25s;
+    }
+    .container.fever-glow{ box-shadow:0 0 30px rgba(241,196,15,.55); border-color:var(--warning); }
+    .hidden{ display:none !important; }
+
+    .topbar{ display:flex; align-items:center; justify-content:space-between; gap:10px; margin-bottom:10px; }
+    .title{ font-size:1.35rem; font-weight:900; margin:0; letter-spacing:-0.2px; }
+    .subhint{ font-size:.85rem; color:#6b7b88; font-weight:800; margin:2px 0 0; }
+
+    .tabs{
+      display:flex; gap:8px; margin:10px 0 12px;
+      background:#f3f6f9; padding:6px; border-radius:14px; border:1px solid #e8eef5;
+    }
+    .tab{
+      flex:1; padding:10px 8px; border:none; border-radius:12px;
+      font-weight:900; cursor:pointer; background:transparent; color:#2c3e50;
+      transition:transform .1s, background .2s;
+    }
+    .tab:active{ transform:scale(.98); }
+    .tab.active{ background:#fff; box-shadow:0 2px 10px rgba(0,0,0,.06); }
+
+    .game-stats{
+      background:#e8f4f8; padding:12px; border-radius:14px;
+      border:1px solid rgba(52,152,219,.18); margin:10px 0;
+    }
+    .level-row{ display:flex; justify-content:space-between; font-weight:900; align-items:center; margin-bottom:8px; }
+    .exp-bar-bg{ width:100%; background:#d9e0e7; height:12px; border-radius:6px; overflow:hidden; }
+    .exp-bar-fill{ height:100%; width:0%; background:var(--success); transition:width .35s ease-out; }
+
+    .card{
+      background:#f8fafc; border:1px solid #e9eef4; border-radius:14px;
+      padding:12px; margin:10px 0; text-align:left;
+    }
+    .row{ display:flex; gap:10px; flex-wrap:wrap; align-items:center; }
+    .row > *{ flex:1; }
+    .mini{ font-size:.85rem; color:#6b7b88; font-weight:800; }
+
+    .pill{
+      display:inline-flex; align-items:center; gap:6px;
+      background:#fff; border:1px solid #e9eef4; border-radius:999px;
+      padding:6px 10px; font-size:.85rem; font-weight:900; color:#2c3e50; white-space:nowrap;
+    }
+    .pill.good{ border-color:rgba(39,174,96,.28); }
+    .pill.warn{ border-color:rgba(241,196,15,.45); }
+    .pill.danger{ border-color:rgba(231,76,60,.35); }
+
+    button{
+      border:none; border-radius:12px; padding:12px; cursor:pointer;
+      font-weight:900; color:#fff; transition:transform .1s, filter .2s;
+    }
+    button:hover{ filter:brightness(1.06); }
+    button:active{ transform:scale(.97); }
+    .btn{ width:100%; box-sizing:border-box; }
+    .btn-primary{ background:var(--primary); }
+    .btn-dark{ background:var(--dark); }
+    .btn-danger{ background:var(--danger); }
+    .btn-warning{ background:var(--warning); color:#333; }
+    .btn-review{ background:var(--review); }
+    .btn-time{ background:var(--time); }
+    .btn-custom{ background:var(--custom); }
+    .btn-gray{ background:#7f8c8d; }
+
+    .grid-3{ display:grid; grid-template-columns:repeat(3,1fr); gap:10px; }
+    .grid-2{ display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+
+    details{ background:#fff; border:1px solid #e9eef4; border-radius:14px; padding:10px 12px; margin:10px 0; }
+    summary{
+      list-style:none; cursor:pointer; font-weight:900; color:#2c3e50;
+      display:flex; align-items:center; justify-content:space-between; gap:10px;
+    }
+    summary::-webkit-details-marker{ display:none; }
+    summary .right{ color:#6b7b88; font-size:.85rem; font-weight:900; }
+
+    .grass-grid{ display:grid; grid-template-columns:repeat(7,1fr); gap:6px; margin-top:10px; }
+    .grass-box{
+      width:100%; aspect-ratio:1; border-radius:4px; background:#ebedf0;
+      position:relative; cursor:pointer; transition:transform .1s;
+    }
+    .grass-box:hover{ transform:scale(1.08); z-index:10; border:1px solid rgba(0,0,0,.08); }
+    .grass-box:hover::after{
+      content:attr(data-info);
+      position:absolute; bottom:130%; left:50%; transform:translateX(-50%);
+      background:#333; color:#fff; padding:4px 8px; border-radius:6px; font-size:.75rem; white-space:nowrap;
+      pointer-events:none;
+    }
+    .grass-lvl-1{ background:#9be9a8; } .grass-lvl-2{ background:#40c463; }
+    .grass-lvl-3{ background:#30a14e; } .grass-lvl-4{ background:#216e39; }
+
+    .badge-wrap{ display:flex; flex-wrap:wrap; gap:8px; margin-top:10px; }
+    .badge{
+      display:inline-flex; align-items:center; gap:6px; padding:6px 10px;
+      border-radius:999px; border:1px solid #e9eef4; background:#fff;
+      font-size:.85rem; font-weight:900; color:#2c3e50;
+    }
+    .badge.lock{ opacity:.45; filter:grayscale(1); }
+
+    .stats{ display:flex; flex-wrap:wrap; gap:8px; justify-content:space-between; align-items:center; margin:10px 0; }
+    .toggles{ display:flex; gap:10px; align-items:center; }
+    #muteBtn,#sfxBtn{ background:none; color:inherit; padding:0; width:auto; font-size:1.45rem; }
+
+    .card-container{
+      perspective:1000px; margin:14px 0 10px; height:64px;
+      display:flex; align-items:center; justify-content:center; position:relative;
+    }
+    #question{
+      font-size:2.1rem; font-weight:900; color:#2c3e50;
+      transition:transform .2s ease, opacity .2s ease;
+      transform-style:preserve-3d;
+    }
+    .flip-out{ transform:rotateX(-90deg); opacity:0; }
+    .flip-in{ transform:rotateX(0deg); opacity:1; }
+
+    .btn-listen{
+      position:absolute; right:6px; width:40px; height:40px; border-radius:50%;
+      background:var(--primary); font-size:1.2rem;
+      display:flex; align-items:center; justify-content:center;
+      box-shadow:0 2px 6px rgba(0,0,0,.16);
+    }
+
+    input, textarea, select{
+      width:100%; padding:12px 14px; border:2px solid #ddd; border-radius:12px;
+      /* iOS Safari 자동 확대(줌) 방지: 16px 이상 유지 */
+      font-size:16px;
+      line-height:1.2;
+      outline:none; box-sizing:border-box;
+      transition:border-color .2s, box-shadow .2s;
+      -webkit-appearance:none;
+      appearance:none;
+    }
+    input:focus, textarea:focus, select:focus{
+      border-color:var(--primary); box-shadow:0 0 8px rgba(52,152,219,.22);
+    }
+    body.fever input:focus{ border-color:var(--warning); box-shadow:0 0 10px rgba(241,196,15,.45); }
+
+    .button-group{ display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:10px; }
+    .btn-main{ grid-column:span 2; padding:14px; font-size:1.05rem; background:var(--primary); }
+    .btn-hint{ background:var(--warning); color:#333; }
+    .btn-exit{ background:var(--danger); }
+
+    #hintArea{
+      margin-top:10px; text-align:left;
+      background:#fffbe6; border:1px solid rgba(241,196,15,.45);
+      padding:10px 12px; border-radius:12px; font-weight:900; color:#7d6608; display:none;
+    }
+    #hintArea small{ display:block; font-weight:800; margin-top:4px; opacity:.85; }
+
+    #feedback{ margin-top:10px; min-height:1.4rem; font-size:1.02rem; font-weight:900; }
+    .correct{ color:var(--success); } .wrong{ color:var(--danger); } .near{ color:#f39c12; }
+
+    /* “오타 정답”을 더 명확하게 */
+    .near-banner{
+      margin-top:10px;
+      background:#fff3e6;
+      border:1px solid rgba(243,156,18,.35);
+      color:#a85d00;
+      padding:10px 12px;
+      border-radius:12px;
+      font-weight:900;
+      display:none;
+    }
+
+    .list{
+      list-style:none; padding:0; margin:8px 0 0;
+      background:#f8f9fa; border:1px solid #eee; border-radius:12px;
+      max-height:180px; overflow:auto;
+    }
+    .list li{
+      display:flex; justify-content:space-between; align-items:center; gap:10px;
+      padding:10px; border-bottom:1px solid #e6e6e6;
+    }
+    .list li:last-child{ border-bottom:none; }
+    .mini-btn{ padding:8px 10px; border-radius:10px; font-size:.85rem; width:auto; }
+
+    @keyframes heartbeat{ 0%,100%{ transform:scale(1); color:var(--danger);} 50%{ transform:scale(1.12); color:#c0392b;} }
+    .timer-text{ color:var(--danger); font-weight:900; }
+    .timer-text.danger{ animation:heartbeat .5s infinite; }
+
+    @keyframes shake{ 0%,100%{ transform:translateX(0);} 20%,60%{ transform:translateX(-10px);} 40%,80%{ transform:translateX(10px);} }
+    .shake-animation{ animation:shake .4s ease-in-out; }
+    @keyframes floatUp{ 0%{ opacity:1; transform:translateY(0) scale(1);} 100%{ opacity:0; transform:translateY(-150px) scale(1.5);} }
+    .particle{ position:fixed; pointer-events:none; animation:floatUp 1.2s forwards; z-index:1000; }
+
+    /* 토스트 */
+    .toast{
+      position:fixed; left:50%; bottom:18px; transform:translateX(-50%);
+      background:#2c3e50; color:#fff; padding:10px 12px; border-radius:12px;
+      font-weight:900; font-size:.9rem;
+      box-shadow:0 10px 30px rgba(0,0,0,.22);
+      opacity:0; pointer-events:none; transition:opacity .2s, transform .2s;
+      z-index:2000;
+    }
+    .toast.show{ opacity:1; transform:translateX(-50%) translateY(-6px); }
+  
+    
+    /* --- V3 God Mode CSS --- */
+    :root {
+      --primary: #3498db; --bg: #f0f2f5; --card-bg: #fff; --text: #2c3e50;
+    }
+    /* Theme definitions apply to body */
+    body.theme-dark { --primary: #3498db; --bg: #1a1a1a; --card-bg: #2d2d2d; --text: #ecf0f1; color: #ecf0f1; }
+    body.theme-pink { --primary: #ff6b81; --bg: #ffeaa7; --card-bg: #fff0f5; --text: #2d3436; color: #2d3436; }
+    body.theme-cyber { --primary: #00cec9; --bg: #000000; --card-bg: #090909; --text: #00cec9; font-family: 'Courier New', monospace; color: #00cec9; }
+
+    /* Shop Grid */
+    .shop-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-top: 10px; }
+    .shop-item { 
+      border: 2px solid #ddd; border-radius: 12px; padding: 10px; text-align: center; 
+      cursor: pointer; transition: 0.2s; position: relative; background: var(--card-bg); color: var(--text);
+    }
+    .shop-item:hover { transform: translateY(-3px); box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+    .shop-item.bought { border-color: var(--success); background: rgba(39,174,96,0.1); }
+    .shop-item.equipped { border-color: var(--primary); background: rgba(52,152,219,0.1); box-shadow: 0 0 0 2px var(--primary); }
+
+    /* Coin Display */
+    .coin-display { 
+      background: #f1c40f; color: #fff; padding: 4px 10px; border-radius: 20px; 
+      font-weight: bold; margin-left: 5px; font-size: 0.9rem; vertical-align: middle;
+      display: inline-flex; align-items: center; gap: 4px;
+    }
+
+    /* Boss Raid UI */
+    .boss-container { text-align: center; margin-bottom: 15px; display: none; padding: 10px; border: 2px dashed #e74c3c; border-radius: 14px; background: rgba(231,76,60,0.05); }
+    .boss-visual { font-size: 5rem; animation: floatBoss 3s infinite ease-in-out; display: inline-block; }
+    @keyframes floatBoss { 0%,100%{transform:translateY(0);} 50%{transform:translateY(-15px);} }
+    .boss-hp-bar { width: 100%; height: 24px; background: #ddd; border-radius: 12px; overflow: hidden; margin-top: 10px; border: 2px solid #333; position: relative; }
+    .boss-hp-fill { height: 100%; background: #e74c3c; width: 100%; transition: width 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+    .boss-hp-text { position: absolute; top: 0; left: 0; width: 100%; text-align: center; color: #fff; font-weight: 900; line-height: 24px; text-shadow: 1px 1px 2px #000; font-size: 0.85rem; }
+
+    /* Mic Button */
+    .mic-btn {
+      position: absolute; right: 50px; top: 50%; transform: translateY(-50%);
+      background: none; border: none; font-size: 1.4rem; cursor: pointer;
+      color: #7f8c8d; transition: 0.2s; z-index: 10;
+    }
+    .mic-btn.listening { color: #e74c3c; animation: pulseMic 1s infinite; }
+    @keyframes pulseMic { 0%{transform:translateY(-50%) scale(1);} 50%{transform:translateY(-50%) scale(1.3);} 100%{transform:translateY(-50%) scale(1);} }
+
+    /* Theme Support for existing elements */
+    body.theme-dark .container, body.theme-dark .card, body.theme-dark details, body.theme-dark input, body.theme-dark textarea, body.theme-dark select { background: #2d2d2d; border-color: #444; color: #ecf0f1; }
+    body.theme-dark .tab.active { background: #2d2d2d; color: #3498db; }
+    body.theme-dark .tab { color: #95a5a6; }
+    body.theme-cyber .container { border: 2px solid #00cec9; box-shadow: 0 0 10px #00cec9; }
+
+    /* --- V2 & V3 Combined --- */
+
+    /* iPad 가로/세로 대응 (가로 최적화) */
+    @media (orientation: landscape) and (min-width: 768px){
+      body{ align-items:flex-start; }
+      .container{
+        width:96%;
+        max-width:860px;
+        padding:14px;
+        border-radius:16px;
+        max-height:calc(100dvh - var(--sat) - var(--sab) - 18px);
+      }
+      button{ padding:10px; }
+      .grid-3,.grid-2{ gap:8px; }
+      .button-group{ gap:8px; }
+      .tabs{ margin:8px 0 10px; }
+    }
+
+    @media print {
+      body * { visibility: hidden; }
+      #print-area, #print-area * { visibility: visible; }
+      #print-area { position: absolute; left: 0; top: 0; width: 100%; margin: 0; padding: 20px; background: #fff; }
+      .container { box-shadow: none; border: none; max-width: 100%; width: 100%; }
+    }
+    .listening-mode #question { font-size: 0; }
+    .listening-mode #question::after {
+      content: "🔊 듣고 쓰기";
+      font-size: 1.8rem; animation: pulse 1.5s infinite;
+    }
+    @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.05); } 100% { transform: scale(1); } }
+
+    .speed-control { display: flex; align-items: center; gap: 5px; font-weight: 800; font-size: 0.9rem; }
+    .speed-btn { padding: 4px 8px; border-radius: 6px; background: #eee; color: #555; cursor: pointer; border: 1px solid #ddd; }
+    .speed-btn.active { background: var(--primary); color: #fff; border-color: var(--primary); }
+</style>
+<link rel="manifest" id="manifest-placeholder">
+  <meta name="theme-color" content="#3498db">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+</head>
+<body>
+
+<!-- TOAST -->
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+<!-- HOME -->
+<div id="setup-screen" class="container">
+  <div class="topbar">
+    <div>
+      <h1 class="title">VOCA 마스터 🚀</h1>
+      <div class="subhint">학습 → 기록 → 상점 <span class="coin-display" id="global-coin">💎 0</span></div>
+    </div>
+    <button class="btn btn-dark" style="width:auto; padding:10px 12px;"
+      onclick="window.__voca.openAdmin()"
+      aria-label="관리자 모드 열기">관리자 ⚙️</button>
+  </div>
+
+  <div class="game-stats">
+    <div class="level-row">
+      <span id="home-level-text">Lv. 1</span>
+      <span id="home-exp-text">0 / 100 EXP</span>
+    </div>
+    <div class="exp-bar-bg"><div id="home-exp-bar" class="exp-bar-fill"></div></div>
+  </div>
+
+  <div class="tabs" role="tablist" aria-label="홈 탭">
+    <button class="tab active" id="tab-learn" role="tab" aria-selected="true" onclick="window.__voca.switchTab('learn')">학습</button>
+    <button class="tab" id="tab-record" role="tab" aria-selected="false" onclick="window.__voca.switchTab('record')">기록</button>
+    <button class="tab" id="tab-shop" role="tab" onclick="window.__voca.switchTab('shop')">상점 💎</button>
+    <button class="tab" id="tab-settings" role="tab" aria-selected="false" onclick="window.__voca.switchTab('settings')">설정</button>
+  </div>
+
+  <!-- TAB: LEARN -->
+  <div id="panel-learn">
+    <div class="card">
+      <div class="row">
+        <span class="pill good" id="streak-pill">🔥 연속: 0일</span>
+        <span class="pill good" id="today-pill">오늘: 0단어</span>
+        <span class="pill warn" id="goal-pill">목표: 10</span>
+      </div>
+      <div class="mini" style="margin-top:8px;">* 오답 복습은 틀린 단어가 생기면 자동으로 열립니다.</div>
+    </div>
+
+    <div class="grid-3">
+      <button class="btn btn-primary" onclick="window.__voca.initQuiz('verbs')">동사 🏃</button>
+      <button class="btn btn-primary" onclick="window.__voca.initQuiz('nouns')">명사 🎒</button>
+      <button class="btn btn-primary" onclick="window.__voca.initQuiz('adjectives')">형용사 ✨</button>
+    </div>
+
+    <div class="grid-2" style="margin-top:10px;">
+      <button class="btn btn-time" onclick="window.__voca.initQuiz('time')">타임 어택 ⏱️</button>
+      <button class="btn btn-danger" onclick="window.__voca.initBossRaid()">🔥 보스 레이드</button>
+      <button class="btn btn-dark" onclick="window.__voca.initQuiz('dictation')">받아쓰기 ✏️</button>
+      <button class="btn btn-review hidden" id="btn-play-review" onclick="window.__voca.initQuiz('wrong')">오답 복습 🧠</button>
+      <button class="btn btn-custom hidden" id="btn-play-custom" onclick="window.__voca.initQuiz('custom')">나만의 단어장 🌟</button>
+      <button class="btn btn-dark" onclick="window.__voca.openMaker()" style="grid-column:span 2;">새 단어 추가 ✍️</button>
+    </div>
+  </div>
+
+  <!-- TAB: RECORD -->
+  <div id="panel-record" class="hidden">
+    <details>
+      <summary><span>🏆 타임어택 최고 기록</span><span class="right" id="best-time-score">0점</span></summary>
+      <div class="card" style="margin:10px 0 0;">
+        <div class="row">
+          <span class="pill">점수: <span id="bestScoreVal">0</span></span>
+          <span class="pill">정확도: <span id="bestAccVal">0</span>%</span>
+          <span class="pill">분당: <span id="bestWpmVal">0</span></span>
+        </div>
+        <button class="btn btn-gray" style="margin-top:10px;" onclick="window.__voca.resetBest()">기록 초기화</button>
+      </div>
+    </details>
+
+    <details>
+      <summary><span>🌱 최근 28일 잔디</span><span class="right">펼치기</span></summary>
+      <div class="grass-grid" id="grass-grid"></div>
+    </details>
+
+    <details>
+      <summary><span>🏅 배지</span><span class="right" id="badge-summary">0/8</span></summary>
+      <div class="badge-wrap" id="badge-wrap"></div>
+    </details>
+
+    <details>
+      <summary><span>📤 학습기록 CSV 내보내기</span><span class="right">관리자 모드 추천</span></summary>
+      <div class="card" style="margin:10px 0 0;">
+        <div class="mini">* 날짜별 정답/시도/정확도/타임어택 최고가 포함됩니다.</div>
+        <button class="btn btn-primary" style="margin-top:10px;" onclick="window.__voca.exportCSV()">CSV 다운로드</button>
+      </div>
+    </details>
+  </div>
+
+  <!-- TAB: SETTINGS -->
+  
+  <!-- TAB: SHOP -->
+  <div id="panel-shop" class="hidden">
+    <div class="card" style="text-align:center; background:linear-gradient(135deg, #f1c40f 0%, #f39c12 100%); color:#fff; border:none;">
+      <div style="font-size:1.2rem; font-weight:900;">내 지갑</div>
+      <div style="font-size:2.5rem; font-weight:900; margin:10px 0;" id="shop-coin-big">💎 0</div>
+      <div class="mini" style="color:#fff; opacity:0.9;">* 학습하고 보스를 잡아 코인을 모으세요!</div>
+    </div>
+
+    <div style="font-weight:900; margin:15px 0 8px;">🎨 테마 스킨</div>
+    <div class="shop-grid" id="shop-themes">
+      <!-- Generated by JS -->
+    </div>
+  </div>
+
+  <div id="panel-settings" class="hidden">
+    <div class="card">
+      <div class="row">
+        <div>
+          <div style="font-weight:900; margin-bottom:6px;">데일리 목표</div>
+          <select id="dailyGoalSelect">
+            <option value="5">5단어</option><option value="10" selected>10단어</option>
+            <option value="20">20단어</option><option value="30">30단어</option>
+          </select>
+        </div>
+        <div>
+          <div style="font-weight:900; margin-bottom:6px;">자동 발음</div>
+          <select id="autoTTSSelect"><option value="on">ON</option><option value="off">OFF</option></select>
+        </div>
+        </div>
+        <div>
+          <div style="font-weight:900; margin-bottom:6px;">발음 속도 🐢/🐇</div>
+          <div class="speed-control" id="speedControl">
+            <button class="speed-btn" onclick="window.__voca.setSpeed(0.8)">0.8x</button>
+            <button class="speed-btn active" onclick="window.__voca.setSpeed(1.0)">1.0x</button>
+            <button class="speed-btn" onclick="window.__voca.setSpeed(1.2)">1.2x</button>
+          </div>
+
+      </div>
+      <div class="row" style="margin-top:10px;">
+        <div>
+          <div style="font-weight:900; margin-bottom:6px;">오타 허용</div>
+          <select id="typoSelect"><option value="on" selected>ON</option><option value="off">OFF</option></select>
+        </div>
+        <div>
+          <div style="font-weight:900; margin-bottom:6px;">효과음</div>
+          <select id="sfxSelect"><option value="on" selected>ON</option><option value="off">OFF</option></select>
+        </div>
+      </div>
+      <div class="mini" style="margin-top:10px;">
+        * 오타 허용 ON: 4글자 이상에서 1글자 오차를 “오타지만 정답 인정” 처리(EXP 일부 감소)
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MAKER -->
+<div id="maker-screen" class="container hidden">
+  <div class="topbar">
+    <div>
+      <h1 class="title">단어 추가 ✍️</h1>
+      <div class="subhint">한 개 추가 · 일괄 추가 · 백업(내보내기/가져오기)</div>
+    </div>
+    <button class="btn btn-danger" style="width:auto; padding:10px 12px;" onclick="window.__voca.closeMaker()">메인 🔙</button>
+  </div>
+
+  <div class="card">
+    <div class="row">
+      <input id="newKan" placeholder="뜻 (예: 학교)" autocomplete="off">
+      <input id="newEng" placeholder="영어 (예: school)" autocomplete="off">
+    </div>
+    <button class="btn btn-primary" style="margin-top:10px;" onclick="window.__voca.addCustomWord()">목록에 추가 ➕</button>
+    <div class="mini" id="custom-count" style="text-align:right; margin-top:8px;">총 0개</div>
+    <ul id="custom-words-list" class="list"></ul>
+  </div>
+
+  <details>
+    <summary><span>📥 일괄 추가</span><span class="right">펼치기</span></summary>
+    <textarea id="bulkArea" rows="5" placeholder="예)
+학교 school
+사과 apple
+가방 bag"></textarea>
+    <div class="row" style="margin-top:10px;">
+      <button class="btn btn-primary" onclick="window.__voca.addBulk()">일괄 추가</button>
+      <button class="btn btn-gray" onclick="window.__voca.clearBulk()">비우기</button>
+    </div>
+    <div class="mini" style="margin-top:8px;">* 한 줄에 “뜻 영어” 또는 “뜻,영어” 또는 탭 구분도 인식</div>
+  </details>
+
+  <details>
+    <summary><span>🔁 내보내기/가져오기(백업)</span><span class="right">펼치기</span></summary>
+    <textarea id="backupArea" rows="5" placeholder="내보내기 JSON 또는 가져오기 JSON을 붙여넣으세요."></textarea>
+    <div class="row" style="margin-top:10px;">
+      <button class="btn btn-primary" onclick="window.__voca.exportCustom()">내보내기</button>
+      <button class="btn btn-dark" onclick="window.__voca.copyBackup()">복사</button>
+      <button class="btn btn-danger" onclick="window.__voca.importCustom()">가져오기</button>
+    </div>
+    <div class="mini" style="margin-top:8px;">* 가져오기는 기존 목록에 “추가”(중복 자동 제외)</div>
+  </details>
+</div>
+
+<!-- QUIZ -->
+<div id="quiz-screen" class="container hidden">
+  <div class="topbar">
+    <div>
+      <h1 class="title">퀴즈 🎮</h1>
+      <div class="subhint"><span id="quiz-level-text">Lv. 1</span> · <span id="quiz-combo-text"></span></div>
+    </div>
+    <div class="toggles">
+      <button id="sfxBtn" onclick="window.__voca.toggleSfx()" title="효과음"
+        aria-label="효과음 켜기 또는 끄기">🔔</button>
+      
+      <button id="listenModeBtn" onclick="window.__voca.toggleListenMode()" title="리스닝 모드 (글자 가리기)"
+        aria-label="리스닝 모드 전환">👁️</button>
+<button id="muteBtn" onclick="window.__voca.toggleMute()" title="발음"
+        aria-label="발음 켜기 또는 끄기">🔊</button>
+    </div>
+  </div>
+
+  <div class="game-stats">
+    <div class="exp-bar-bg"><div id="quiz-exp-bar" class="exp-bar-fill"></div></div>
+  </div>
+
+  <div class="stats">
+    <span class="pill good">점수: <span id="score">0</span></span>
+    <span class="pill">시도: <span id="attempts">0</span></span>
+    <span class="pill">정확도: <span id="accuracy">0</span>%</span>
+    <span class="pill warn">남은: <span id="remaining">0</span></span>
+    <span id="timer-display" class="pill danger hidden timer-text">⏱️ <span id="time-left">60</span>초</span>
+  </div>
+
+  
+  <div id="boss-stage" class="boss-container">
+    <div class="boss-visual" id="boss-emoji">😈</div>
+    <div class="boss-hp-bar">
+      <div id="boss-hp" class="boss-hp-fill"></div>
+      <div id="boss-hp-text" class="boss-hp-text">1000/1000</div>
+    </div>
+  </div>
+
+  <div class="card-container">
+    <div id="question">단어</div>
+    <button class="btn-listen" onclick="window.__voca.playCurrentWordTTS()" title="발음 듣기"
+      aria-label="현재 단어 발음 듣기">🗣️</button>
+  </div>
+
+  
+  <div style="position:relative; margin-top:10px;">
+    <input id="answerInput" placeholder="정답 입력 (또는 마이크 클릭)" autocomplete="off" style="padding-right:90px;">
+    <!-- Mic Button (V3) -->
+    <button id="micBtn" class="mic-btn" onclick="window.__voca.toggleMic()" title="음성 인식 (크롬 전용)">🎤</button>
+    <!-- Listen Mode Toggle (V2 Feature moved here for better layout, optional, or keep in topbar) -->
+    <!-- Let's keep V2's topbar toggle for Listen Mode, but add a quick TTS button here inside input like V3 design -->
+  </div>
+
+  <div id="hintArea"></div>
+  <div id="nearBanner" class="near-banner" role="status" aria-live="polite"></div>
+
+  <div class="button-group">
+    <button class="btn btn-main" onclick="window.__voca.handleCheck()">정답 확인</button>
+    <button class="btn btn-hint" onclick="window.__voca.showHint()">힌트 💡</button>
+    <button class="btn btn-exit" onclick="window.__voca.showResult()">끝내기 🏁</button>
+  </div>
+
+  <div id="feedback"></div>
+</div>
+
+<!-- RESULT -->
+<div id="result-screen" class="container hidden">
+  <div class="topbar">
+    <div>
+      <h1 class="title">결과 📝</h1>
+      <div class="subhint" id="final-score">최종 점수: 0점</div>
+    </div>
+    <button class="btn btn-dark" style="width:auto; padding:10px 12px;"
+      onclick="location.reload()" aria-label="홈으로 돌아가기">홈 🏠</button>
+  </div>
+
+  <div id="time-extra" class="card hidden">
+    <div style="font-weight:900; margin-bottom:6px;">⏱️ 타임어택 분석</div>
+    <div id="time-stats" style="font-weight:900; color:#2c3e50;"></div>
+    <div id="best-badge" style="margin-top:8px; font-weight:900;"></div>
+  </div>
+
+  <div class="card" style="background:#fff3f3; border-color:rgba(231,76,60,.18);">
+    <div style="font-weight:900; color:var(--danger);">누적 오답 노트 🚩</div>
+    <div class="mini" style="margin-top:6px;">* ‘숙련’으로 보내면 기록으로 남고, 오답에서 빠집니다.</div>
+    <ul id="wrong-items" class="list"></ul>
+    <button class="btn btn-gray" style="margin-top:10px; padding:8px;" onclick="window.__voca.printWrongNotes()">🖨️ 오답 노트 인쇄 (시험지)</button>
+
+  </div>
+
+  <div class="card" style="background:#f4fbf6; border-color:rgba(39,174,96,.18);">
+    <div style="font-weight:900; color:var(--success);">숙련(마스터) 🏆</div>
+    <div class="mini" style="margin-top:6px;">* 정복한 단어 목록입니다.</div>
+    <ul id="master-items" class="list"></ul>
+  </div>
+</div>
+
+<!-- ADMIN (학생이 직접 관리) -->
+<div id="admin-screen" class="container hidden">
+  <div class="topbar">
+    <div>
+      <h1 class="title">관리자 모드 ⚙️</h1>
+      <div class="subhint">세트 만들기 · 세트 적용 · 배포(JSON) · 기록(CSV)</div>
+    </div>
+    <button class="btn btn-danger" style="width:auto; padding:10px 12px;"
+      onclick="window.__voca.closeAdmin()" aria-label="관리자 모드 닫기">메인 🔙</button>
+  </div>
+
+  <div class="card">
+    <div style="font-weight:900; margin-bottom:8px;">📦 단어 세트 만들기</div>
+    <input id="setName" placeholder="세트 이름 (예: 4-1 1단원)" />
+    <textarea id="setBulk" rows="6" style="margin-top:10px;" placeholder="예)
+학교 school
+사과 apple
+가방 bag"></textarea>
+    <div class="row" style="margin-top:10px;">
+      <button class="btn btn-primary" onclick="window.__voca.saveSet()">세트 저장</button>
+      <button class="btn btn-gray" onclick="window.__voca.clearSetForm()">초기화</button>
+    </div>
+    <div class="mini" style="margin-top:8px;">
+      * 저장한 세트를 “적용”하면 해당 세트 단어가 ‘나만의 단어장’에 자동 추가됩니다(중복 제외).
+    </div>
+  </div>
+
+  <details open>
+    <summary><span>📚 저장된 세트</span><span class="right">적용/내보내기/삭제</span></summary>
+    <ul id="setList" class="list"></ul>
+  </details>
+
+  <details>
+    <summary><span>📤 세트 JSON 내보내기</span><span class="right">공유/백업</span></summary>
+    <textarea id="adminExport" rows="5" placeholder="세트를 선택하면 JSON이 여기에 생성됩니다."></textarea>
+    <div class="row" style="margin-top:10px;">
+      <button class="btn btn-dark" onclick="window.__voca.copyAdminExport()">JSON 복사</button>
+      <button class="btn btn-primary" onclick="window.__voca.exportCSV()">학습기록 CSV</button>
+    </div>
+  </details>
+
+  <details>
+    <summary><span>📥 세트 JSON 가져오기</span><span class="right">붙여넣기</span></summary>
+    <textarea id="adminImport" rows="5" placeholder="다른 사람이 준 세트 JSON을 붙여넣고 가져오세요."></textarea>
+    <div class="row" style="margin-top:10px;">
+      <button class="btn btn-primary" onclick="window.__voca.importSetJSON()">세트 가져오기</button>
+      <button class="btn btn-gray" onclick="document.getElementById('adminImport').value=''">비우기</button>
+    </div>
+    <div class="mini" style="margin-top:8px;">* 가져온 세트는 “저장된 세트” 목록에 추가됩니다.</div>
+  </details>
+</div>
+
+<script>
+(() => {
+  "use strict";
+
+  /* =========================
+   * Storage: 안전 로드/세이브
+   * ========================= */
+  const Storage = {
+    safeLoad(key, fallback, onRecover) {
+      try {
+        const raw = localStorage.getItem(key);
+        if (raw === null || raw === undefined) return fallback;
+        return JSON.parse(raw);
+      } catch (e) {
+        // 데이터 손상 → 복구
+        try { localStorage.removeItem(key); } catch {}
+        if (typeof onRecover === "function") onRecover(key);
+        return fallback;
+      }
+    },
+    safeSave(key, value) {
+      try { localStorage.setItem(key, JSON.stringify(value)); return true; }
+      catch { return false; }
+    },
+    safeRemove(key) {
+      try { localStorage.removeItem(key); } catch {}
+    }
+  };
+
+  /* =========================
+   * App Class: 상태/로직 캡슐화
+   * ========================= */
+  class VocaApp {
+    constructor() {
+      this.wordBank = {
+        verbs: [{kan:"돕다",eng:"help"},{kan:"씻다",eng:"wash"},{kan:"청소하다",eng:"clean"},{kan:"연습하다",eng:"practice"},{kan:"공부하다",eng:"study"}],
+        nouns: [{kan:"학교",eng:"school"},{kan:"사과",eng:"apple"},{kan:"가방",eng:"bag"},{kan:"책상",eng:"desk"},{kan:"물",eng:"water"}],
+        adjectives: [{kan:"행복한",eng:"happy"},{kan:"슬픈",eng:"sad"},{kan:"강한",eng:"strong"},{kan:"바쁜",eng:"busy"},{kan:"예쁜",eng:"pretty"}]
+      };
+
+      // 상태(State) 단일 객체로 통합
+      this.state = {
+        data: {
+          customWords: [],
+          wrongWords: [],
+          masterWords: [],
+          playerLevel: 1,
+          playerExp: 0,
+          attendanceData: {},
+          settings: { dailyGoal: 10, autoTTS: true, typoHelp: true, sfx: true, ttsSpeed: 1.0 },
+          bestTimeAttack: { bestScore: 0, bestWpm: 0, bestAccuracy: 0 },
+          progress: { daily:{}, history:[] },
+          sets: [],
+          badges: {},
+          coins: 0,
+          inventory: ['default'],
+          equippedTheme: 'default'
+        },
+        runtime: {
+          currentList: [],
+          currentWord: null,
+          combo: 0,
+          score: 0,
+          attempts: 0,
+          correctCount: 0,
+          isMuted: false, isListeningMode: false,
+          isTimeMode: false,
+          timerInterval: null,
+          timeLeft: 60,
+          timeModeStart: 0,
+          audioCtx: null,
+          isBossMode: false,
+          bossHP: 0,
+          maxBossHP: 0
+        }
+      };
+
+      this.BADGE_DEF = [
+        {id:'streak_3',  icon:'🔥', name:'3일 연속',  desc:'연속 학습 3일'},
+        {id:'streak_7',  icon:'🔥', name:'7일 연속',  desc:'연속 학습 7일'},
+        {id:'streak_14', icon:'🔥', name:'14일 연속', desc:'연속 학습 14일'},
+        {id:'goal_1',    icon:'🏅', name:'오늘 목표',  desc:'오늘 목표 달성'},
+        {id:'goal_7',    icon:'🏅', name:'목표 7회',   desc:'목표 달성 7회'},
+        {id:'master_10', icon:'🏆', name:'정복 10',    desc:'숙련 10개 달성'},
+        {id:'time_15',   icon:'⏱️', name:'타임 15점',  desc:'타임어택 15점 달성'},
+        {id:'time_best', icon:'🎉', name:'신기록',     desc:'타임어택 최고기록 갱신'}
+      ];
+    }
+
+    /* ---------- UI Helpers ---------- */
+    $(id){ return document.getElementById(id); }
+
+    toast(msg){
+      const t = this.$('toast');
+      if(!t) return;
+      t.textContent = msg;
+      t.classList.add('show');
+      clearTimeout(this._toastTimer);
+      this._toastTimer = setTimeout(()=>t.classList.remove('show'), 1700);
+    }
+
+    /* ---------- Data Load/Save ---------- */
+    loadAll() {
+      const onRecover = (k)=>this.toast(`저장 데이터(${k})가 손상되어 초기화했어요 🛡️`);
+      const D = this.state.data;
+
+      D.customWords    = Storage.safeLoad('myVocaCustom', [], onRecover);
+      D.wrongWords     = Storage.safeLoad('myVocaWrongWords', [], onRecover);
+      D.masterWords    = Storage.safeLoad('myVocaMasterWords', [], onRecover);
+      D.playerLevel    = parseInt(Storage.safeLoad('myVocaLevel', 1, onRecover)) || 1;
+      D.playerExp      = parseInt(Storage.safeLoad('myVocaExp', 0, onRecover)) || 0;
+      D.attendanceData = Storage.safeLoad('myVocaAttendance', {}, onRecover);
+      D.settings       = Storage.safeLoad('myVocaSettings', { dailyGoal:10, autoTTS:true, typoHelp:true, sfx:true, ttsSpeed:1.0 }, onRecover);
+      D.bestTimeAttack = Storage.safeLoad('myVocaBestTimeAttack', { bestScore:0, bestWpm:0, bestAccuracy:0 }, onRecover);
+      D.progress       = Storage.safeLoad('myVocaProgress', { daily:{}, history:[] }, onRecover);
+      D.sets           = Storage.safeLoad('myVocaSets', [], onRecover);
+      D.badges = Storage.safeLoad('myVocaBadges', {}, onRecover);
+      D.coins = parseInt(Storage.safeLoad('myVocaCoins', 0, onRecover)) || 0;
+      D.inventory = Storage.safeLoad('myVocaInventory', ['default'], onRecover);
+      D.equippedTheme = Storage.safeLoad('myVocaTheme', 'default', onRecover);
+      if(D.equippedTheme && D.equippedTheme !== 'default') document.body.classList.add(`theme-${D.equippedTheme}`);
+
+
+      // 데이터 정규화(최소 안전장치)
+      if(!Array.isArray(D.customWords)) D.customWords = [];
+      if(!Array.isArray(D.wrongWords)) D.wrongWords = [];
+      if(!Array.isArray(D.masterWords)) D.masterWords = [];
+      if(!Array.isArray(D.sets)) D.sets = [];
+      if(typeof D.attendanceData !== 'object' || D.attendanceData === null) D.attendanceData = {};
+      if(typeof D.badges !== 'object' || D.badges === null) D.badges = {};
+      if(typeof D.progress !== 'object' || D.progress === null) D.progress = { daily:{}, history:[] };
+
+      // settings 정규화
+      D.settings.dailyGoal = parseInt(D.settings.dailyGoal || 10);
+      D.settings.autoTTS = !!D.settings.autoTTS;
+      D.settings.typoHelp = !!D.settings.typoHelp;
+      D.settings.sfx = !!D.settings.sfx;
+
+      D.settings.ttsSpeed = parseFloat(D.settings.ttsSpeed || 1.0);
+
+      return true;
+    }
+
+    saveKey(key, value){
+      return Storage.safeSave(key, value);
+    }
+
+    persistCore(){
+      const D = this.state.data;
+      this.saveKey('myVocaCustom', D.customWords);
+      this.saveKey('myVocaWrongWords', D.wrongWords);
+      this.saveKey('myVocaMasterWords', D.masterWords);
+      this.saveKey('myVocaLevel', D.playerLevel);
+      this.saveKey('myVocaExp', D.playerExp);
+      this.saveKey('myVocaAttendance', D.attendanceData);
+      this.saveKey('myVocaSettings', D.settings);
+      this.saveKey('myVocaBestTimeAttack', D.bestTimeAttack);
+      this.saveKey('myVocaProgress', D.progress);
+      this.saveKey('myVocaSets', D.sets);
+      this.saveKey('myVocaBadges', D.badges);
+          this.saveKey('myVocaCoins', D.coins||0);
+      this.saveKey('myVocaInventory', D.inventory||['default']);
+      this.saveKey('myVocaTheme', D.equippedTheme||'default');
+    }
+
+    /* ---------- Utils ---------- */
+    normalizeEng(s){ return String(s||"").trim().toLowerCase(); }
+    dateStrOf(d){
+      return d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0');
+    }
+
+    ensureAudio(){
+      const R = this.state.runtime;
+      if(!R.audioCtx) R.audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      return R.audioCtx;
+    }
+
+    playSound(type){
+      const { settings } = this.state.data;
+      if(!settings.sfx) return;
+      const ctx = this.ensureAudio();
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.connect(gain); gain.connect(ctx.destination);
+
+      if(type==='correct'){ osc.frequency.setValueAtTime(880, ctx.currentTime); osc.type='sine'; }
+      else if(type==='levelup'){ osc.frequency.setValueAtTime(1046.5, ctx.currentTime); osc.type='sine'; }
+      else if(type==='tick'){ osc.frequency.setValueAtTime(600, ctx.currentTime); osc.type='triangle'; gain.gain.setValueAtTime(0.5, ctx.currentTime); }
+      else { osc.frequency.setValueAtTime(220, ctx.currentTime); osc.type='square'; }
+
+      osc.start();
+      const dur = (type==='tick') ? 0.1 : 0.25;
+      gain.gain.exponentialRampToValueAtTime(0.00001, ctx.currentTime + dur);
+      osc.stop(ctx.currentTime + dur);
+    }
+
+    speakWord(text, slow=false){
+      const R = this.state.runtime;
+      if(R.isMuted) return;
+
+      // 지원 여부
+      if(!('speechSynthesis' in window) || typeof SpeechSynthesisUtterance === 'undefined'){
+        this.toast('이 기기/브라우저는 발음을 지원하지 않아요.');
+        return;
+      }
+
+      const self = this;
+      const msg = String(text || '').trim();
+      if(!msg) return;
+
+      let u;
+      try{
+        // iOS에서 잔여 큐가 꼬일 수 있어 항상 정리
+        try{ window.speechSynthesis.cancel(); }catch{}
+        u = new SpeechSynthesisUtterance(msg);
+      }catch(e){
+        this.toast('발음 준비에 실패했어요. 다시 시도해 주세요.');
+        return;
+      }
+
+      u.lang = 'en-US';
+      u.rate = slow ? 0.8 : (this.state.data.settings.ttsSpeed || 1.0);
+
+      let started = false;
+      let done = false;
+
+      const notifyBlocked = (detail)=>{
+        if(done) return;
+        done = true;
+        // iOS 무음모드/권한/정책으로 막혀도 앱은 계속 동작
+        self.toast(detail || '🔇 발음이 차단되었어요. (무음모드/볼륨/사파리 정책) 소리를 켜고 다시 눌러주세요.');
+      };
+
+      const startGuard = setTimeout(()=>{
+        if(!started && !done){
+          notifyBlocked('🔇 발음이 시작되지 않았어요. iOS 무음모드/사파리 정책 때문에 막힐 수 있어요.');
+        }
+      }, 1300);
+
+      u.onstart = ()=>{ started = true; clearTimeout(startGuard); };
+      u.onend   = ()=>{ done = true; clearTimeout(startGuard); };
+      u.onerror = ()=>{ clearTimeout(startGuard); notifyBlocked(); };
+
+      try{
+        window.speechSynthesis.speak(u);
+      }catch(e){
+        clearTimeout(startGuard);
+        notifyBlocked('🔇 발음 실행이 실패했어요. 소리/권한을 확인 후 다시 시도해 주세요.');
+      }
+    }
+
+    showParticles(emoji){
+      for(let i=0;i<14;i++){
+        const p=document.createElement('div');
+        p.innerText=emoji;
+        p.className='particle';
+        p.style.left=(50+(Math.random()*40-20))+'vw';
+        p.style.top=(50+(Math.random()*40-20))+'vh';
+        p.style.fontSize=(Math.random()*18+18)+'px';
+        document.body.appendChild(p);
+        setTimeout(()=>p.remove(), 1200);
+      }
+    }
+
+    levenshtein(a,b){
+      a=a||""; b=b||"";
+      const n=a.length, m=b.length;
+      const dp=Array.from({length:n+1},()=>Array(m+1).fill(0));
+      for(let i=0;i<=n;i++) dp[i][0]=i;
+      for(let j=0;j<=m;j++) dp[0][j]=j;
+      for(let i=1;i<=n;i++){
+        for(let j=1;j<=m;j++){
+          const cost=(a[i-1]===b[j-1])?0:1;
+          dp[i][j]=Math.min(dp[i-1][j]+1, dp[i][j-1]+1, dp[i-1][j-1]+cost);
+        }
+      }
+      return dp[n][m];
+    }
+
+
+    shuffle(arr){
+      for(let i=arr.length-1;i>0;i--){
+        const j=Math.floor(Math.random()*(i+1));
+        [arr[i],arr[j]]=[arr[j],arr[i]];
+      }
+      return arr;
+    }
+
+    /* ---------- Tabs ---------- */
+    
+    /* --- V2 Features --- */
+    
+    /* --- V3 God Mode Logic --- */
+    addCoin(n) {
+      const D = this.state.data;
+      D.coins = (D.coins || 0) + n;
+      this.saveKey('myVocaCoins', D.coins);
+      this.renderCoin();
+    }
+    renderCoin() {
+      const c = this.state.data.coins || 0;
+      const el1 = document.getElementById('global-coin');
+      const el2 = document.getElementById('shop-coin-big');
+      if(el1) el1.innerText = `💎 ${c}`;
+      if(el2) el2.innerText = `💎 ${c}`;
+    }
+    initShop() {
+      const themes = [
+        {id:'default', name:'기본 (화이트)', price:0, color:'#fff'},
+        {id:'dark', name:'다크 모드', price:500, color:'#2c3e50'},
+        {id:'pink', name:'핑크 러블리', price:1000, color:'#ff9ff3'},
+        {id:'cyber', name:'사이버 펑크', price:2000, color:'#000'}
+      ];
+      const grid = document.getElementById('shop-themes');
+      if(!grid) return;
+      grid.innerHTML = '';
+      const myItems = this.state.data.inventory || ['default'];
+      const current = this.state.data.equippedTheme || 'default';
+
+      themes.forEach(t => {
+        const has = myItems.includes(t.id);
+        const equipped = (current === t.id);
+        const div = document.createElement('div');
+        div.className = `shop-item ${has ? 'bought' : ''} ${equipped ? 'equipped' : ''}`;
+        div.innerHTML = `
+          <div style="width:30px; height:30px; background:${t.color}; border-radius:50%; margin:0 auto 5px; border:1px solid #ddd;"></div>
+          <div style="font-weight:bold;">${t.name}</div>
+          <div style="font-size:0.9rem; margin-top:5px;">${has ? (equipped?'장착중':'보유중') : '💎 '+t.price}</div>
+        `;
+        div.onclick = () => {
+          if(equipped) return;
+          if(has) { this.equipTheme(t.id); }
+          else {
+            if((this.state.data.coins||0) >= t.price) {
+              if(confirm(`${t.name} 테마를 구매하시겠습니까?`)){
+                this.addCoin(-t.price);
+                this.state.data.inventory.push(t.id);
+                this.saveKey('myVocaInventory', this.state.data.inventory);
+                this.equipTheme(t.id);
+              }
+            } else { alert('코인이 부족합니다! 학습을 통해 모아보세요 💰'); }
+          }
+        };
+        grid.appendChild(div);
+      });
+    }
+    equipTheme(id) {
+      this.state.data.equippedTheme = id;
+      this.saveKey('myVocaTheme', id);
+      // Remove all theme classes first
+      document.body.classList.remove('theme-dark', 'theme-pink', 'theme-cyber');
+      if(id !== 'default') document.body.classList.add(`theme-${id}`);
+      this.initShop();
+      this.toast('테마가 변경되었습니다! 🎨');
+    }
+
+    // Boss
+    initBossRaid() {
+      this.state.runtime.isBossMode = true;
+      this.state.runtime.bossHP = 1000;
+      this.state.runtime.maxBossHP = 1000;
+      this.$('boss-stage').style.display = 'block';
+      this.initQuiz('time'); // 타임어택 기반
+      this.toast('😈 보스 출현! 정답을 맞춰 공격하세요!');
+    }
+    bossAttack(dmg) {
+      const R = this.state.runtime;
+      if(!R.isBossMode) return;
+      R.bossHP -= dmg;
+      const pct = Math.max(0, (R.bossHP/R.maxBossHP)*100);
+      this.$('boss-hp').style.width = `${pct}%`;
+      this.$('boss-hp-text').innerText = `${R.bossHP}/${R.maxBossHP}`;
+
+      // Damage Effect
+      const eff = document.createElement('div');
+      eff.innerText = `-${dmg}`;
+      eff.style.position='fixed'; eff.style.left='50%'; eff.style.top='40%'; 
+      eff.style.color='#e74c3c'; eff.style.fontWeight='900'; eff.style.fontSize='2rem'; 
+      eff.style.pointerEvents='none'; eff.style.animation='floatUp 0.8s forwards';
+      document.body.appendChild(eff);
+      setTimeout(()=>eff.remove(), 800);
+
+      if(R.bossHP <= 0) {
+        this.state.runtime.timeLeft = 0; // End Game
+        clearInterval(this.state.runtime.timerInterval);
+        alert('🎉 보스 토벌 성공!! 보상: 💎 300');
+        this.addCoin(300);
+        this.showResult();
+      }
+    }
+
+    // Mic
+    toggleMic() {
+      if(!('webkitSpeechRecognition' in window)) return alert('크롬 브라우저에서만 가능한 기능입니다.');
+      if(this.micListening) { this.rec.stop(); return; }
+
+      const rec = new window.webkitSpeechRecognition();
+      rec.lang = 'en-US'; 
+      rec.interimResults = false; 
+      rec.maxAlternatives = 1;
+
+      this.micListening = true;
+      this.$('micBtn').classList.add('listening');
+
+      rec.onstart = () => { this.toast('🎤 듣고 있어요...'); };
+      rec.onresult = (e) => {
+        const txt = e.results[0][0].transcript;
+        this.$('answerInput').value = txt;
+        this.handleCheck(); // Auto submit
+      };
+      rec.onend = () => { this.micListening = false; this.$('micBtn').classList.remove('listening'); };
+      rec.onerror = () => { this.micListening = false; this.$('micBtn').classList.remove('listening'); };
+
+      rec.start();
+      this.rec = rec;
+    }
+
+    setSpeed(val) {
+      this.state.data.settings.ttsSpeed = val;
+      this.saveKey('myVocaSettings', this.state.data.settings);
+      this.updateSpeedUI();
+      this.toast(`발음 속도: ${val}x`);
+      this.speakWord("Speed check", true); // Test sound
+    }
+
+    updateSpeedUI() {
+      const s = this.state.data.settings.ttsSpeed || 1.0;
+      const btns = document.querySelectorAll('.speed-btn');
+      btns.forEach(b => {
+        b.classList.toggle('active', parseFloat(b.innerText) === s);
+      });
+    }
+
+    toggleListenMode() {
+      const R = this.state.runtime;
+      R.isListeningMode = !R.isListeningMode;
+
+      // ✅ CSS(.listening-mode …)와 JS 상태를 한 방식으로 통일: body 클래스 토글
+      document.body.classList.toggle('listening-mode', R.isListeningMode);
+
+      const btn = this.$('listenModeBtn');
+      const qBox = this.$('question');
+
+      if (R.isListeningMode) {
+        btn.innerText = '👂';
+        btn.style.background = '#e84393';
+        btn.style.color = '#fff';
+        // 질문 텍스트는 유지(숨김은 CSS에서 처리) — 다음에 OFF로 돌아올 때 복구가 안전함
+        if (R.currentWord) qBox.innerText = R.currentWord.kan;
+        this.playCurrentWordTTS();
+      } else {
+        btn.innerText = '👁️';
+        btn.style.background = '';
+        btn.style.color = '';
+        if (R.currentWord) qBox.innerText = R.currentWord.kan;
+      }
+      this.toast(R.isListeningMode ? '리스닝 모드: ON 🎧' : '리스닝 모드: OFF 👁️');
+    }
+
+    printWrongNotes() {
+      const D = this.state.data;
+      if (D.wrongWords.length === 0) return alert('오답 노트가 비어있어요!');
+
+      const printDiv = this.$('print-area');
+      const today = new Date().toLocaleDateString();
+
+      let html = `
+        <h1 style="text-align:center; border-bottom:2px solid #333; padding-bottom:10px;">📑 오답 노트 / 테스트지</h1>
+        <div style="text-align:right; margin-bottom:20px; font-weight:bold;">날짜: ${today} &nbsp;&nbsp; 이름: ____________</div>
+        <table style="width:100%; border-collapse:collapse; margin-top:20px;">
+          <tr style="background:#eee;">
+            <th style="border:1px solid #333; padding:10px; width:10%;">No.</th>
+            <th style="border:1px solid #333; padding:10px; width:40%;">뜻 (Meaning)</th>
+            <th style="border:1px solid #333; padding:10px; width:50%;">단어 쓰기 (Spelling)</th>
+          </tr>
+      `;
+
+      D.wrongWords.forEach((w, i) => {
+        html += `
+          <tr>
+            <td style="border:1px solid #333; padding:12px; text-align:center;">${i+1}</td>
+            <td style="border:1px solid #333; padding:12px; font-weight:bold;">${w.kan}</td>
+            <td style="border:1px solid #333; padding:12px;"></td> 
+          </tr>
+        `; // 빈칸으로 출력
+      });
+
+      html += '</table><div style="margin-top:30px; text-align:center; color:#888;">- VOCA 마스터 PRO 인쇄 모드 -</div>';
+
+      printDiv.innerHTML = html;
+      window.print();
+    }
+switchTab(key){
+      this.$('panel-learn').classList.toggle('hidden', key!=='learn');
+      this.$('panel-record').classList.toggle('hidden', key!=='record');
+      this.$('panel-settings').classList.toggle('hidden', key!=='settings');
+      this.$('panel-shop').classList.toggle('hidden', key!=='shop');
+      this.$('tab-shop').classList.toggle('active', key==='shop');
+      this.$('tab-shop').setAttribute('aria-selected', key==='shop');
+      if(key==='shop') this.initShop();
+
+
+      this.$('tab-learn').classList.toggle('active', key==='learn');
+      this.$('tab-record').classList.toggle('active', key==='record');
+      this.$('tab-settings').classList.toggle('active', key==='settings');
+
+      this.$('tab-learn').setAttribute('aria-selected', key==='learn');
+      this.$('tab-record').setAttribute('aria-selected', key==='record');
+      this.$('tab-settings').setAttribute('aria-selected', key==='settings');
+
+      if(key==='record'){ this.renderGrass(); this.renderBadges(); this.renderBest(); }
+    }
+
+    /* ---------- Home UI ---------- */
+    calculateStreak(){
+      const { attendanceData } = this.state.data;
+      let streak=0;
+      let d=new Date();
+      const todayStr=this.dateStrOf(d);
+
+      if(attendanceData[todayStr] && attendanceData[todayStr]>0){
+        streak++; d.setDate(d.getDate()-1);
+        while(attendanceData[this.dateStrOf(d)]>0){ streak++; d.setDate(d.getDate()-1); }
+      }else{
+        d.setDate(d.getDate()-1);
+        if(attendanceData[this.dateStrOf(d)]>0){
+          streak++; d.setDate(d.getDate()-1);
+          while(attendanceData[this.dateStrOf(d)]>0){ streak++; d.setDate(d.getDate()-1); }
+        }
+      }
+      return streak;
+    }
+
+    recordGrassOneWord(){
+      const D = this.state.data;
+      const ds = this.dateStrOf(new Date());
+      D.attendanceData[ds] = (D.attendanceData[ds]||0) + 1;
+      this.saveKey('myVocaAttendance', D.attendanceData);
+
+      // 목표 보상(하루 1회)
+      const goalKey = 'myVocaGoalReward_' + ds;
+      if(D.attendanceData[ds] >= D.settings.dailyGoal && !localStorage.getItem(goalKey)){
+        D.playerExp += 30;
+        if(D.playerExp >= 100){ D.playerLevel++; D.playerExp -= 100; this.showParticles('🏅'); }
+        this.saveKey('myVocaLevel', D.playerLevel);
+        this.saveKey('myVocaExp', D.playerExp);
+        localStorage.setItem(goalKey, '1');
+        this.unlockBadge('goal_1');
+      }
+      this.updateGoal7Badge();
+    }
+
+    renderHomeMini(){
+      const D = this.state.data;
+      const ds = this.dateStrOf(new Date());
+      const todayCount = D.attendanceData[ds] || 0;
+      const streak = this.calculateStreak();
+
+      this.$('streak-pill').innerText = `🔥 연속: ${streak}일`;
+      this.$('today-pill').innerText = `오늘: ${todayCount}단어`;
+      this.$('goal-pill').innerText = `목표: ${D.settings.dailyGoal}`;
+
+      if(streak >= 3) this.unlockBadge('streak_3');
+      if(streak >= 7) this.unlockBadge('streak_7');
+      if(streak >= 14) this.unlockBadge('streak_14');
+
+      this.updateGameUI();
+      this.checkMainButtons();
+    }
+
+    renderGrass(){
+      const grid = this.$('grass-grid');
+      if(!grid) return;
+      const { attendanceData } = this.state.data;
+      grid.innerHTML='';
+      const today = new Date();
+      for(let i=27;i>=0;i--){
+        const d=new Date();
+        d.setDate(today.getDate()-i);
+        const ds=this.dateStrOf(d);
+        const count=attendanceData[ds]||0;
+        const box=document.createElement('div');
+        box.className='grass-box';
+        if(count>=15) box.classList.add('grass-lvl-4');
+        else if(count>=10) box.classList.add('grass-lvl-3');
+        else if(count>=5) box.classList.add('grass-lvl-2');
+        else if(count>0) box.classList.add('grass-lvl-1');
+        box.setAttribute('data-info', `${d.getMonth()+1}월 ${d.getDate()}일: ${count}개`);
+        grid.appendChild(box);
+      }
+    }
+
+    updateGameUI(){
+      const D = this.state.data;
+      const R = this.state.runtime;
+      const pct = Math.min((D.playerExp/100)*100, 100);
+
+      this.$('home-level-text').innerText = `Lv. ${D.playerLevel}`;
+      this.$('home-exp-text').innerText = `${D.playerExp} / 100 EXP`;
+      this.$('home-exp-bar').style.width = pct + '%';
+
+      this.$('quiz-level-text').innerText = `Lv. ${D.playerLevel}`;
+      this.$('quiz-exp-bar').style.width = pct + '%';
+
+      this.$('muteBtn').innerText = R.isMuted ? '🔇' : '🔊';
+      this.$('sfxBtn').innerText = D.settings.sfx ? '🔔' : '🔕';
+
+      // 콤보/피버
+      const comboEl = this.$('quiz-combo-text');
+      if(R.combo >= 3){
+        document.body.classList.add('fever');
+        this.$('quiz-screen').classList.add('fever-glow');
+        comboEl.innerText = `${R.combo} Combo! 🔥`;
+      }else{
+        document.body.classList.remove('fever');
+        this.$('quiz-screen').classList.remove('fever-glow');
+        comboEl.innerText = (R.combo > 1) ? `${R.combo} Combo!` : '';
+      }
+    }
+
+    checkMainButtons(){
+      const D = this.state.data;
+      this.$('btn-play-custom').classList.toggle('hidden', D.customWords.length===0);
+      this.$('btn-play-review').classList.toggle('hidden', D.wrongWords.length===0);
+    }
+
+    /* ---------- Badges ---------- */
+    unlockBadge(id){
+      const D = this.state.data;
+      if(D.badges[id]) return;
+      D.badges[id] = true;
+      this.saveKey('myVocaBadges', D.badges);
+      // 새 배지는 과하지 않게 토스트
+      this.toast(`배지 획득! 🏅`);
+    }
+
+    renderBadges(){
+      const D = this.state.data;
+      const wrap = this.$('badge-wrap');
+      if(!wrap) return;
+      wrap.innerHTML='';
+      let unlocked=0;
+      this.BADGE_DEF.forEach(b=>{
+        const on=!!D.badges[b.id];
+        if(on) unlocked++;
+        const el=document.createElement('div');
+        el.className='badge'+(on?'':' lock');
+        el.title=b.desc;
+        el.innerHTML=`${b.icon} <strong>${b.name}</strong>`;
+        wrap.appendChild(el);
+      });
+      this.$('badge-summary').innerText = `${unlocked}/${this.BADGE_DEF.length}`;
+    }
+
+    updateGoal7Badge(){
+      const D = this.state.data;
+      const keys = Object.keys(D.attendanceData);
+      let cnt=0;
+      for(const k of keys){
+        if((D.attendanceData[k]||0) >= D.settings.dailyGoal) cnt++;
+      }
+      if(cnt >= 7) this.unlockBadge('goal_7');
+    }
+
+    /* ---------- Settings ---------- */
+    initSettingsUI(){
+      const D = this.state.data;
+      const goalSel=this.$('dailyGoalSelect');
+      const autoSel=this.$('autoTTSSelect');
+      const typoSel=this.$('typoSelect');
+      const sfxSel=this.$('sfxSelect');
+
+      goalSel.value=String(D.settings.dailyGoal||10);
+      autoSel.value=D.settings.autoTTS?'on':'off';
+      typoSel.value=D.settings.typoHelp?'on':'off';
+      sfxSel.value=D.settings.sfx?'on':'off';
+
+      goalSel.addEventListener('change',()=>{
+        D.settings.dailyGoal=parseInt(goalSel.value);
+        this.saveKey('myVocaSettings', D.settings);
+        this.renderHomeMini();
+        this.updateGoal7Badge();
+      });
+      autoSel.addEventListener('change',()=>{
+        D.settings.autoTTS=(autoSel.value==='on');
+        this.saveKey('myVocaSettings', D.settings);
+      });
+      typoSel.addEventListener('change',()=>{
+        D.settings.typoHelp=(typoSel.value==='on');
+        this.saveKey('myVocaSettings', D.settings);
+      });
+      sfxSel.addEventListener('change',()=>{
+        D.settings.sfx=(sfxSel.value==='on');
+        this.saveKey('myVocaSettings', D.settings);
+        this.updateGameUI();
+      });
+    }
+
+    /* ---------- Maker ---------- */
+    openMaker(){
+      this.$('setup-screen').classList.add('hidden');
+      this.$('maker-screen').classList.remove('hidden');
+      this.renderCustomList();
+      this.$('newKan').focus();
+    }
+    closeMaker(){
+      this.$('maker-screen').classList.add('hidden');
+      this.$('setup-screen').classList.remove('hidden');
+      this.renderHomeMini();
+    }
+
+    addCustomWord(){
+      const D = this.state.data;
+      const kan=this.$('newKan').value.trim();
+      const eng=this.normalizeEng(this.$('newEng').value);
+      if(!kan || !eng) return alert('뜻과 영단어를 모두 입력해주세요!');
+      if(D.customWords.some(w=>this.normalizeEng(w.eng)===eng)) return alert('이미 있는 단어예요(영어 기준).');
+      D.customWords.push({kan,eng});
+      this.saveKey('myVocaCustom', D.customWords);
+      this.$('newKan').value=''; this.$('newEng').value='';
+      this.renderCustomList();
+      this.checkMainButtons();
+    }
+
+    renderCustomList(){
+      const D = this.state.data;
+      this.$('custom-count').innerText = `총 ${D.customWords.length}개`;
+      const ul=this.$('custom-words-list');
+      ul.innerHTML='';
+      if(D.customWords.length===0){
+        ul.innerHTML="<li style='justify-content:center; padding:14px;'>아직 단어가 없어요.</li>";
+        return;
+      }
+      D.customWords.forEach((w,i)=>{
+        const li=document.createElement('li');
+        li.innerHTML=`
+          <span><b>${w.kan}</b> : ${w.eng}</span>
+          <button class="mini-btn btn-danger" onclick="window.__voca.deleteCustomWord(${i})">삭제</button>
+        `;
+        ul.appendChild(li);
+      });
+    }
+
+    deleteCustomWord(i){
+      const D = this.state.data;
+      D.customWords.splice(i,1);
+      this.saveKey('myVocaCustom', D.customWords);
+      this.renderCustomList();
+      this.checkMainButtons();
+    }
+
+    parseBulkLine(line){
+      const t=line.trim();
+      if(!t) return null;
+      let parts=t.split(/[\t,]/).map(x=>x.trim()).filter(Boolean);
+      if(parts.length<2) parts=t.split(/\s+/);
+      if(parts.length<2) return null;
+      return {kan:parts[0], eng:this.normalizeEng(parts[1])};
+    }
+
+    addBulk(){
+      const D = this.state.data;
+      const text=this.$('bulkArea').value;
+      const lines=text.split('\n');
+      let added=0, skipped=0;
+      for(const line of lines){
+        const item=this.parseBulkLine(line);
+        if(!item){ skipped++; continue; }
+        if(D.customWords.some(w=>this.normalizeEng(w.eng)===item.eng)){ skipped++; continue; }
+        D.customWords.push({kan:item.kan.trim(), eng:item.eng});
+        added++;
+      }
+      this.saveKey('myVocaCustom', D.customWords);
+      this.renderCustomList();
+      this.checkMainButtons();
+      alert(`완료! 추가 ${added}개 / 건너뜀 ${skipped}개`);
+    }
+
+    clearBulk(){ this.$('bulkArea').value=''; }
+
+    exportCustom(){
+      const D = this.state.data;
+      const payload={ type:"customWords", customWords:D.customWords, exportedAt:new Date().toISOString() };
+      this.$('backupArea').value=JSON.stringify(payload);
+    }
+
+    async copyBackup(){
+      const val=this.$('backupArea').value.trim();
+      if(!val) return alert('복사할 내용이 없어요.');
+      try{ await navigator.clipboard.writeText(val); alert('복사 완료!'); }
+      catch{ alert('복사 실패(권한). 직접 복사해 주세요.'); }
+    }
+
+    importCustom(){
+      const D = this.state.data;
+      const val=this.$('backupArea').value.trim();
+      if(!val) return alert('가져올 JSON을 붙여넣어 주세요.');
+      try{
+        const obj=JSON.parse(val);
+        const list=obj.customWords || obj.words || [];
+        if(!Array.isArray(list)) throw new Error();
+        let added=0;
+        for(const w of list){
+          if(!w?.kan || !w?.eng) continue;
+          const eng=this.normalizeEng(w.eng);
+          if(D.customWords.some(x=>this.normalizeEng(x.eng)===eng)) continue;
+          D.customWords.push({kan:String(w.kan).trim(), eng});
+          added++;
+        }
+        this.saveKey('myVocaCustom', D.customWords);
+        this.renderCustomList();
+        this.checkMainButtons();
+        alert(`가져오기 완료! 추가 ${added}개`);
+      }catch{
+        alert('JSON 형식이 올바르지 않아요.');
+      }
+    }
+
+    /* ---------- Quiz ---------- */
+    buildWrongReviewList(){
+      const D = this.state.data;
+      const sorted=[...D.wrongWords].sort((a,b)=>{
+        const aw=a.wrongCount||1, bw=b.wrongCount||1;
+        const al=a.lastWrong||0, bl=b.lastWrong||0;
+        if(bw!==aw) return bw-aw;
+        return bl-al;
+      });
+      return sorted.slice(0,40).map(w=>({kan:w.kan, eng:w.eng}));
+    }
+
+    initQuiz(category){
+      const D = this.state.data;
+      const R = this.state.runtime;
+
+      clearInterval(R.timerInterval);
+      this.$('timer-display').classList.add('hidden');
+      this.$('timer-display').classList.remove('danger');
+
+      this.$('hintArea').style.display='none';
+      this.$('hintArea').innerHTML='';
+      this.$('feedback').innerText='';
+      this.$('nearBanner').style.display='none';
+      this.$('nearBanner').innerText='';
+
+      R.attempts=0; R.correctCount=0; R.combo=0; R.score=0;
+      R.isTimeMode = (category==='time');
+
+      if(category==='time') R.currentList=[...this.wordBank.verbs,...this.wordBank.nouns,...this.wordBank.adjectives,...D.customWords];
+      else if(category==='dictation') {
+        R.currentList=[...this.wordBank.verbs,...this.wordBank.nouns,...this.wordBank.adjectives,...D.customWords];
+        R.isListeningMode = true;
+      }
+      else if(category==='custom') R.currentList=[...D.customWords];
+      else if(category==='wrong') R.currentList=this.buildWrongReviewList();
+      else R.currentList=[...this.wordBank[category]];
+
+      // 한번 섞고(중복 출제 방지) 순서대로 진행
+      this.shuffle(R.currentList);
+
+      if(!R.currentList.length){
+        alert('단어가 없어요! 먼저 단어를 추가하거나 다른 모드를 선택해 주세요.');
+        return;
+      }
+
+      this.$('setup-screen').classList.add('hidden');
+      this.$('quiz-screen').classList.remove('hidden');
+
+      this.updateGameUI();
+      this.updateStatsUI();
+
+      // 리스닝 모드(받아쓰기 등)일 때 버튼 UI 반영
+      if(R.isListeningMode){
+        const btn = this.$('listenModeBtn');
+        if(btn){ btn.innerText='👂'; btn.style.background='#e84393'; btn.style.color='#fff'; }
+      }else{
+        const btn = this.$('listenModeBtn');
+        if(btn){ btn.innerText='👁️'; btn.style.background=''; btn.style.color=''; }
+      }
+
+      if(R.isTimeMode) this.startTimer();
+      this.nextQuestion(true);
+    }
+
+    startTimer(){
+      const R = this.state.runtime;
+      R.timeLeft=60;
+      R.timeModeStart=Date.now();
+      const el=this.$('timer-display');
+      el.classList.remove('hidden');
+      this.$('time-left').innerText=R.timeLeft;
+
+      R.timerInterval=setInterval(()=>{
+        R.timeLeft--;
+        this.$('time-left').innerText=R.timeLeft;
+        if(R.timeLeft<=10) el.classList.add('danger');
+        if(R.timeLeft<=5 && R.timeLeft>0) this.playSound('tick');
+        if(R.timeLeft<=0){
+          this.playSound('wrong');
+          alert('⏰ 타임 오버! 수고하셨습니다.');
+          this.showResult();
+        }
+      },1000);
+    }
+
+    nextQuestion(isFirst=false){
+      const D = this.state.data;
+      const R = this.state.runtime;
+      if(R.currentList.length===0) return this.showResult();
+      R.currentWord = R.currentList[0];
+
+      const q=this.$('question');
+      q.classList.add('flip-out');
+      setTimeout(()=>{
+        
+    if (R.isListeningMode) {
+        q.innerHTML = '<div style="font-size:3rem;">🔊</div><div style="font-size:1rem; color:#666;">듣고 쓰기</div>';
+        setTimeout(() => this.playCurrentWordTTS(), 300);
+    } else {
+        q.innerText = R.currentWord.kan;
+    }
+;
+        q.classList.remove('flip-out');
+        q.classList.add('flip-in');
+        setTimeout(()=>q.classList.remove('flip-in'), 200);
+      }, 200);
+
+      this.$('remaining').innerText=R.currentList.length;
+      this.$('answerInput').value='';
+      this.$('answerInput').focus();
+      this.$('feedback').innerText='';
+      this.$('hintArea').style.display='none';
+      this.$('hintArea').innerHTML='';
+      this.$('nearBanner').style.display='none';
+      this.$('nearBanner').innerText='';
+
+      if(D.settings.autoTTS){
+        if(isFirst) setTimeout(()=>this.speakWord(R.currentWord.eng), 250);
+        else this.speakWord(R.currentWord.eng);
+      }
+    }
+
+    updateStatsUI(){
+      const R = this.state.runtime;
+      this.$('score').innerText=R.score;
+      this.$('attempts').innerText=R.attempts;
+      const acc = R.attempts===0 ? 0 : Math.round((R.correctCount/R.attempts)*100);
+      this.$('accuracy').innerText=acc;
+    }
+
+    playCurrentWordTTS(){
+      const R = this.state.runtime;
+      if(R.currentWord) this.speakWord(R.currentWord.eng);
+      this.$('answerInput').focus();
+    }
+
+    showHint(){
+      const R = this.state.runtime;
+      if(!R.currentWord) return;
+      const correct=this.normalizeEng(R.currentWord.eng);
+      const masked=correct.split('').map((ch,i)=> (i===0?ch:'_')).join(' ');
+      const hint=this.$('hintArea');
+      hint.style.display='block';
+      hint.innerHTML=`힌트: <span style="font-size:1.08rem;">${masked}</span>
+        <small>첫 글자 '${correct[0]}' · 글자 수 ${correct.length} (힌트 사용 시 EXP 감소)</small>`;
+    }
+
+    upsertWrong(word){
+      const D = this.state.data;
+      const eng=this.normalizeEng(word.eng);
+      const now=Date.now();
+      if(D.masterWords.some(w=>this.normalizeEng(w.eng)===eng)) return;
+
+      const idx=D.wrongWords.findIndex(w=>this.normalizeEng(w.eng)===eng);
+      if(idx===-1){
+        D.wrongWords.push({kan:word.kan, eng, wrongCount:1, lastWrong:now});
+      }else{
+        D.wrongWords[idx].wrongCount=(D.wrongWords[idx].wrongCount||1)+1;
+        D.wrongWords[idx].lastWrong=now;
+        D.wrongWords[idx].kan=word.kan;
+      }
+      this.saveKey('myVocaWrongWords', D.wrongWords);
+      this.checkMainButtons();
+    }
+
+    handleCheck(){
+      const D = this.state.data;
+      const R = this.state.runtime;
+      if(!R.currentWord) return;
+
+      const input=this.normalizeEng(this.$('answerInput').value);
+      const correct=this.normalizeEng(R.currentWord.eng);
+      const feedback=this.$('feedback');
+
+      R.attempts++;
+
+      let isCorrect=(input===correct);
+      let isNear=false;
+      if(!isCorrect && D.settings.typoHelp && input.length>0){
+        const dist=this.levenshtein(input, correct);
+        if(dist===1 && Math.max(input.length, correct.length)>=4) isNear=true;
+      }
+
+      const usedHint = (this.$('hintArea').style.display !== 'none');
+
+      if(isCorrect || isNear){
+        R.correctCount++;
+        R.combo++;
+
+        let earnedExp = 20 + (R.combo*5);
+        if(usedHint) earnedExp = Math.floor(earnedExp*0.3);
+        if(isNear) earnedExp = Math.floor(earnedExp*0.7);
+
+        D.playerExp += earnedExp;
+        const coin = (isNear ? 1 : 2) * (R.isBossMode ? 5 : 1);
+        this.addCoin(coin);
+        if(R.isBossMode) this.bossAttack(100 + (R.combo * 10));
+
+        R.score++;
+
+        this.recordGrassOneWord();
+
+        if(D.playerExp >= 100){
+          D.playerLevel++;
+          D.playerExp -= 100;
+          this.playSound('levelup');
+          this.showParticles('🌟');
+        }else{
+          this.playSound('correct');
+          this.showParticles(isNear ? '🟡' : '✨');
+        }
+
+        this.saveKey('myVocaLevel', D.playerLevel);
+        this.saveKey('myVocaExp', D.playerExp);
+
+        this.updateGameUI();
+        this.updateStatsUI();
+        this.speakWord(correct);
+
+        if(isNear){
+          // ✅ 요청 반영: 오타 정답 시각적 피드백 강화
+          const banner=this.$('nearBanner');
+          banner.style.display='block';
+          banner.innerText = "⚠️ 오타가 있지만 정답으로 인정됩니다!";
+          feedback.innerHTML = `거의 정답! ✅ (+${earnedExp} EXP)`;
+          feedback.className='near';
+        }else{
+          feedback.innerHTML = `정답입니다! (+${earnedExp} EXP) ✨`;
+          feedback.className='correct';
+        }
+        // 리스트에서 제거(순서 진행)
+        R.currentList.shift();
+
+        this.updateGoal7Badge();
+        this.renderHomeMini();
+
+        setTimeout(()=>this.nextQuestion(), 450);
+
+      }else{
+        R.combo=0;
+        this.updateGameUI();
+        this.updateStatsUI();
+        this.playSound('wrong');
+        this.speakWord(correct, true);
+        if(R.isBossMode) {
+          R.timeLeft = Math.max(0, R.timeLeft - 5);
+          this.toast('보스 공격! 시간 -5초 😱');
+        }
+
+
+        this.$('quiz-screen').classList.add('shake-animation');
+        setTimeout(()=>this.$('quiz-screen').classList.remove('shake-animation'), 400);
+
+        feedback.innerHTML = `틀렸어요! 정답은 <b>${correct}</b>`;
+        feedback.className='wrong';
+
+        this.upsertWrong(R.currentWord);
+
+        setTimeout(()=>this.nextQuestion(), 900);
+      }
+    }
+
+    toggleMute(){
+      const R = this.state.runtime;
+      R.isMuted=!R.isMuted;
+      this.updateGameUI();
+      if(R.isMuted) window.speechSynthesis.cancel();
+    }
+
+    toggleSfx(){
+      const D = this.state.data;
+      D.settings.sfx=!D.settings.sfx;
+      this.saveKey('myVocaSettings', D.settings);
+      this.updateGameUI();
+    }
+
+    /* ---------- Result + Logging ---------- */
+    logSession(mode, score, attempts, accuracy, wpm){
+      const D = this.state.data;
+      const ts=Date.now();
+      D.progress.history.unshift({ts, mode, score, attempts, accuracy, wpm});
+      const ds=this.dateStrOf(new Date());
+      D.progress.daily[ds]=D.progress.daily[ds] || {correct:0, attempts:0, timeAttackBest:0};
+      D.progress.daily[ds].correct += score;
+      D.progress.daily[ds].attempts += attempts;
+      if(mode==='time') D.progress.daily[ds].timeAttackBest = Math.max(D.progress.daily[ds].timeAttackBest||0, score);
+      this.saveKey('myVocaProgress', D.progress);
+    }
+
+    showResult(){
+      const D = this.state.data;
+      const R = this.state.runtime;
+
+      clearInterval(R.timerInterval);
+      document.body.classList.remove('fever');
+
+      this.$('quiz-screen').classList.add('hidden');
+      this.$('result-screen').classList.remove('hidden');
+      this.$('final-score').innerText = `최종 점수: ${R.score}점`;
+
+      const acc = R.attempts===0 ? 0 : Math.round((R.correctCount/R.attempts)*100);
+      const wpm = R.isTimeMode ? Math.round((R.score / Math.max(1, Math.round((Date.now()-R.timeModeStart)/1000))) * 60) : 0;
+      this.logSession(R.isTimeMode ? 'time' : 'normal', R.score, R.attempts, acc, wpm);
+
+      this.renderWrongList();
+      this.renderMasterList();
+
+      if(R.isTimeMode){
+        const elapsedSec = Math.max(1, Math.round((Date.now()-R.timeModeStart)/1000));
+        const wpm2 = Math.round((R.score/elapsedSec)*60);
+
+        this.$('time-extra').classList.remove('hidden');
+        this.$('time-stats').innerHTML =
+          `- 총 시도: ${R.attempts}회<br/>- 정답: ${R.correctCount}회<br/>- 정확도: ${acc}%<br/>- 분당 정답: ${wpm2}개/분`;
+
+        let isBest=false;
+        if(R.score > (D.bestTimeAttack.bestScore||0)){
+          D.bestTimeAttack.bestScore=R.score;
+          D.bestTimeAttack.bestAccuracy=acc;
+          D.bestTimeAttack.bestWpm=wpm2;
+          isBest=true;
+        }
+        this.saveKey('myVocaBestTimeAttack', D.bestTimeAttack);
+
+        if(R.score >= 15) this.unlockBadge('time_15');
+        if(isBest) this.unlockBadge('time_best');
+
+        this.$('best-badge').innerHTML = isBest
+          ? `🎉 <span style="color:var(--danger);">최고 기록 갱신!</span>`
+          : `최고 기록: ${D.bestTimeAttack.bestScore}점 (정확도 ${D.bestTimeAttack.bestAccuracy}% · ${D.bestTimeAttack.bestWpm}개/분)`;
+      }else{
+        this.$('time-extra').classList.add('hidden');
+      }
+
+      if(D.masterWords.length >= 10) this.unlockBadge('master_10');
+
+      this.renderHomeMini();
+    }
+
+    renderWrongList(){
+      const D = this.state.data;
+      const ul=this.$('wrong-items');
+      ul.innerHTML='';
+      if(D.wrongWords.length===0){
+        ul.innerHTML="<li style='justify-content:center; padding:14px;'>누적 오답이 없어요! 🏆</li>";
+        return;
+      }
+      const sorted=[...D.wrongWords].sort((a,b)=>(b.wrongCount||1)-(a.wrongCount||1));
+      sorted.forEach(w=>{
+        const li=document.createElement('li');
+        li.innerHTML=`
+          <span><b>${w.kan}</b> : ${w.eng} <span style="opacity:.7; font-weight:900;">(오답 ${w.wrongCount||1}회)</span></span>
+          <div style="display:flex; gap:8px;">
+            <button class="mini-btn btn-primary" onclick="window.__voca.moveToMaster('${w.eng}')">숙련 🏆</button>
+            <button class="mini-btn btn-danger" onclick="window.__voca.removeWrongWord('${w.eng}')">삭제</button>
+          </div>
+        `;
+        ul.appendChild(li);
+      });
+    }
+
+    renderMasterList(){
+      const D = this.state.data;
+      const ul=this.$('master-items');
+      ul.innerHTML='';
+      if(D.masterWords.length===0){
+        ul.innerHTML="<li style='justify-content:center; padding:14px;'>아직 숙련 단어가 없어요.</li>";
+        return;
+      }
+      D.masterWords.forEach(w=>{
+        const li=document.createElement('li');
+        li.innerHTML=`
+          <span><b>${w.kan}</b> : ${w.eng}</span>
+          <button class="mini-btn btn-gray" onclick="window.__voca.removeMaster('${w.eng}')">제거</button>
+        `;
+        ul.appendChild(li);
+      });
+    }
+
+    removeWrongWord(eng){
+      const D = this.state.data;
+      const e=this.normalizeEng(eng);
+      D.wrongWords=D.wrongWords.filter(w=>this.normalizeEng(w.eng)!==e);
+      this.saveKey('myVocaWrongWords', D.wrongWords);
+      this.renderWrongList();
+      this.checkMainButtons();
+    }
+
+    moveToMaster(eng){
+      const D = this.state.data;
+      const e=this.normalizeEng(eng);
+      const w=D.wrongWords.find(x=>this.normalizeEng(x.eng)===e);
+      if(!w) return;
+      if(!D.masterWords.some(x=>this.normalizeEng(x.eng)===e)){
+        D.masterWords.push({kan:w.kan, eng:e, masteredAt:Date.now()});
+        this.saveKey('myVocaMasterWords', D.masterWords);
+        this.showParticles('🏆');
+      }
+      D.wrongWords=D.wrongWords.filter(x=>this.normalizeEng(x.eng)!==e);
+      this.saveKey('myVocaWrongWords', D.wrongWords);
+
+      if(D.masterWords.length>=10) this.unlockBadge('master_10');
+
+      this.renderWrongList();
+      this.renderMasterList();
+      this.checkMainButtons();
+    }
+
+    removeMaster(eng){
+      const D = this.state.data;
+      const e=this.normalizeEng(eng);
+      D.masterWords=D.masterWords.filter(w=>this.normalizeEng(w.eng)!==e);
+      this.saveKey('myVocaMasterWords', D.masterWords);
+      this.renderMasterList();
+    }
+
+    /* ---------- Best + CSV ---------- */
+    renderBest(){
+      const D = this.state.data;
+      this.$('best-time-score').innerText = `${D.bestTimeAttack.bestScore||0}점`;
+      this.$('bestScoreVal').innerText = D.bestTimeAttack.bestScore||0;
+      this.$('bestAccVal').innerText = D.bestTimeAttack.bestAccuracy||0;
+      this.$('bestWpmVal').innerText = D.bestTimeAttack.bestWpm||0;
+    }
+
+    resetBest(){
+      const D = this.state.data;
+      D.bestTimeAttack={bestScore:0,bestWpm:0,bestAccuracy:0};
+      this.saveKey('myVocaBestTimeAttack', D.bestTimeAttack);
+      this.renderBest();
+      alert('최고 기록을 초기화했어요!');
+    }
+
+    exportCSV(){
+      const D = this.state.data;
+      const rows=[["date","correct","attempts","accuracy","timeAttackBest"]];
+      const keys=Object.keys(D.progress.daily).sort();
+      for(const k of keys){
+        const d=D.progress.daily[k];
+        const acc = d.attempts ? Math.round((d.correct/d.attempts)*100) : 0;
+        rows.push([k, d.correct||0, d.attempts||0, acc, d.timeAttackBest||0]);
+      }
+      const csv=rows.map(r=>r.join(",")).join("\n");
+      const blob=new Blob(["\uFEFF"+csv],{type:"text/csv;charset=utf-8;"});
+      const url=URL.createObjectURL(blob);
+      const a=document.createElement('a');
+      a.href=url; a.download="voca_progress.csv";
+      document.body.appendChild(a); a.click(); a.remove();
+      URL.revokeObjectURL(url);
+      this.toast("CSV 다운로드 시작!");
+    }
+
+    /* ---------- Admin (학생이 직접 관리) ---------- */
+    openAdmin(){
+      this.$('setup-screen').classList.add('hidden');
+      this.$('admin-screen').classList.remove('hidden');
+      this.renderSetList();
+    }
+
+    closeAdmin(){
+      this.$('admin-screen').classList.add('hidden');
+      this.$('setup-screen').classList.remove('hidden');
+      this.renderHomeMini();
+    }
+
+    clearSetForm(){
+      this.$('setName').value='';
+      this.$('setBulk').value='';
+    }
+
+    parseSetBulk(text){
+      const lines=(text||'').split('\n');
+      const words=[];
+      for(const line of lines){
+        const item=this.parseBulkLine(line);
+        if(item && !words.some(w=>this.normalizeEng(w.eng)===this.normalizeEng(item.eng))){
+          words.push({kan:String(item.kan).trim(), eng:this.normalizeEng(item.eng)});
+        }
+      }
+      return words;
+    }
+
+    saveSet(){
+      const D = this.state.data;
+      const name=this.$('setName').value.trim();
+      const bulk=this.$('setBulk').value;
+      if(!name) return alert('세트 이름을 입력해 주세요.');
+      const words=this.parseSetBulk(bulk);
+      if(words.length===0) return alert('단어가 1개 이상 필요해요.');
+
+      const set={ id:'set_'+Date.now(), name, createdAt:Date.now(), words };
+      D.sets.unshift(set);
+      this.saveKey('myVocaSets', D.sets);
+      this.renderSetList();
+      this.clearSetForm();
+      this.toast(`세트 저장 완료! (${words.length}개)`);
+    }
+
+    renderSetList(){
+      const D = this.state.data;
+      const ul=this.$('setList');
+      ul.innerHTML='';
+      if(D.sets.length===0){
+        ul.innerHTML="<li style='justify-content:center; padding:14px;'>저장된 세트가 없어요.</li>";
+        return;
+      }
+      D.sets.forEach(s=>{
+        const li=document.createElement('li');
+        li.innerHTML=`
+          <span>
+            <b>${s.name}</b>
+            <div class="mini" style="margin-top:4px;">${(s.words||[]).length}개</div>
+          </span>
+          <div style="display:flex; gap:8px; flex-wrap:wrap; justify-content:flex-end;">
+            <button class="mini-btn btn-primary" onclick="window.__voca.applySet('${s.id}')">적용</button>
+            <button class="mini-btn btn-dark" onclick="window.__voca.selectSet('${s.id}')">내보내기</button>
+            <button class="mini-btn btn-danger" onclick="window.__voca.deleteSet('${s.id}')">삭제</button>
+          </div>
+        `;
+        ul.appendChild(li);
+      });
+    }
+
+    selectSet(id){
+      const D = this.state.data;
+      const s=D.sets.find(x=>x.id===id);
+      if(!s) return;
+      const payload={ type:"vocaSet", name:s.name, words:s.words, exportedAt:new Date().toISOString() };
+      this.$('adminExport').value=JSON.stringify(payload);
+      this.toast("내보내기 JSON 생성!");
+    }
+
+    deleteSet(id){
+      const D = this.state.data;
+      D.sets=D.sets.filter(x=>x.id!==id);
+      this.saveKey('myVocaSets', D.sets);
+      this.renderSetList();
+      this.toast("세트를 삭제했어요.");
+    }
+
+    applySet(id){
+      const D = this.state.data;
+      const s=D.sets.find(x=>x.id===id);
+      if(!s) return;
+      const before = D.customWords.length;
+      const addList = Array.isArray(s.words) ? s.words : [];
+      for(const w of addList){
+        if(!w?.kan || !w?.eng) continue;
+        const eng=this.normalizeEng(w.eng);
+        if(D.customWords.some(x=>this.normalizeEng(x.eng)===eng)) continue;
+        D.customWords.push({ kan:String(w.kan).trim(), eng });
+      }
+      const added = D.customWords.length - before;
+      this.saveKey('myVocaCustom', D.customWords);
+      this.checkMainButtons();
+      this.toast(`세트 적용: ${added}개 추가됨`);
+    }
+
+    async copyAdminExport(){
+      const val=this.$('adminExport').value.trim();
+      if(!val) return alert('먼저 세트를 “내보내기”로 선택해 JSON을 생성하세요.');
+      try{ await navigator.clipboard.writeText(val); this.toast('JSON 복사 완료!'); }
+      catch{ alert('복사 실패(권한). 직접 복사해 주세요.'); }
+    }
+
+    importSetJSON(){
+      const D = this.state.data;
+      const val=this.$('adminImport').value.trim();
+      if(!val) return alert('가져올 세트 JSON을 붙여넣어 주세요.');
+      try{
+        const obj=JSON.parse(val);
+        if(obj.type !== 'vocaSet') return alert('세트 JSON 형식이 아니에요.');
+        const name = String(obj.name||'가져온 세트').trim();
+        const words = Array.isArray(obj.words) ? obj.words : [];
+        const cleaned = [];
+        for(const w of words){
+          if(!w?.kan || !w?.eng) continue;
+          const eng=this.normalizeEng(w.eng);
+          if(cleaned.some(x=>this.normalizeEng(x.eng)===eng)) continue;
+          cleaned.push({ kan:String(w.kan).trim(), eng });
+        }
+        if(cleaned.length===0) return alert('세트에 단어가 없어요.');
+        const set={ id:'set_'+Date.now(), name, createdAt:Date.now(), words:cleaned };
+        D.sets.unshift(set);
+        this.saveKey('myVocaSets', D.sets);
+        this.renderSetList();
+        this.toast(`세트 가져오기 완료! (${cleaned.length}개)`);
+      }catch{
+        alert('JSON 형식이 올바르지 않아요.');
+      }
+    }
+
+    /* ---------- Init ---------- */
+    init(){
+      this.loadAll();
+      this.initSettingsUI();
+      this.renderBest();
+      this.renderHomeMini();
+      this.renderGrass();
+      this.renderBadges();
+
+      // iOS 입력 안정화(자동 대문자/자동 수정 최소화)
+      document.querySelectorAll('input,textarea,select').forEach((el)=>{
+        el.setAttribute('autocapitalize','none');
+        el.setAttribute('autocorrect','off');
+        el.setAttribute('spellcheck','false');
+      });
+
+      // 엔터 제출
+      this.$('answerInput').addEventListener('keydown',(e)=>{
+        if(e.key==='Enter') this.handleCheck();
+      });
+
+      // 첫 실행 안내(데이터 복구 알림과 분리)
+      this.toast("준비 완료! 오늘 목표부터 가볼까요? 🚀");
+    }
+  }
+
+  // 앱 인스턴스 생성 + 전역 접근 최소화(딱 1개만)
+  window.__voca = new VocaApp();
+  window.__voca.init();
+
+})();
+</script>
+<div id="print-area"></div>
+  <script>
+    const manifestData={name:"VOCA 마스터 PRO V3 GodMode",short_name:"VOCA PRO",start_url:"./",display:"standalone",background_color:"#f0f2f5",theme_color:"#3498db",icons:[{src:"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect fill='%233498db' width='100' height='100'/%3E%3Ctext x='50' y='70' font-size='60' text-anchor='middle' fill='white'%3E🎧%3C/text%3E%3C/svg%3E",sizes:"512x512",type:"image/svg+xml"}]};
+    const b=new Blob([JSON.stringify(manifestData)],{type:'application/json'});
+    document.getElementById('manifest-placeholder').setAttribute('href',URL.createObjectURL(b));
+
+    if('serviceWorker' in navigator){
+      const sw=`const C='voca-v2-cache';self.addEventListener('install',e=>{e.waitUntil(caches.open(C).then(c=>c.addAll(['./'])));self.skipWaiting()});self.addEventListener('fetch',e=>{e.respondWith(caches.match(e.request).then(r=>r||fetch(e.request).then(res=>{return caches.open(C).then(c=>{if(e.request.method==='GET')c.put(e.request,res.clone());return res})}).catch(()=>caches.match('./'))))});self.addEventListener('activate',e=>{e.waitUntil(caches.keys().then(k=>Promise.all(k.map(n=>n!==C&&caches.delete(n)))));return self.clients.claim()});`;
+      navigator.serviceWorker.register(URL.createObjectURL(new Blob([sw],{type:'application/javascript'})));
+    }
+    // Init Speed UI on load
+    window.addEventListener('load', ()=>{ try{ window.__voca.updateSpeedUI(); }catch{} });
+  </script>
+</body>
+</html>
