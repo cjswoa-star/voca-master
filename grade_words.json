@@ -1,0 +1,6014 @@
+{
+  "g1": [
+    {
+      "eng": "hello",
+      "kan": "안녕",
+      "level": 1
+    },
+    {
+      "eng": "goodbye",
+      "kan": "안녕/잘가",
+      "level": 1
+    },
+    {
+      "eng": "yes",
+      "kan": "네",
+      "level": 1
+    },
+    {
+      "eng": "no",
+      "kan": "아니",
+      "level": 1
+    },
+    {
+      "eng": "please",
+      "kan": "부디/제발",
+      "level": 1
+    },
+    {
+      "eng": "thank you",
+      "kan": "고마워",
+      "level": 1
+    },
+    {
+      "eng": "sorry",
+      "kan": "미안해",
+      "level": 1
+    },
+    {
+      "eng": "mom",
+      "kan": "엄마",
+      "level": 1
+    },
+    {
+      "eng": "dad",
+      "kan": "아빠",
+      "level": 1
+    },
+    {
+      "eng": "family",
+      "kan": "가족",
+      "level": 1
+    },
+    {
+      "eng": "friend",
+      "kan": "친구",
+      "level": 1
+    },
+    {
+      "eng": "teacher",
+      "kan": "선생님",
+      "level": 1
+    },
+    {
+      "eng": "student",
+      "kan": "학생",
+      "level": 1
+    },
+    {
+      "eng": "school",
+      "kan": "학교",
+      "level": 1
+    },
+    {
+      "eng": "class",
+      "kan": "수업/학급",
+      "level": 1
+    },
+    {
+      "eng": "book",
+      "kan": "책",
+      "level": 1
+    },
+    {
+      "eng": "pen",
+      "kan": "펜",
+      "level": 1
+    },
+    {
+      "eng": "pencil",
+      "kan": "연필",
+      "level": 1
+    },
+    {
+      "eng": "desk",
+      "kan": "책상",
+      "level": 1
+    },
+    {
+      "eng": "chair",
+      "kan": "의자",
+      "level": 1
+    },
+    {
+      "eng": "bag",
+      "kan": "가방",
+      "level": 1
+    },
+    {
+      "eng": "water",
+      "kan": "물",
+      "level": 1
+    },
+    {
+      "eng": "milk",
+      "kan": "우유",
+      "level": 1
+    },
+    {
+      "eng": "juice",
+      "kan": "주스",
+      "level": 1
+    },
+    {
+      "eng": "apple",
+      "kan": "사과",
+      "level": 1
+    },
+    {
+      "eng": "banana",
+      "kan": "바나나",
+      "level": 1
+    },
+    {
+      "eng": "bread",
+      "kan": "빵",
+      "level": 1
+    },
+    {
+      "eng": "rice",
+      "kan": "밥",
+      "level": 1
+    },
+    {
+      "eng": "lunch",
+      "kan": "점심",
+      "level": 1
+    },
+    {
+      "eng": "cat",
+      "kan": "고양이",
+      "level": 1
+    },
+    {
+      "eng": "dog",
+      "kan": "개",
+      "level": 1
+    },
+    {
+      "eng": "bird",
+      "kan": "새",
+      "level": 1
+    },
+    {
+      "eng": "fish",
+      "kan": "물고기",
+      "level": 1
+    },
+    {
+      "eng": "red",
+      "kan": "빨간",
+      "level": 1
+    },
+    {
+      "eng": "blue",
+      "kan": "파란",
+      "level": 1
+    },
+    {
+      "eng": "green",
+      "kan": "초록",
+      "level": 1
+    },
+    {
+      "eng": "yellow",
+      "kan": "노란",
+      "level": 1
+    },
+    {
+      "eng": "black",
+      "kan": "검은",
+      "level": 1
+    },
+    {
+      "eng": "white",
+      "kan": "하얀",
+      "level": 1
+    },
+    {
+      "eng": "big",
+      "kan": "큰",
+      "level": 1
+    },
+    {
+      "eng": "small",
+      "kan": "작은",
+      "level": 1
+    },
+    {
+      "eng": "hot",
+      "kan": "뜨거운",
+      "level": 1
+    },
+    {
+      "eng": "cold",
+      "kan": "차가운",
+      "level": 1
+    },
+    {
+      "eng": "new",
+      "kan": "새로운",
+      "level": 1
+    },
+    {
+      "eng": "old",
+      "kan": "오래된",
+      "level": 1
+    },
+    {
+      "eng": "one",
+      "kan": "하나",
+      "level": 1
+    },
+    {
+      "eng": "two",
+      "kan": "둘",
+      "level": 1
+    },
+    {
+      "eng": "three",
+      "kan": "셋",
+      "level": 1
+    },
+    {
+      "eng": "four",
+      "kan": "넷",
+      "level": 1
+    },
+    {
+      "eng": "five",
+      "kan": "다섯",
+      "level": 1
+    },
+    {
+      "eng": "six",
+      "kan": "여섯",
+      "level": 1
+    },
+    {
+      "eng": "seven",
+      "kan": "일곱",
+      "level": 1
+    },
+    {
+      "eng": "eight",
+      "kan": "여덟",
+      "level": 1
+    },
+    {
+      "eng": "nine",
+      "kan": "아홉",
+      "level": 1
+    },
+    {
+      "eng": "ten",
+      "kan": "열",
+      "level": 1
+    },
+    {
+      "eng": "go",
+      "kan": "가다",
+      "level": 1
+    },
+    {
+      "eng": "come",
+      "kan": "오다",
+      "level": 1
+    },
+    {
+      "eng": "see",
+      "kan": "보다",
+      "level": 1
+    },
+    {
+      "eng": "look",
+      "kan": "보다(쳐다보다)",
+      "level": 1
+    },
+    {
+      "eng": "listen",
+      "kan": "듣다",
+      "level": 1
+    },
+    {
+      "eng": "say",
+      "kan": "말하다",
+      "level": 1
+    },
+    {
+      "eng": "read",
+      "kan": "읽다",
+      "level": 1
+    },
+    {
+      "eng": "write",
+      "kan": "쓰다",
+      "level": 1
+    },
+    {
+      "eng": "eat",
+      "kan": "먹다",
+      "level": 1
+    },
+    {
+      "eng": "drink",
+      "kan": "마시다",
+      "level": 1
+    },
+    {
+      "eng": "play",
+      "kan": "놀다",
+      "level": 1
+    },
+    {
+      "eng": "sleep",
+      "kan": "자다",
+      "level": 1
+    },
+    {
+      "eng": "like",
+      "kan": "좋아하다",
+      "level": 1
+    },
+    {
+      "eng": "want",
+      "kan": "원하다",
+      "level": 1
+    },
+    {
+      "eng": "happy",
+      "kan": "행복한",
+      "level": 1
+    },
+    {
+      "eng": "sad",
+      "kan": "슬픈",
+      "level": 1
+    },
+    {
+      "eng": "good",
+      "kan": "좋은",
+      "level": 1
+    },
+    {
+      "eng": "bad",
+      "kan": "나쁜",
+      "level": 1
+    },
+    {
+      "eng": "fast",
+      "kan": "빠른",
+      "level": 1
+    },
+    {
+      "eng": "slow",
+      "kan": "느린",
+      "level": 1
+    },
+    {
+      "eng": "here",
+      "kan": "여기",
+      "level": 1
+    },
+    {
+      "eng": "there",
+      "kan": "저기",
+      "level": 1
+    },
+    {
+      "eng": "now",
+      "kan": "지금",
+      "level": 1
+    },
+    {
+      "eng": "today",
+      "kan": "오늘",
+      "level": 1
+    },
+    {
+      "eng": "tomorrow",
+      "kan": "내일",
+      "level": 1
+    },
+    {
+      "eng": "hi",
+      "kan": "안녕(친근)",
+      "level": 1
+    },
+    {
+      "eng": "good morning",
+      "kan": "좋은 아침",
+      "level": 1
+    },
+    {
+      "eng": "good night",
+      "kan": "안녕히 주무세요",
+      "level": 1
+    },
+    {
+      "eng": "my",
+      "kan": "나의",
+      "level": 1
+    },
+    {
+      "eng": "your",
+      "kan": "너의",
+      "level": 1
+    },
+    {
+      "eng": "this",
+      "kan": "이것",
+      "level": 1
+    },
+    {
+      "eng": "that",
+      "kan": "저것",
+      "level": 1
+    },
+    {
+      "eng": "name",
+      "kan": "이름",
+      "level": 1
+    },
+    {
+      "eng": "what",
+      "kan": "무엇",
+      "level": 1
+    },
+    {
+      "eng": "who",
+      "kan": "누구",
+      "level": 1
+    },
+    {
+      "eng": "where",
+      "kan": "어디",
+      "level": 1
+    },
+    {
+      "eng": "my name is",
+      "kan": "내 이름은 ~야",
+      "level": 1
+    },
+    {
+      "eng": "I am",
+      "kan": "나는 ~이다",
+      "level": 1
+    },
+    {
+      "eng": "you are",
+      "kan": "너는 ~이다",
+      "level": 1
+    },
+    {
+      "eng": "please help me",
+      "kan": "도와주세요",
+      "level": 1
+    },
+    {
+      "eng": "excuse me",
+      "kan": "실례합니다",
+      "level": 1
+    },
+    {
+      "eng": "girl",
+      "kan": "여자아이",
+      "level": 1
+    },
+    {
+      "eng": "boy",
+      "kan": "남자아이",
+      "level": 1
+    },
+    {
+      "eng": "baby",
+      "kan": "아기",
+      "level": 1
+    },
+    {
+      "eng": "paper",
+      "kan": "종이",
+      "level": 1
+    },
+    {
+      "eng": "eraser",
+      "kan": "지우개",
+      "level": 1
+    },
+    {
+      "eng": "crayon",
+      "kan": "크레용",
+      "level": 1
+    },
+    {
+      "eng": "clock",
+      "kan": "시계",
+      "level": 1
+    },
+    {
+      "eng": "time",
+      "kan": "시간",
+      "level": 1
+    },
+    {
+      "eng": "ball",
+      "kan": "공",
+      "level": 1
+    },
+    {
+      "eng": "game",
+      "kan": "게임",
+      "level": 1
+    },
+    {
+      "eng": "jump",
+      "kan": "점프하다",
+      "level": 1
+    },
+    {
+      "eng": "sit",
+      "kan": "앉다",
+      "level": 1
+    },
+    {
+      "eng": "stand",
+      "kan": "서다",
+      "level": 1
+    },
+    {
+      "eng": "clap",
+      "kan": "박수치다",
+      "level": 1
+    },
+    {
+      "eng": "wash",
+      "kan": "씻다",
+      "level": 1
+    },
+    {
+      "eng": "smell",
+      "kan": "냄새 맡다",
+      "level": 1
+    },
+    {
+      "eng": "touch",
+      "kan": "만지다",
+      "level": 1
+    },
+    {
+      "eng": "up",
+      "kan": "위로",
+      "level": 1
+    },
+    {
+      "eng": "down",
+      "kan": "아래로",
+      "level": 1
+    },
+    {
+      "eng": "left",
+      "kan": "왼쪽",
+      "level": 1
+    },
+    {
+      "eng": "right",
+      "kan": "오른쪽",
+      "level": 1
+    },
+    {
+      "eng": "cute",
+      "kan": "귀여운",
+      "level": 1
+    },
+    {
+      "eng": "pretty",
+      "kan": "예쁜",
+      "level": 1
+    },
+    {
+      "eng": "fun",
+      "kan": "재미있는",
+      "level": 1
+    },
+    {
+      "eng": "orange",
+      "kan": "오렌지",
+      "level": 1
+    },
+    {
+      "eng": "grape",
+      "kan": "포도",
+      "level": 1
+    },
+    {
+      "eng": "strawberry",
+      "kan": "딸기",
+      "level": 1
+    },
+    {
+      "eng": "cookie",
+      "kan": "쿠키",
+      "level": 1
+    },
+    {
+      "eng": "cake",
+      "kan": "케이크",
+      "level": 1
+    },
+    {
+      "eng": "toy",
+      "kan": "장난감",
+      "level": 1
+    },
+    {
+      "eng": "robot",
+      "kan": "로봇",
+      "level": 1
+    },
+    {
+      "eng": "doll",
+      "kan": "인형",
+      "level": 1
+    },
+    {
+      "eng": "bath",
+      "kan": "목욕",
+      "level": 1
+    },
+    {
+      "eng": "tooth",
+      "kan": "이",
+      "level": 1
+    },
+    {
+      "eng": "teeth",
+      "kan": "이(복수)",
+      "level": 1
+    },
+    {
+      "eng": "brush",
+      "kan": "닦다/솔",
+      "level": 1
+    },
+    {
+      "eng": "cry",
+      "kan": "울다",
+      "level": 1
+    },
+    {
+      "eng": "draw a line",
+      "kan": "선을 긋다",
+      "level": 1
+    },
+    {
+      "eng": "color",
+      "kan": "색칠하다/색",
+      "level": 1
+    },
+    {
+      "eng": "circle",
+      "kan": "동그라미",
+      "level": 1
+    },
+    {
+      "eng": "square",
+      "kan": "네모",
+      "level": 1
+    },
+    {
+      "eng": "triangle",
+      "kan": "삼각형",
+      "level": 1
+    },
+    {
+      "eng": "oval",
+      "kan": "타원",
+      "level": 1
+    },
+    {
+      "eng": "rectangle",
+      "kan": "직사각형",
+      "level": 1
+    },
+    {
+      "eng": "thin",
+      "kan": "얇은",
+      "level": 1
+    },
+    {
+      "eng": "thick",
+      "kan": "두꺼운",
+      "level": 1
+    },
+    {
+      "eng": "taste",
+      "kan": "맛보다/맛",
+      "level": 1
+    },
+    {
+      "eng": "hear",
+      "kan": "듣다",
+      "level": 1
+    },
+    {
+      "eng": "speak",
+      "kan": "말하다",
+      "level": 1
+    },
+    {
+      "eng": "wave",
+      "kan": "손을 흔들다",
+      "level": 1
+    },
+    {
+      "eng": "rainbow",
+      "kan": "무지개",
+      "level": 1
+    },
+    {
+      "eng": "moon",
+      "kan": "달",
+      "level": 1
+    },
+    {
+      "eng": "sun",
+      "kan": "태양",
+      "level": 1
+    },
+    {
+      "eng": "garden",
+      "kan": "정원",
+      "level": 1
+    },
+    {
+      "eng": "cow",
+      "kan": "소",
+      "level": 1
+    },
+    {
+      "eng": "pig",
+      "kan": "돼지",
+      "level": 1
+    },
+    {
+      "eng": "horse",
+      "kan": "말",
+      "level": 1
+    },
+    {
+      "eng": "turtle",
+      "kan": "거북이",
+      "level": 1
+    },
+    {
+      "eng": "rabbit",
+      "kan": "토끼",
+      "level": 1
+    },
+    {
+      "eng": "lion",
+      "kan": "사자",
+      "level": 1
+    },
+    {
+      "eng": "tiger",
+      "kan": "호랑이",
+      "level": 1
+    },
+    {
+      "eng": "elephant",
+      "kan": "코끼리",
+      "level": 1
+    },
+    {
+      "eng": "glue",
+      "kan": "풀",
+      "level": 1
+    },
+    {
+      "eng": "scissors",
+      "kan": "가위",
+      "level": 1
+    },
+    {
+      "eng": "tape",
+      "kan": "테이프",
+      "level": 1
+    },
+    {
+      "eng": "sweater",
+      "kan": "스웨터",
+      "level": 1
+    },
+    {
+      "eng": "pants",
+      "kan": "바지",
+      "level": 1
+    },
+    {
+      "eng": "skirt",
+      "kan": "치마",
+      "level": 1
+    },
+    {
+      "eng": "socks",
+      "kan": "양말",
+      "level": 1
+    },
+    {
+      "eng": "coat",
+      "kan": "코트",
+      "level": 1
+    }
+  ],
+  "g2": [
+    {
+      "eng": "and",
+      "kan": "그리고",
+      "level": 2
+    },
+    {
+      "eng": "or",
+      "kan": "또는",
+      "level": 2
+    },
+    {
+      "eng": "but",
+      "kan": "하지만",
+      "level": 2
+    },
+    {
+      "eng": "because",
+      "kan": "왜냐하면",
+      "level": 2
+    },
+    {
+      "eng": "so",
+      "kan": "그래서",
+      "level": 2
+    },
+    {
+      "eng": "if",
+      "kan": "만약",
+      "level": 2
+    },
+    {
+      "eng": "when",
+      "kan": "~할 때",
+      "level": 2
+    },
+    {
+      "eng": "in",
+      "kan": "안에",
+      "level": 2
+    },
+    {
+      "eng": "on",
+      "kan": "위에",
+      "level": 2
+    },
+    {
+      "eng": "under",
+      "kan": "아래에",
+      "level": 2
+    },
+    {
+      "eng": "over",
+      "kan": "위로",
+      "level": 2
+    },
+    {
+      "eng": "next to",
+      "kan": "옆에",
+      "level": 2
+    },
+    {
+      "eng": "between",
+      "kan": "사이에",
+      "level": 2
+    },
+    {
+      "eng": "morning",
+      "kan": "아침",
+      "level": 2
+    },
+    {
+      "eng": "afternoon",
+      "kan": "오후",
+      "level": 2
+    },
+    {
+      "eng": "evening",
+      "kan": "저녁",
+      "level": 2
+    },
+    {
+      "eng": "night",
+      "kan": "밤",
+      "level": 2
+    },
+    {
+      "eng": "Monday",
+      "kan": "월요일",
+      "level": 2
+    },
+    {
+      "eng": "Tuesday",
+      "kan": "화요일",
+      "level": 2
+    },
+    {
+      "eng": "Wednesday",
+      "kan": "수요일",
+      "level": 2
+    },
+    {
+      "eng": "Thursday",
+      "kan": "목요일",
+      "level": 2
+    },
+    {
+      "eng": "Friday",
+      "kan": "금요일",
+      "level": 2
+    },
+    {
+      "eng": "Saturday",
+      "kan": "토요일",
+      "level": 2
+    },
+    {
+      "eng": "Sunday",
+      "kan": "일요일",
+      "level": 2
+    },
+    {
+      "eng": "spring",
+      "kan": "봄",
+      "level": 2
+    },
+    {
+      "eng": "summer",
+      "kan": "여름",
+      "level": 2
+    },
+    {
+      "eng": "fall",
+      "kan": "가을",
+      "level": 2
+    },
+    {
+      "eng": "winter",
+      "kan": "겨울",
+      "level": 2
+    },
+    {
+      "eng": "home",
+      "kan": "집",
+      "level": 2
+    },
+    {
+      "eng": "room",
+      "kan": "방",
+      "level": 2
+    },
+    {
+      "eng": "door",
+      "kan": "문",
+      "level": 2
+    },
+    {
+      "eng": "window",
+      "kan": "창문",
+      "level": 2
+    },
+    {
+      "eng": "bed",
+      "kan": "침대",
+      "level": 2
+    },
+    {
+      "eng": "kitchen",
+      "kan": "부엌",
+      "level": 2
+    },
+    {
+      "eng": "bathroom",
+      "kan": "화장실",
+      "level": 2
+    },
+    {
+      "eng": "city",
+      "kan": "도시",
+      "level": 2
+    },
+    {
+      "eng": "town",
+      "kan": "마을",
+      "level": 2
+    },
+    {
+      "eng": "park",
+      "kan": "공원",
+      "level": 2
+    },
+    {
+      "eng": "library",
+      "kan": "도서관",
+      "level": 2
+    },
+    {
+      "eng": "store",
+      "kan": "가게",
+      "level": 2
+    },
+    {
+      "eng": "hospital",
+      "kan": "병원",
+      "level": 2
+    },
+    {
+      "eng": "bus",
+      "kan": "버스",
+      "level": 2
+    },
+    {
+      "eng": "subway",
+      "kan": "지하철",
+      "level": 2
+    },
+    {
+      "eng": "car",
+      "kan": "자동차",
+      "level": 2
+    },
+    {
+      "eng": "bike",
+      "kan": "자전거",
+      "level": 2
+    },
+    {
+      "eng": "walk",
+      "kan": "걷다",
+      "level": 2
+    },
+    {
+      "eng": "ride",
+      "kan": "타다",
+      "level": 2
+    },
+    {
+      "eng": "help",
+      "kan": "돕다",
+      "level": 2
+    },
+    {
+      "eng": "ask",
+      "kan": "묻다",
+      "level": 2
+    },
+    {
+      "eng": "answer",
+      "kan": "대답하다",
+      "level": 2
+    },
+    {
+      "eng": "call",
+      "kan": "부르다/전화하다",
+      "level": 2
+    },
+    {
+      "eng": "meet",
+      "kan": "만나다",
+      "level": 2
+    },
+    {
+      "eng": "visit",
+      "kan": "방문하다",
+      "level": 2
+    },
+    {
+      "eng": "make",
+      "kan": "만들다",
+      "level": 2
+    },
+    {
+      "eng": "draw",
+      "kan": "그리다",
+      "level": 2
+    },
+    {
+      "eng": "sing",
+      "kan": "노래하다",
+      "level": 2
+    },
+    {
+      "eng": "dance",
+      "kan": "춤추다",
+      "level": 2
+    },
+    {
+      "eng": "study",
+      "kan": "공부하다",
+      "level": 2
+    },
+    {
+      "eng": "practice",
+      "kan": "연습하다",
+      "level": 2
+    },
+    {
+      "eng": "clean",
+      "kan": "청소하다",
+      "level": 2
+    },
+    {
+      "eng": "open",
+      "kan": "열다",
+      "level": 2
+    },
+    {
+      "eng": "close",
+      "kan": "닫다",
+      "level": 2
+    },
+    {
+      "eng": "start",
+      "kan": "시작하다",
+      "level": 2
+    },
+    {
+      "eng": "finish",
+      "kan": "끝내다",
+      "level": 2
+    },
+    {
+      "eng": "easy",
+      "kan": "쉬운",
+      "level": 2
+    },
+    {
+      "eng": "hard",
+      "kan": "어려운",
+      "level": 2
+    },
+    {
+      "eng": "busy",
+      "kan": "바쁜",
+      "level": 2
+    },
+    {
+      "eng": "tired",
+      "kan": "피곤한",
+      "level": 2
+    },
+    {
+      "eng": "hungry",
+      "kan": "배고픈",
+      "level": 2
+    },
+    {
+      "eng": "thirsty",
+      "kan": "목마른",
+      "level": 2
+    },
+    {
+      "eng": "early",
+      "kan": "일찍",
+      "level": 2
+    },
+    {
+      "eng": "late",
+      "kan": "늦게",
+      "level": 2
+    },
+    {
+      "eng": "often",
+      "kan": "자주",
+      "level": 2
+    },
+    {
+      "eng": "sometimes",
+      "kan": "가끔",
+      "level": 2
+    },
+    {
+      "eng": "always",
+      "kan": "항상",
+      "level": 2
+    },
+    {
+      "eng": "never",
+      "kan": "결코 ~않다",
+      "level": 2
+    },
+    {
+      "eng": "before",
+      "kan": "전에",
+      "level": 2
+    },
+    {
+      "eng": "after",
+      "kan": "후에",
+      "level": 2
+    },
+    {
+      "eng": "again",
+      "kan": "다시",
+      "level": 2
+    },
+    {
+      "eng": "together",
+      "kan": "함께",
+      "level": 2
+    },
+    {
+      "eng": "face",
+      "kan": "얼굴",
+      "level": 2
+    },
+    {
+      "eng": "hand",
+      "kan": "손",
+      "level": 2
+    },
+    {
+      "eng": "foot",
+      "kan": "발",
+      "level": 2
+    },
+    {
+      "eng": "eye",
+      "kan": "눈",
+      "level": 2
+    },
+    {
+      "eng": "ear",
+      "kan": "귀",
+      "level": 2
+    },
+    {
+      "eng": "mouth",
+      "kan": "입",
+      "level": 2
+    },
+    {
+      "eng": "weather",
+      "kan": "날씨",
+      "level": 2
+    },
+    {
+      "eng": "sunny",
+      "kan": "맑은",
+      "level": 2
+    },
+    {
+      "eng": "rainy",
+      "kan": "비 오는",
+      "level": 2
+    },
+    {
+      "eng": "snowy",
+      "kan": "눈 오는",
+      "level": 2
+    },
+    {
+      "eng": "windy",
+      "kan": "바람 부는",
+      "level": 2
+    },
+    {
+      "eng": "question",
+      "kan": "질문",
+      "level": 2
+    },
+    {
+      "eng": "test",
+      "kan": "시험",
+      "level": 2
+    },
+    {
+      "eng": "score",
+      "kan": "점수",
+      "level": 2
+    },
+    {
+      "eng": "story",
+      "kan": "이야기",
+      "level": 2
+    },
+    {
+      "eng": "picture",
+      "kan": "그림/사진",
+      "level": 2
+    },
+    {
+      "eng": "some",
+      "kan": "몇몇/약간",
+      "level": 2
+    },
+    {
+      "eng": "many",
+      "kan": "많은",
+      "level": 2
+    },
+    {
+      "eng": "few",
+      "kan": "적은",
+      "level": 2
+    },
+    {
+      "eng": "more",
+      "kan": "더 많은",
+      "level": 2
+    },
+    {
+      "eng": "less",
+      "kan": "더 적은",
+      "level": 2
+    },
+    {
+      "eng": "first",
+      "kan": "첫째",
+      "level": 2
+    },
+    {
+      "eng": "second",
+      "kan": "둘째",
+      "level": 2
+    },
+    {
+      "eng": "third",
+      "kan": "셋째",
+      "level": 2
+    },
+    {
+      "eng": "yesterday",
+      "kan": "어제",
+      "level": 2
+    },
+    {
+      "eng": "week",
+      "kan": "주",
+      "level": 2
+    },
+    {
+      "eng": "month",
+      "kan": "달",
+      "level": 2
+    },
+    {
+      "eng": "year",
+      "kan": "해/년",
+      "level": 2
+    },
+    {
+      "eng": "hobby",
+      "kan": "취미",
+      "level": 2
+    },
+    {
+      "eng": "movie",
+      "kan": "영화",
+      "level": 2
+    },
+    {
+      "eng": "song",
+      "kan": "노래",
+      "level": 2
+    },
+    {
+      "eng": "food",
+      "kan": "음식",
+      "level": 2
+    },
+    {
+      "eng": "fruit",
+      "kan": "과일",
+      "level": 2
+    },
+    {
+      "eng": "vegetable",
+      "kan": "채소",
+      "level": 2
+    },
+    {
+      "eng": "breakfast",
+      "kan": "아침식사",
+      "level": 2
+    },
+    {
+      "eng": "dinner",
+      "kan": "저녁식사",
+      "level": 2
+    },
+    {
+      "eng": "basketball",
+      "kan": "농구",
+      "level": 2
+    },
+    {
+      "eng": "soccer",
+      "kan": "축구",
+      "level": 2
+    },
+    {
+      "eng": "baseball",
+      "kan": "야구",
+      "level": 2
+    },
+    {
+      "eng": "computer",
+      "kan": "컴퓨터",
+      "level": 2
+    },
+    {
+      "eng": "phone",
+      "kan": "전화기",
+      "level": 2
+    },
+    {
+      "eng": "camera",
+      "kan": "카메라",
+      "level": 2
+    },
+    {
+      "eng": "video",
+      "kan": "영상",
+      "level": 2
+    },
+    {
+      "eng": "near",
+      "kan": "가까운",
+      "level": 2
+    },
+    {
+      "eng": "far",
+      "kan": "먼",
+      "level": 2
+    },
+    {
+      "eng": "turn",
+      "kan": "돌다/차례",
+      "level": 2
+    },
+    {
+      "eng": "wait",
+      "kan": "기다리다",
+      "level": 2
+    },
+    {
+      "eng": "hurry",
+      "kan": "서두르다",
+      "level": 2
+    },
+    {
+      "eng": "get up",
+      "kan": "일어나다",
+      "level": 2
+    },
+    {
+      "eng": "sit down",
+      "kan": "앉다",
+      "level": 2
+    },
+    {
+      "eng": "stand up",
+      "kan": "일어서다",
+      "level": 2
+    },
+    {
+      "eng": "go home",
+      "kan": "집에 가다",
+      "level": 2
+    },
+    {
+      "eng": "come in",
+      "kan": "들어오다",
+      "level": 2
+    },
+    {
+      "eng": "rain",
+      "kan": "비",
+      "level": 2
+    },
+    {
+      "eng": "snow",
+      "kan": "눈",
+      "level": 2
+    },
+    {
+      "eng": "cloudy",
+      "kan": "흐린",
+      "level": 2
+    },
+    {
+      "eng": "warm",
+      "kan": "따뜻한",
+      "level": 2
+    },
+    {
+      "eng": "cool",
+      "kan": "선선한",
+      "level": 2
+    },
+    {
+      "eng": "excited",
+      "kan": "신나는",
+      "level": 2
+    },
+    {
+      "eng": "scared",
+      "kan": "무서운",
+      "level": 2
+    },
+    {
+      "eng": "farm",
+      "kan": "농장",
+      "level": 2
+    },
+    {
+      "eng": "zoo",
+      "kan": "동물원",
+      "level": 2
+    },
+    {
+      "eng": "pet",
+      "kan": "반려동물",
+      "level": 2
+    },
+    {
+      "eng": "airport",
+      "kan": "공항",
+      "level": 2
+    },
+    {
+      "eng": "station",
+      "kan": "역",
+      "level": 2
+    },
+    {
+      "eng": "bridge",
+      "kan": "다리",
+      "level": 2
+    },
+    {
+      "eng": "ticket",
+      "kan": "표(티켓)",
+      "level": 2
+    },
+    {
+      "eng": "seat",
+      "kan": "좌석",
+      "level": 2
+    },
+    {
+      "eng": "bring",
+      "kan": "가져오다(dup g2 already?)",
+      "level": 2
+    },
+    {
+      "eng": "quiet",
+      "kan": "조용한",
+      "level": 2
+    },
+    {
+      "eng": "loud",
+      "kan": "시끄러운/큰 소리의",
+      "level": 2
+    },
+    {
+      "eng": "soft",
+      "kan": "부드러운",
+      "level": 2
+    },
+    {
+      "eng": "sweet",
+      "kan": "달콤한",
+      "level": 2
+    },
+    {
+      "eng": "salty",
+      "kan": "짠",
+      "level": 2
+    },
+    {
+      "eng": "delicious",
+      "kan": "맛있는",
+      "level": 2
+    },
+    {
+      "eng": "dirty",
+      "kan": "더러운",
+      "level": 2
+    },
+    {
+      "eng": "tall",
+      "kan": "키가 큰",
+      "level": 2
+    },
+    {
+      "eng": "short",
+      "kan": "키가 작은/짧은",
+      "level": 2
+    },
+    {
+      "eng": "strong",
+      "kan": "강한",
+      "level": 2
+    },
+    {
+      "eng": "weak",
+      "kan": "약한",
+      "level": 2
+    },
+    {
+      "eng": "sour",
+      "kan": "신",
+      "level": 2
+    },
+    {
+      "eng": "spicy",
+      "kan": "매운",
+      "level": 2
+    },
+    {
+      "eng": "both",
+      "kan": "둘 다",
+      "level": 2
+    },
+    {
+      "eng": "each",
+      "kan": "각각",
+      "level": 2
+    },
+    {
+      "eng": "rarely",
+      "kan": "드물게",
+      "level": 2
+    },
+    {
+      "eng": "straight",
+      "kan": "곧게/직선의",
+      "level": 2
+    },
+    {
+      "eng": "crosswalk",
+      "kan": "횡단보도",
+      "level": 2
+    },
+    {
+      "eng": "traffic light",
+      "kan": "신호등",
+      "level": 2
+    },
+    {
+      "eng": "platform",
+      "kan": "승강장",
+      "level": 2
+    },
+    {
+      "eng": "recipe",
+      "kan": "요리법",
+      "level": 2
+    },
+    {
+      "eng": "ingredient",
+      "kan": "재료",
+      "level": 2
+    },
+    {
+      "eng": "plate",
+      "kan": "접시",
+      "level": 2
+    },
+    {
+      "eng": "bowl",
+      "kan": "그릇",
+      "level": 2
+    },
+    {
+      "eng": "fork",
+      "kan": "포크",
+      "level": 2
+    },
+    {
+      "eng": "spoon",
+      "kan": "숟가락",
+      "level": 2
+    },
+    {
+      "eng": "knife",
+      "kan": "칼",
+      "level": 2
+    },
+    {
+      "eng": "take",
+      "kan": "가지고 가다/타다",
+      "level": 2
+    },
+    {
+      "eng": "put",
+      "kan": "놓다",
+      "level": 2
+    },
+    {
+      "eng": "give",
+      "kan": "주다",
+      "level": 2
+    },
+    {
+      "eng": "get",
+      "kan": "받다/얻다",
+      "level": 2
+    },
+    {
+      "eng": "keep",
+      "kan": "지키다/보관하다",
+      "level": 2
+    },
+    {
+      "eng": "lose",
+      "kan": "잃어버리다",
+      "level": 2
+    },
+    {
+      "eng": "win",
+      "kan": "이기다",
+      "level": 2
+    },
+    {
+      "eng": "welcome",
+      "kan": "환영하다",
+      "level": 2
+    },
+    {
+      "eng": "hurt",
+      "kan": "다치다/아프게 하다",
+      "level": 2
+    },
+    {
+      "eng": "nurse",
+      "kan": "간호사",
+      "level": 2
+    },
+    {
+      "eng": "refrigerator",
+      "kan": "냉장고",
+      "level": 2
+    },
+    {
+      "eng": "microwave",
+      "kan": "전자레인지",
+      "level": 2
+    },
+    {
+      "eng": "stove",
+      "kan": "가스레인지",
+      "level": 2
+    },
+    {
+      "eng": "sink",
+      "kan": "싱크대",
+      "level": 2
+    },
+    {
+      "eng": "elevator",
+      "kan": "엘리베이터",
+      "level": 2
+    },
+    {
+      "eng": "stairs",
+      "kan": "계단",
+      "level": 2
+    },
+    {
+      "eng": "hallway",
+      "kan": "복도",
+      "level": 2
+    },
+    {
+      "eng": "ceiling",
+      "kan": "천장",
+      "level": 2
+    },
+    {
+      "eng": "wallet",
+      "kan": "지갑",
+      "level": 2
+    },
+    {
+      "eng": "pocket",
+      "kan": "주머니",
+      "level": 2
+    },
+    {
+      "eng": "receipt",
+      "kan": "영수증",
+      "level": 2
+    },
+    {
+      "eng": "charger",
+      "kan": "충전기",
+      "level": 2
+    },
+    {
+      "eng": "remote",
+      "kan": "리모컨",
+      "level": 2
+    },
+    {
+      "eng": "bandage",
+      "kan": "반창고",
+      "level": 2
+    },
+    {
+      "eng": "cough",
+      "kan": "기침",
+      "level": 2
+    },
+    {
+      "eng": "toothbrush",
+      "kan": "칫솔",
+      "level": 2
+    },
+    {
+      "eng": "toothpaste",
+      "kan": "치약",
+      "level": 2
+    },
+    {
+      "eng": "shampoo",
+      "kan": "샴푸",
+      "level": 2
+    },
+    {
+      "eng": "towel",
+      "kan": "수건",
+      "level": 2
+    },
+    {
+      "eng": "uniform",
+      "kan": "교복/유니폼",
+      "level": 2
+    },
+    {
+      "eng": "sneakers",
+      "kan": "운동화",
+      "level": 2
+    },
+    {
+      "eng": "umbrella",
+      "kan": "우산",
+      "level": 2
+    },
+    {
+      "eng": "raincoat",
+      "kan": "우비",
+      "level": 2
+    },
+    {
+      "eng": "puzzle",
+      "kan": "퍼즐",
+      "level": 2
+    },
+    {
+      "eng": "photo",
+      "kan": "사진",
+      "level": 2
+    },
+    {
+      "eng": "email",
+      "kan": "이메일",
+      "level": 2
+    },
+    {
+      "eng": "address",
+      "kan": "주소",
+      "level": 2
+    },
+    {
+      "eng": "phone number",
+      "kan": "전화번호",
+      "level": 2
+    },
+    {
+      "eng": "ticket office",
+      "kan": "매표소",
+      "level": 2
+    },
+    {
+      "eng": "information desk",
+      "kan": "안내 데스크",
+      "level": 2
+    }
+  ],
+  "g3": [
+    {
+      "eng": "people",
+      "kan": "사람들",
+      "level": 3
+    },
+    {
+      "eng": "child",
+      "kan": "아이",
+      "level": 3
+    },
+    {
+      "eng": "children",
+      "kan": "아이들",
+      "level": 3
+    },
+    {
+      "eng": "group",
+      "kan": "집단/모둠",
+      "level": 3
+    },
+    {
+      "eng": "team",
+      "kan": "팀",
+      "level": 3
+    },
+    {
+      "eng": "learn",
+      "kan": "배우다",
+      "level": 3
+    },
+    {
+      "eng": "teach",
+      "kan": "가르치다",
+      "level": 3
+    },
+    {
+      "eng": "understand",
+      "kan": "이해하다",
+      "level": 3
+    },
+    {
+      "eng": "remember",
+      "kan": "기억하다",
+      "level": 3
+    },
+    {
+      "eng": "forget",
+      "kan": "잊다",
+      "level": 3
+    },
+    {
+      "eng": "think",
+      "kan": "생각하다",
+      "level": 3
+    },
+    {
+      "eng": "know",
+      "kan": "알다",
+      "level": 3
+    },
+    {
+      "eng": "believe",
+      "kan": "믿다",
+      "level": 3
+    },
+    {
+      "eng": "guess",
+      "kan": "추측하다",
+      "level": 3
+    },
+    {
+      "eng": "decide",
+      "kan": "결정하다",
+      "level": 3
+    },
+    {
+      "eng": "explain",
+      "kan": "설명하다",
+      "level": 3
+    },
+    {
+      "eng": "describe",
+      "kan": "묘사하다",
+      "level": 3
+    },
+    {
+      "eng": "compare",
+      "kan": "비교하다",
+      "level": 3
+    },
+    {
+      "eng": "choose",
+      "kan": "고르다",
+      "level": 3
+    },
+    {
+      "eng": "agree",
+      "kan": "동의하다",
+      "level": 3
+    },
+    {
+      "eng": "problem",
+      "kan": "문제",
+      "level": 3
+    },
+    {
+      "eng": "idea",
+      "kan": "생각/아이디어",
+      "level": 3
+    },
+    {
+      "eng": "plan",
+      "kan": "계획",
+      "level": 3
+    },
+    {
+      "eng": "rule",
+      "kan": "규칙",
+      "level": 3
+    },
+    {
+      "eng": "example",
+      "kan": "예시",
+      "level": 3
+    },
+    {
+      "eng": "important",
+      "kan": "중요한",
+      "level": 3
+    },
+    {
+      "eng": "interesting",
+      "kan": "흥미로운",
+      "level": 3
+    },
+    {
+      "eng": "useful",
+      "kan": "유용한",
+      "level": 3
+    },
+    {
+      "eng": "careful",
+      "kan": "조심스러운",
+      "level": 3
+    },
+    {
+      "eng": "different",
+      "kan": "다른",
+      "level": 3
+    },
+    {
+      "eng": "same",
+      "kan": "같은",
+      "level": 3
+    },
+    {
+      "eng": "begin",
+      "kan": "시작하다",
+      "level": 3
+    },
+    {
+      "eng": "end",
+      "kan": "끝내다",
+      "level": 3
+    },
+    {
+      "eng": "continue",
+      "kan": "계속하다",
+      "level": 3
+    },
+    {
+      "eng": "stop",
+      "kan": "멈추다",
+      "level": 3
+    },
+    {
+      "eng": "change",
+      "kan": "바꾸다/변화",
+      "level": 3
+    },
+    {
+      "eng": "build",
+      "kan": "짓다/만들다",
+      "level": 3
+    },
+    {
+      "eng": "break",
+      "kan": "깨뜨리다/부서지다",
+      "level": 3
+    },
+    {
+      "eng": "fix",
+      "kan": "고치다",
+      "level": 3
+    },
+    {
+      "eng": "carry",
+      "kan": "나르다",
+      "level": 3
+    },
+    {
+      "eng": "move",
+      "kan": "움직이다",
+      "level": 3
+    },
+    {
+      "eng": "share",
+      "kan": "나누다",
+      "level": 3
+    },
+    {
+      "eng": "save",
+      "kan": "저장하다/절약하다",
+      "level": 3
+    },
+    {
+      "eng": "spend",
+      "kan": "쓰다(시간/돈)",
+      "level": 3
+    },
+    {
+      "eng": "pay",
+      "kan": "지불하다",
+      "level": 3
+    },
+    {
+      "eng": "buy",
+      "kan": "사다",
+      "level": 3
+    },
+    {
+      "eng": "sell",
+      "kan": "팔다",
+      "level": 3
+    },
+    {
+      "eng": "feel",
+      "kan": "느끼다",
+      "level": 3
+    },
+    {
+      "eng": "hope",
+      "kan": "바라다",
+      "level": 3
+    },
+    {
+      "eng": "worry",
+      "kan": "걱정하다",
+      "level": 3
+    },
+    {
+      "eng": "smile",
+      "kan": "미소짓다",
+      "level": 3
+    },
+    {
+      "eng": "laugh",
+      "kan": "웃다",
+      "level": 3
+    },
+    {
+      "eng": "science",
+      "kan": "과학",
+      "level": 3
+    },
+    {
+      "eng": "math",
+      "kan": "수학",
+      "level": 3
+    },
+    {
+      "eng": "music",
+      "kan": "음악",
+      "level": 3
+    },
+    {
+      "eng": "art",
+      "kan": "미술",
+      "level": 3
+    },
+    {
+      "eng": "sports",
+      "kan": "운동",
+      "level": 3
+    },
+    {
+      "eng": "English",
+      "kan": "영어",
+      "level": 3
+    },
+    {
+      "eng": "map",
+      "kan": "지도",
+      "level": 3
+    },
+    {
+      "eng": "country",
+      "kan": "나라",
+      "level": 3
+    },
+    {
+      "eng": "world",
+      "kan": "세계",
+      "level": 3
+    },
+    {
+      "eng": "ocean",
+      "kan": "바다",
+      "level": 3
+    },
+    {
+      "eng": "river",
+      "kan": "강",
+      "level": 3
+    },
+    {
+      "eng": "mountain",
+      "kan": "산",
+      "level": 3
+    },
+    {
+      "eng": "forest",
+      "kan": "숲",
+      "level": 3
+    },
+    {
+      "eng": "animal",
+      "kan": "동물",
+      "level": 3
+    },
+    {
+      "eng": "plant",
+      "kan": "식물",
+      "level": 3
+    },
+    {
+      "eng": "flower",
+      "kan": "꽃",
+      "level": 3
+    },
+    {
+      "eng": "tree",
+      "kan": "나무",
+      "level": 3
+    },
+    {
+      "eng": "leaf",
+      "kan": "잎",
+      "level": 3
+    },
+    {
+      "eng": "favorite",
+      "kan": "가장 좋아하는",
+      "level": 3
+    },
+    {
+      "eng": "kind",
+      "kan": "친절한/종류",
+      "level": 3
+    },
+    {
+      "eng": "safe",
+      "kan": "안전한",
+      "level": 3
+    },
+    {
+      "eng": "dangerous",
+      "kan": "위험한",
+      "level": 3
+    },
+    {
+      "eng": "healthy",
+      "kan": "건강한",
+      "level": 3
+    },
+    {
+      "eng": "usually",
+      "kan": "보통은",
+      "level": 3
+    },
+    {
+      "eng": "suddenly",
+      "kan": "갑자기",
+      "level": 3
+    },
+    {
+      "eng": "quietly",
+      "kan": "조용히",
+      "level": 3
+    },
+    {
+      "eng": "loudly",
+      "kan": "크게(소리로)",
+      "level": 3
+    },
+    {
+      "eng": "carefully",
+      "kan": "조심스럽게",
+      "level": 3
+    },
+    {
+      "eng": "soon",
+      "kan": "곧",
+      "level": 3
+    },
+    {
+      "eng": "already",
+      "kan": "이미",
+      "level": 3
+    },
+    {
+      "eng": "still",
+      "kan": "여전히",
+      "level": 3
+    },
+    {
+      "eng": "almost",
+      "kan": "거의",
+      "level": 3
+    },
+    {
+      "eng": "sentence",
+      "kan": "문장",
+      "level": 3
+    },
+    {
+      "eng": "word",
+      "kan": "단어",
+      "level": 3
+    },
+    {
+      "eng": "meaning",
+      "kan": "의미",
+      "level": 3
+    },
+    {
+      "eng": "sound",
+      "kan": "소리",
+      "level": 3
+    },
+    {
+      "eng": "letter",
+      "kan": "글자/편지",
+      "level": 3
+    },
+    {
+      "eng": "homework",
+      "kan": "숙제",
+      "level": 3
+    },
+    {
+      "eng": "project",
+      "kan": "프로젝트/과제",
+      "level": 3
+    },
+    {
+      "eng": "during",
+      "kan": "~동안",
+      "level": 3
+    },
+    {
+      "eng": "until",
+      "kan": "~까지",
+      "level": 3
+    },
+    {
+      "eng": "while",
+      "kan": "~하는 동안",
+      "level": 3
+    },
+    {
+      "eng": "subject",
+      "kan": "과목",
+      "level": 3
+    },
+    {
+      "eng": "social studies",
+      "kan": "사회",
+      "level": 3
+    },
+    {
+      "eng": "PE",
+      "kan": "체육",
+      "level": 3
+    },
+    {
+      "eng": "computer class",
+      "kan": "컴퓨터 수업",
+      "level": 3
+    },
+    {
+      "eng": "page",
+      "kan": "쪽(페이지)",
+      "level": 3
+    },
+    {
+      "eng": "chapter",
+      "kan": "장(챕터)",
+      "level": 3
+    },
+    {
+      "eng": "title",
+      "kan": "제목",
+      "level": 3
+    },
+    {
+      "eng": "topic",
+      "kan": "주제",
+      "level": 3
+    },
+    {
+      "eng": "search",
+      "kan": "검색하다",
+      "level": 3
+    },
+    {
+      "eng": "check",
+      "kan": "확인하다",
+      "level": 3
+    },
+    {
+      "eng": "correct",
+      "kan": "정답의/고치다",
+      "level": 3
+    },
+    {
+      "eng": "wrong",
+      "kan": "틀린",
+      "level": 3
+    },
+    {
+      "eng": "notice",
+      "kan": "알아차리다/공지",
+      "level": 3
+    },
+    {
+      "eng": "show",
+      "kan": "보여주다",
+      "level": 3
+    },
+    {
+      "eng": "tell",
+      "kan": "말해주다",
+      "level": 3
+    },
+    {
+      "eng": "reply",
+      "kan": "답장하다",
+      "level": 3
+    },
+    {
+      "eng": "follow",
+      "kan": "따라가다/따르다",
+      "level": 3
+    },
+    {
+      "eng": "lead",
+      "kan": "이끌다",
+      "level": 3
+    },
+    {
+      "eng": "join",
+      "kan": "참가하다",
+      "level": 3
+    },
+    {
+      "eng": "invite",
+      "kan": "초대하다",
+      "level": 3
+    },
+    {
+      "eng": "mistake",
+      "kan": "실수",
+      "level": 3
+    },
+    {
+      "eng": "sick",
+      "kan": "아픈",
+      "level": 3
+    },
+    {
+      "eng": "germ",
+      "kan": "세균",
+      "level": 3
+    },
+    {
+      "eng": "cover",
+      "kan": "덮다/가리다",
+      "level": 3
+    },
+    {
+      "eng": "disagree",
+      "kan": "동의하지 않다",
+      "level": 3
+    },
+    {
+      "eng": "maybe",
+      "kan": "아마",
+      "level": 3
+    },
+    {
+      "eng": "everyday",
+      "kan": "매일",
+      "level": 3
+    },
+    {
+      "eng": "weekend",
+      "kan": "주말",
+      "level": 3
+    },
+    {
+      "eng": "borrow",
+      "kan": "빌리다",
+      "level": 3
+    },
+    {
+      "eng": "lend",
+      "kan": "빌려주다",
+      "level": 3
+    },
+    {
+      "eng": "return",
+      "kan": "돌려주다/돌아오다",
+      "level": 3
+    },
+    {
+      "eng": "opposite",
+      "kan": "반대의",
+      "level": 3
+    },
+    {
+      "eng": "middle",
+      "kan": "중간",
+      "level": 3
+    },
+    {
+      "eng": "corner",
+      "kan": "모서리",
+      "level": 3
+    },
+    {
+      "eng": "edge",
+      "kan": "가장자리",
+      "level": 3
+    },
+    {
+      "eng": "instruction",
+      "kan": "지시/설명서",
+      "level": 3
+    },
+    {
+      "eng": "direction",
+      "kan": "방향/지시",
+      "level": 3
+    },
+    {
+      "eng": "step",
+      "kan": "단계",
+      "level": 3
+    },
+    {
+      "eng": "order",
+      "kan": "순서/주문",
+      "level": 3
+    },
+    {
+      "eng": "list",
+      "kan": "목록",
+      "level": 3
+    },
+    {
+      "eng": "detail",
+      "kan": "세부사항",
+      "level": 3
+    },
+    {
+      "eng": "arrive",
+      "kan": "도착하다",
+      "level": 3
+    },
+    {
+      "eng": "leave",
+      "kan": "떠나다",
+      "level": 3
+    },
+    {
+      "eng": "travel",
+      "kan": "여행하다/여행",
+      "level": 3
+    },
+    {
+      "eng": "trip",
+      "kan": "여행",
+      "level": 3
+    },
+    {
+      "eng": "traffic",
+      "kan": "교통",
+      "level": 3
+    },
+    {
+      "eng": "crowded",
+      "kan": "붐비는",
+      "level": 3
+    },
+    {
+      "eng": "danger",
+      "kan": "위험",
+      "level": 3
+    },
+    {
+      "eng": "care",
+      "kan": "돌보다/보살피다",
+      "level": 3
+    },
+    {
+      "eng": "multiply",
+      "kan": "곱하다",
+      "level": 3
+    },
+    {
+      "eng": "divide",
+      "kan": "나누다",
+      "level": 3
+    },
+    {
+      "eng": "subtract",
+      "kan": "빼다",
+      "level": 3
+    },
+    {
+      "eng": "add",
+      "kan": "더하다",
+      "level": 3
+    },
+    {
+      "eng": "fraction",
+      "kan": "분수",
+      "level": 3
+    },
+    {
+      "eng": "decimal",
+      "kan": "소수",
+      "level": 3
+    },
+    {
+      "eng": "equation",
+      "kan": "방정식/등식",
+      "level": 3
+    },
+    {
+      "eng": "problem solving",
+      "kan": "문제 해결",
+      "level": 3
+    },
+    {
+      "eng": "angle",
+      "kan": "각",
+      "level": 3
+    },
+    {
+      "eng": "circle graph",
+      "kan": "원그래프",
+      "level": 3
+    },
+    {
+      "eng": "bar graph",
+      "kan": "막대그래프",
+      "level": 3
+    },
+    {
+      "eng": "conclusion",
+      "kan": "결론",
+      "level": 3
+    },
+    {
+      "eng": "magnet",
+      "kan": "자석",
+      "level": 3
+    },
+    {
+      "eng": "gravity",
+      "kan": "중력",
+      "level": 3
+    },
+    {
+      "eng": "friction",
+      "kan": "마찰",
+      "level": 3
+    },
+    {
+      "eng": "evaporation",
+      "kan": "증발",
+      "level": 3
+    },
+    {
+      "eng": "condensation",
+      "kan": "응결",
+      "level": 3
+    },
+    {
+      "eng": "precipitation",
+      "kan": "강수",
+      "level": 3
+    },
+    {
+      "eng": "water cycle",
+      "kan": "물의 순환",
+      "level": 3
+    },
+    {
+      "eng": "food chain",
+      "kan": "먹이사슬",
+      "level": 3
+    },
+    {
+      "eng": "predator",
+      "kan": "포식자",
+      "level": 3
+    },
+    {
+      "eng": "prey",
+      "kan": "먹이",
+      "level": 3
+    },
+    {
+      "eng": "author",
+      "kan": "작가",
+      "level": 3
+    },
+    {
+      "eng": "reader",
+      "kan": "독자",
+      "level": 3
+    },
+    {
+      "eng": "summary",
+      "kan": "요약",
+      "level": 3
+    },
+    {
+      "eng": "main idea",
+      "kan": "중심 생각",
+      "level": 3
+    },
+    {
+      "eng": "infer",
+      "kan": "추론하다",
+      "level": 3
+    },
+    {
+      "eng": "synonym",
+      "kan": "동의어",
+      "level": 3
+    },
+    {
+      "eng": "antonym",
+      "kan": "반의어",
+      "level": 3
+    },
+    {
+      "eng": "dictionary",
+      "kan": "사전",
+      "level": 3
+    },
+    {
+      "eng": "thesaurus",
+      "kan": "유의어 사전",
+      "level": 3
+    },
+    {
+      "eng": "behavior",
+      "kan": "행동",
+      "level": 3
+    },
+    {
+      "eng": "emotion",
+      "kan": "감정",
+      "level": 3
+    },
+    {
+      "eng": "donate",
+      "kan": "기부하다",
+      "level": 3
+    },
+    {
+      "eng": "helmet",
+      "kan": "헬멧",
+      "level": 3
+    },
+    {
+      "eng": "seatbelt",
+      "kan": "안전벨트",
+      "level": 3
+    },
+    {
+      "eng": "garbage",
+      "kan": "쓰레기",
+      "level": 3
+    },
+    {
+      "eng": "vocabulary",
+      "kan": "어휘",
+      "level": 3
+    },
+    {
+      "eng": "grammar",
+      "kan": "문법",
+      "level": 3
+    },
+    {
+      "eng": "pronunciation",
+      "kan": "발음",
+      "level": 3
+    },
+    {
+      "eng": "spelling",
+      "kan": "철자",
+      "level": 3
+    },
+    {
+      "eng": "role",
+      "kan": "역할",
+      "level": 3
+    },
+    {
+      "eng": "scene",
+      "kan": "장면",
+      "level": 3
+    },
+    {
+      "eng": "dialogue",
+      "kan": "대화",
+      "level": 3
+    },
+    {
+      "eng": "narrator",
+      "kan": "해설자",
+      "level": 3
+    },
+    {
+      "eng": "tip",
+      "kan": "팁/요령",
+      "level": 3
+    },
+    {
+      "eng": "goal setting",
+      "kan": "목표 설정",
+      "level": 3
+    },
+    {
+      "eng": "self-check",
+      "kan": "자기 점검",
+      "level": 3
+    },
+    {
+      "eng": "timeline",
+      "kan": "시간 순서",
+      "level": 3
+    },
+    {
+      "eng": "materials",
+      "kan": "재료",
+      "level": 3
+    },
+    {
+      "eng": "equipment",
+      "kan": "장비",
+      "level": 3
+    },
+    {
+      "eng": "prediction",
+      "kan": "예측",
+      "level": 3
+    },
+    {
+      "eng": "observation",
+      "kan": "관찰",
+      "level": 3
+    },
+    {
+      "eng": "measurement",
+      "kan": "측정",
+      "level": 3
+    },
+    {
+      "eng": "experiment log",
+      "kan": "실험 기록",
+      "level": 3
+    },
+    {
+      "eng": "result table",
+      "kan": "결과표",
+      "level": 3
+    },
+    {
+      "eng": "kilometer",
+      "kan": "킬로미터",
+      "level": 3
+    },
+    {
+      "eng": "meter",
+      "kan": "미터",
+      "level": 3
+    },
+    {
+      "eng": "centimeter",
+      "kan": "센티미터",
+      "level": 3
+    },
+    {
+      "eng": "liter",
+      "kan": "리터",
+      "level": 3
+    },
+    {
+      "eng": "gram",
+      "kan": "그램",
+      "level": 3
+    },
+    {
+      "eng": "thermometer",
+      "kan": "온도계",
+      "level": 3
+    },
+    {
+      "eng": "scale",
+      "kan": "저울",
+      "level": 3
+    },
+    {
+      "eng": "ruler",
+      "kan": "자",
+      "level": 3
+    },
+    {
+      "eng": "compass",
+      "kan": "나침반",
+      "level": 3
+    }
+  ],
+  "g4": [
+    {
+      "eng": "culture",
+      "kan": "문화",
+      "level": 4
+    },
+    {
+      "eng": "history",
+      "kan": "역사",
+      "level": 4
+    },
+    {
+      "eng": "community",
+      "kan": "공동체/지역사회",
+      "level": 4
+    },
+    {
+      "eng": "tradition",
+      "kan": "전통",
+      "level": 4
+    },
+    {
+      "eng": "festival",
+      "kan": "축제",
+      "level": 4
+    },
+    {
+      "eng": "information",
+      "kan": "정보",
+      "level": 4
+    },
+    {
+      "eng": "message",
+      "kan": "메시지",
+      "level": 4
+    },
+    {
+      "eng": "opinion",
+      "kan": "의견",
+      "level": 4
+    },
+    {
+      "eng": "fact",
+      "kan": "사실",
+      "level": 4
+    },
+    {
+      "eng": "reason",
+      "kan": "이유",
+      "level": 4
+    },
+    {
+      "eng": "result",
+      "kan": "결과",
+      "level": 4
+    },
+    {
+      "eng": "research",
+      "kan": "연구",
+      "level": 4
+    },
+    {
+      "eng": "report",
+      "kan": "보고서",
+      "level": 4
+    },
+    {
+      "eng": "present",
+      "kan": "발표하다/현재",
+      "level": 4
+    },
+    {
+      "eng": "introduce",
+      "kan": "소개하다",
+      "level": 4
+    },
+    {
+      "eng": "discuss",
+      "kan": "토론하다",
+      "level": 4
+    },
+    {
+      "eng": "support",
+      "kan": "돕다/지지하다",
+      "level": 4
+    },
+    {
+      "eng": "protect",
+      "kan": "보호하다",
+      "level": 4
+    },
+    {
+      "eng": "prevent",
+      "kan": "예방하다",
+      "level": 4
+    },
+    {
+      "eng": "allow",
+      "kan": "허락하다",
+      "level": 4
+    },
+    {
+      "eng": "require",
+      "kan": "요구하다",
+      "level": 4
+    },
+    {
+      "eng": "measure",
+      "kan": "측정하다/조치",
+      "level": 4
+    },
+    {
+      "eng": "increase",
+      "kan": "증가하다",
+      "level": 4
+    },
+    {
+      "eng": "reduce",
+      "kan": "줄이다",
+      "level": 4
+    },
+    {
+      "eng": "improve",
+      "kan": "개선하다",
+      "level": 4
+    },
+    {
+      "eng": "develop",
+      "kan": "발전시키다/개발",
+      "level": 4
+    },
+    {
+      "eng": "create",
+      "kan": "창조하다",
+      "level": 4
+    },
+    {
+      "eng": "invent",
+      "kan": "발명하다",
+      "level": 4
+    },
+    {
+      "eng": "design",
+      "kan": "설계하다/디자인",
+      "level": 4
+    },
+    {
+      "eng": "solve",
+      "kan": "해결하다",
+      "level": 4
+    },
+    {
+      "eng": "handle",
+      "kan": "다루다/처리하다",
+      "level": 4
+    },
+    {
+      "eng": "examine",
+      "kan": "검사하다/살피다",
+      "level": 4
+    },
+    {
+      "eng": "analyze",
+      "kan": "분석하다",
+      "level": 4
+    },
+    {
+      "eng": "organize",
+      "kan": "정리하다/조직하다",
+      "level": 4
+    },
+    {
+      "eng": "collect",
+      "kan": "모으다/수집하다",
+      "level": 4
+    },
+    {
+      "eng": "environment",
+      "kan": "환경",
+      "level": 4
+    },
+    {
+      "eng": "nature",
+      "kan": "자연",
+      "level": 4
+    },
+    {
+      "eng": "energy",
+      "kan": "에너지",
+      "level": 4
+    },
+    {
+      "eng": "electricity",
+      "kan": "전기",
+      "level": 4
+    },
+    {
+      "eng": "temperature",
+      "kan": "온도",
+      "level": 4
+    },
+    {
+      "eng": "pollution",
+      "kan": "오염",
+      "level": 4
+    },
+    {
+      "eng": "recycle",
+      "kan": "재활용하다",
+      "level": 4
+    },
+    {
+      "eng": "waste",
+      "kan": "낭비/쓰레기",
+      "level": 4
+    },
+    {
+      "eng": "resource",
+      "kan": "자원",
+      "level": 4
+    },
+    {
+      "eng": "future",
+      "kan": "미래",
+      "level": 4
+    },
+    {
+      "eng": "past",
+      "kan": "과거",
+      "level": 4
+    },
+    {
+      "eng": "system",
+      "kan": "체계/시스템",
+      "level": 4
+    },
+    {
+      "eng": "process",
+      "kan": "과정",
+      "level": 4
+    },
+    {
+      "eng": "method",
+      "kan": "방법",
+      "level": 4
+    },
+    {
+      "eng": "tool",
+      "kan": "도구",
+      "level": 4
+    },
+    {
+      "eng": "technology",
+      "kan": "기술",
+      "level": 4
+    },
+    {
+      "eng": "online",
+      "kan": "온라인",
+      "level": 4
+    },
+    {
+      "eng": "website",
+      "kan": "웹사이트",
+      "level": 4
+    },
+    {
+      "eng": "password",
+      "kan": "비밀번호",
+      "level": 4
+    },
+    {
+      "eng": "upload",
+      "kan": "업로드하다",
+      "level": 4
+    },
+    {
+      "eng": "download",
+      "kan": "다운로드하다",
+      "level": 4
+    },
+    {
+      "eng": "keyboard",
+      "kan": "키보드",
+      "level": 4
+    },
+    {
+      "eng": "screen",
+      "kan": "화면",
+      "level": 4
+    },
+    {
+      "eng": "button",
+      "kan": "버튼",
+      "level": 4
+    },
+    {
+      "eng": "menu",
+      "kan": "메뉴",
+      "level": 4
+    },
+    {
+      "eng": "setting",
+      "kan": "설정",
+      "level": 4
+    },
+    {
+      "eng": "careless",
+      "kan": "부주의한",
+      "level": 4
+    },
+    {
+      "eng": "polite",
+      "kan": "예의 바른",
+      "level": 4
+    },
+    {
+      "eng": "rude",
+      "kan": "무례한",
+      "level": 4
+    },
+    {
+      "eng": "especially",
+      "kan": "특히",
+      "level": 4
+    },
+    {
+      "eng": "finally",
+      "kan": "마침내",
+      "level": 4
+    },
+    {
+      "eng": "therefore",
+      "kan": "그러므로",
+      "level": 4
+    },
+    {
+      "eng": "however",
+      "kan": "하지만",
+      "level": 4
+    },
+    {
+      "eng": "probably",
+      "kan": "아마도",
+      "level": 4
+    },
+    {
+      "eng": "exactly",
+      "kan": "정확히",
+      "level": 4
+    },
+    {
+      "eng": "clearly",
+      "kan": "분명히",
+      "level": 4
+    },
+    {
+      "eng": "exercise",
+      "kan": "운동/연습",
+      "level": 4
+    },
+    {
+      "eng": "diet",
+      "kan": "식단",
+      "level": 4
+    },
+    {
+      "eng": "stress",
+      "kan": "스트레스",
+      "level": 4
+    },
+    {
+      "eng": "doctor",
+      "kan": "의사",
+      "level": 4
+    },
+    {
+      "eng": "medicine",
+      "kan": "약/의학",
+      "level": 4
+    },
+    {
+      "eng": "government",
+      "kan": "정부",
+      "level": 4
+    },
+    {
+      "eng": "capital",
+      "kan": "수도",
+      "level": 4
+    },
+    {
+      "eng": "population",
+      "kan": "인구",
+      "level": 4
+    },
+    {
+      "eng": "continent",
+      "kan": "대륙",
+      "level": 4
+    },
+    {
+      "eng": "planet",
+      "kan": "행성",
+      "level": 4
+    },
+    {
+      "eng": "space",
+      "kan": "우주",
+      "level": 4
+    },
+    {
+      "eng": "solar",
+      "kan": "태양의",
+      "level": 4
+    },
+    {
+      "eng": "electric",
+      "kan": "전기의",
+      "level": 4
+    },
+    {
+      "eng": "battery",
+      "kan": "배터리",
+      "level": 4
+    },
+    {
+      "eng": "charge",
+      "kan": "충전하다",
+      "level": 4
+    },
+    {
+      "eng": "material",
+      "kan": "재료",
+      "level": 4
+    },
+    {
+      "eng": "metal",
+      "kan": "금속",
+      "level": 4
+    },
+    {
+      "eng": "wood",
+      "kan": "나무(재료)",
+      "level": 4
+    },
+    {
+      "eng": "humidity",
+      "kan": "습도",
+      "level": 4
+    },
+    {
+      "eng": "pressure",
+      "kan": "압력",
+      "level": 4
+    },
+    {
+      "eng": "record",
+      "kan": "기록하다",
+      "level": 4
+    },
+    {
+      "eng": "diagram",
+      "kan": "도표/그림",
+      "level": 4
+    },
+    {
+      "eng": "graph",
+      "kan": "그래프",
+      "level": 4
+    },
+    {
+      "eng": "table",
+      "kan": "표",
+      "level": 4
+    },
+    {
+      "eng": "decision",
+      "kan": "결정",
+      "level": 4
+    },
+    {
+      "eng": "choice",
+      "kan": "선택",
+      "level": 4
+    },
+    {
+      "eng": "policy",
+      "kan": "정책",
+      "level": 4
+    },
+    {
+      "eng": "service",
+      "kan": "서비스",
+      "level": 4
+    },
+    {
+      "eng": "public",
+      "kan": "공공의",
+      "level": 4
+    },
+    {
+      "eng": "emergency",
+      "kan": "비상사태",
+      "level": 4
+    },
+    {
+      "eng": "accident",
+      "kan": "사고",
+      "level": 4
+    },
+    {
+      "eng": "first aid",
+      "kan": "응급처치",
+      "level": 4
+    },
+    {
+      "eng": "symptom",
+      "kan": "증상",
+      "level": 4
+    },
+    {
+      "eng": "stomachache",
+      "kan": "배탈/복통",
+      "level": 4
+    },
+    {
+      "eng": "headache",
+      "kan": "두통",
+      "level": 4
+    },
+    {
+      "eng": "fever",
+      "kan": "열",
+      "level": 4
+    },
+    {
+      "eng": "happily",
+      "kan": "행복하게",
+      "level": 4
+    },
+    {
+      "eng": "instead",
+      "kan": "대신에",
+      "level": 4
+    },
+    {
+      "eng": "democracy",
+      "kan": "민주주의",
+      "level": 4
+    },
+    {
+      "eng": "election",
+      "kan": "선거",
+      "level": 4
+    },
+    {
+      "eng": "vote",
+      "kan": "투표하다/투표",
+      "level": 4
+    },
+    {
+      "eng": "constitution",
+      "kan": "헌법",
+      "level": 4
+    },
+    {
+      "eng": "citizenship",
+      "kan": "시민권/시민의식",
+      "level": 4
+    },
+    {
+      "eng": "industry",
+      "kan": "산업",
+      "level": 4
+    },
+    {
+      "eng": "factory",
+      "kan": "공장",
+      "level": 4
+    },
+    {
+      "eng": "worker",
+      "kan": "노동자",
+      "level": 4
+    },
+    {
+      "eng": "trade",
+      "kan": "무역/거래",
+      "level": 4
+    },
+    {
+      "eng": "import",
+      "kan": "수입하다",
+      "level": 4
+    },
+    {
+      "eng": "export",
+      "kan": "수출하다",
+      "level": 4
+    },
+    {
+      "eng": "ecosystem",
+      "kan": "생태계",
+      "level": 4
+    },
+    {
+      "eng": "habitat",
+      "kan": "서식지",
+      "level": 4
+    },
+    {
+      "eng": "species",
+      "kan": "종(생물)",
+      "level": 4
+    },
+    {
+      "eng": "weather forecast",
+      "kan": "일기예보",
+      "level": 4
+    },
+    {
+      "eng": "typhoon",
+      "kan": "태풍",
+      "level": 4
+    },
+    {
+      "eng": "drought",
+      "kan": "가뭄",
+      "level": 4
+    },
+    {
+      "eng": "flood",
+      "kan": "홍수",
+      "level": 4
+    },
+    {
+      "eng": "earthquake",
+      "kan": "지진",
+      "level": 4
+    },
+    {
+      "eng": "volcano",
+      "kan": "화산",
+      "level": 4
+    },
+    {
+      "eng": "nutrition",
+      "kan": "영양",
+      "level": 4
+    },
+    {
+      "eng": "vitamin",
+      "kan": "비타민",
+      "level": 4
+    },
+    {
+      "eng": "injury",
+      "kan": "부상",
+      "level": 4
+    },
+    {
+      "eng": "safety rule",
+      "kan": "안전수칙",
+      "level": 4
+    },
+    {
+      "eng": "username",
+      "kan": "사용자 이름",
+      "level": 4
+    },
+    {
+      "eng": "browser",
+      "kan": "브라우저",
+      "level": 4
+    },
+    {
+      "eng": "link",
+      "kan": "링크",
+      "level": 4
+    },
+    {
+      "eng": "click",
+      "kan": "클릭하다",
+      "level": 4
+    },
+    {
+      "eng": "search engine",
+      "kan": "검색엔진",
+      "level": 4
+    },
+    {
+      "eng": "file",
+      "kan": "파일",
+      "level": 4
+    },
+    {
+      "eng": "folder",
+      "kan": "폴더",
+      "level": 4
+    },
+    {
+      "eng": "document",
+      "kan": "문서",
+      "level": 4
+    },
+    {
+      "eng": "presentation",
+      "kan": "발표자료",
+      "level": 4
+    },
+    {
+      "eng": "slide",
+      "kan": "슬라이드",
+      "level": 4
+    },
+    {
+      "eng": "deadline",
+      "kan": "마감일",
+      "level": 4
+    },
+    {
+      "eng": "schedule",
+      "kan": "일정",
+      "level": 4
+    },
+    {
+      "eng": "latitude",
+      "kan": "위도",
+      "level": 4
+    },
+    {
+      "eng": "longitude",
+      "kan": "경도",
+      "level": 4
+    },
+    {
+      "eng": "map key",
+      "kan": "범례",
+      "level": 4
+    },
+    {
+      "eng": "density",
+      "kan": "밀도",
+      "level": 4
+    },
+    {
+      "eng": "border",
+      "kan": "국경",
+      "level": 4
+    },
+    {
+      "eng": "agriculture",
+      "kan": "농업",
+      "level": 4
+    },
+    {
+      "eng": "manufacturing",
+      "kan": "제조업",
+      "level": 4
+    },
+    {
+      "eng": "tourism",
+      "kan": "관광",
+      "level": 4
+    },
+    {
+      "eng": "tax",
+      "kan": "세금",
+      "level": 4
+    },
+    {
+      "eng": "duty",
+      "kan": "의무",
+      "level": 4
+    },
+    {
+      "eng": "equality",
+      "kan": "평등",
+      "level": 4
+    },
+    {
+      "eng": "diversity",
+      "kan": "다양성",
+      "level": 4
+    },
+    {
+      "eng": "heritage",
+      "kan": "유산",
+      "level": 4
+    },
+    {
+      "eng": "engineering",
+      "kan": "공학",
+      "level": 4
+    },
+    {
+      "eng": "circuit",
+      "kan": "회로",
+      "level": 4
+    },
+    {
+      "eng": "conductor",
+      "kan": "도체",
+      "level": 4
+    },
+    {
+      "eng": "insulator",
+      "kan": "부도체",
+      "level": 4
+    },
+    {
+      "eng": "microscope",
+      "kan": "현미경",
+      "level": 4
+    },
+    {
+      "eng": "telescope",
+      "kan": "망원경",
+      "level": 4
+    },
+    {
+      "eng": "plate tectonics",
+      "kan": "판 구조론",
+      "level": 4
+    },
+    {
+      "eng": "erosion",
+      "kan": "침식",
+      "level": 4
+    },
+    {
+      "eng": "weathering",
+      "kan": "풍화",
+      "level": 4
+    },
+    {
+      "eng": "sediment",
+      "kan": "퇴적물",
+      "level": 4
+    },
+    {
+      "eng": "biodiversity",
+      "kan": "생물다양성",
+      "level": 4
+    },
+    {
+      "eng": "conservation",
+      "kan": "보전",
+      "level": 4
+    },
+    {
+      "eng": "greenhouse effect",
+      "kan": "온실효과",
+      "level": 4
+    },
+    {
+      "eng": "coding",
+      "kan": "코딩",
+      "level": 4
+    },
+    {
+      "eng": "program",
+      "kan": "프로그램",
+      "level": 4
+    },
+    {
+      "eng": "virus",
+      "kan": "바이러스",
+      "level": 4
+    },
+    {
+      "eng": "sample",
+      "kan": "표본",
+      "level": 4
+    },
+    {
+      "eng": "ratio",
+      "kan": "비율",
+      "level": 4
+    },
+    {
+      "eng": "accurate",
+      "kan": "정확한",
+      "level": 4
+    },
+    {
+      "eng": "communication",
+      "kan": "의사소통",
+      "level": 4
+    },
+    {
+      "eng": "cooperation",
+      "kan": "협력",
+      "level": 4
+    },
+    {
+      "eng": "transportation",
+      "kan": "교통",
+      "level": 4
+    },
+    {
+      "eng": "infrastructure",
+      "kan": "사회기반시설",
+      "level": 4
+    },
+    {
+      "eng": "tunnel",
+      "kan": "터널",
+      "level": 4
+    },
+    {
+      "eng": "highway",
+      "kan": "고속도로",
+      "level": 4
+    },
+    {
+      "eng": "fossil fuel",
+      "kan": "화석연료",
+      "level": 4
+    },
+    {
+      "eng": "coal",
+      "kan": "석탄",
+      "level": 4
+    },
+    {
+      "eng": "oil",
+      "kan": "석유",
+      "level": 4
+    },
+    {
+      "eng": "gas",
+      "kan": "가스",
+      "level": 4
+    },
+    {
+      "eng": "electric vehicle",
+      "kan": "전기차",
+      "level": 4
+    },
+    {
+      "eng": "public transport",
+      "kan": "대중교통",
+      "level": 4
+    },
+    {
+      "eng": "earth",
+      "kan": "지구",
+      "level": 4
+    },
+    {
+      "eng": "atmosphere",
+      "kan": "대기",
+      "level": 4
+    },
+    {
+      "eng": "hurricane",
+      "kan": "허리케인",
+      "level": 4
+    },
+    {
+      "eng": "blizzard",
+      "kan": "눈보라",
+      "level": 4
+    },
+    {
+      "eng": "heat wave",
+      "kan": "폭염",
+      "level": 4
+    },
+    {
+      "eng": "plant cell",
+      "kan": "식물 세포",
+      "level": 4
+    },
+    {
+      "eng": "animal cell",
+      "kan": "동물 세포",
+      "level": 4
+    },
+    {
+      "eng": "organ",
+      "kan": "기관",
+      "level": 4
+    },
+    {
+      "eng": "tissue",
+      "kan": "조직",
+      "level": 4
+    },
+    {
+      "eng": "nutrient",
+      "kan": "영양소",
+      "level": 4
+    },
+    {
+      "eng": "protein",
+      "kan": "단백질",
+      "level": 4
+    },
+    {
+      "eng": "carbohydrate",
+      "kan": "탄수화물",
+      "level": 4
+    },
+    {
+      "eng": "fat",
+      "kan": "지방",
+      "level": 4
+    },
+    {
+      "eng": "rule of law",
+      "kan": "법치",
+      "level": 4
+    },
+    {
+      "eng": "human rights",
+      "kan": "인권",
+      "level": 4
+    },
+    {
+      "eng": "budget plan",
+      "kan": "예산 계획",
+      "level": 4
+    },
+    {
+      "eng": "public service",
+      "kan": "공공 서비스",
+      "level": 4
+    },
+    {
+      "eng": "media",
+      "kan": "미디어",
+      "level": 4
+    },
+    {
+      "eng": "advertisement",
+      "kan": "광고",
+      "level": 4
+    },
+    {
+      "eng": "headline",
+      "kan": "헤드라인",
+      "level": 4
+    },
+    {
+      "eng": "reporter",
+      "kan": "기자",
+      "level": 4
+    },
+    {
+      "eng": "fake news",
+      "kan": "가짜 뉴스",
+      "level": 4
+    },
+    {
+      "eng": "verify",
+      "kan": "검증하다",
+      "level": 4
+    },
+    {
+      "eng": "parade",
+      "kan": "퍼레이드",
+      "level": 4
+    },
+    {
+      "eng": "museum",
+      "kan": "박물관",
+      "level": 4
+    },
+    {
+      "eng": "exhibition",
+      "kan": "전시",
+      "level": 4
+    },
+    {
+      "eng": "artifact",
+      "kan": "유물/인공물",
+      "level": 4
+    },
+    {
+      "eng": "tsunami",
+      "kan": "쓰나미",
+      "level": 4
+    },
+    {
+      "eng": "landslide",
+      "kan": "산사태",
+      "level": 4
+    },
+    {
+      "eng": "wildfire",
+      "kan": "산불",
+      "level": 4
+    },
+    {
+      "eng": "recycling bin",
+      "kan": "분리수거함",
+      "level": 4
+    },
+    {
+      "eng": "compost",
+      "kan": "퇴비",
+      "level": 4
+    },
+    {
+      "eng": "biodegradable",
+      "kan": "생분해성",
+      "level": 4
+    },
+    {
+      "eng": "nutrition label",
+      "kan": "영양성분표",
+      "level": 4
+    },
+    {
+      "eng": "allergy",
+      "kan": "알레르기",
+      "level": 4
+    },
+    {
+      "eng": "ingredient list",
+      "kan": "원재료명",
+      "level": 4
+    },
+    {
+      "eng": "evacuation",
+      "kan": "대피",
+      "level": 4
+    },
+    {
+      "eng": "shelter",
+      "kan": "대피소",
+      "level": 4
+    },
+    {
+      "eng": "bullying",
+      "kan": "괴롭힘/따돌림",
+      "level": 4
+    }
+  ],
+  "g5": [
+    {
+      "eng": "evidence",
+      "kan": "증거",
+      "level": 5
+    },
+    {
+      "eng": "theory",
+      "kan": "이론",
+      "level": 5
+    },
+    {
+      "eng": "data",
+      "kan": "데이터",
+      "level": 5
+    },
+    {
+      "eng": "chart",
+      "kan": "차트/그래프",
+      "level": 5
+    },
+    {
+      "eng": "survey",
+      "kan": "설문",
+      "level": 5
+    },
+    {
+      "eng": "contrast",
+      "kan": "대조하다",
+      "level": 5
+    },
+    {
+      "eng": "predict",
+      "kan": "예측하다",
+      "level": 5
+    },
+    {
+      "eng": "estimate",
+      "kan": "추정하다",
+      "level": 5
+    },
+    {
+      "eng": "conclude",
+      "kan": "결론내리다",
+      "level": 5
+    },
+    {
+      "eng": "influence",
+      "kan": "영향(을 미치다)",
+      "level": 5
+    },
+    {
+      "eng": "affect",
+      "kan": "영향을 주다",
+      "level": 5
+    },
+    {
+      "eng": "cause",
+      "kan": "원인/야기하다",
+      "level": 5
+    },
+    {
+      "eng": "effect",
+      "kan": "효과/영향",
+      "level": 5
+    },
+    {
+      "eng": "challenge",
+      "kan": "도전/과제",
+      "level": 5
+    },
+    {
+      "eng": "goal",
+      "kan": "목표",
+      "level": 5
+    },
+    {
+      "eng": "achievement",
+      "kan": "성취",
+      "level": 5
+    },
+    {
+      "eng": "progress",
+      "kan": "진전/발전",
+      "level": 5
+    },
+    {
+      "eng": "necessary",
+      "kan": "필요한",
+      "level": 5
+    },
+    {
+      "eng": "possible",
+      "kan": "가능한",
+      "level": 5
+    },
+    {
+      "eng": "impossible",
+      "kan": "불가능한",
+      "level": 5
+    },
+    {
+      "eng": "available",
+      "kan": "이용 가능한",
+      "level": 5
+    },
+    {
+      "eng": "effective",
+      "kan": "효과적인",
+      "level": 5
+    },
+    {
+      "eng": "efficient",
+      "kan": "효율적인",
+      "level": 5
+    },
+    {
+      "eng": "complex",
+      "kan": "복잡한",
+      "level": 5
+    },
+    {
+      "eng": "simple",
+      "kan": "간단한",
+      "level": 5
+    },
+    {
+      "eng": "responsibility",
+      "kan": "책임",
+      "level": 5
+    },
+    {
+      "eng": "respect",
+      "kan": "존중하다/존경",
+      "level": 5
+    },
+    {
+      "eng": "trust",
+      "kan": "신뢰하다/신뢰",
+      "level": 5
+    },
+    {
+      "eng": "promise",
+      "kan": "약속하다/약속",
+      "level": 5
+    },
+    {
+      "eng": "communicate",
+      "kan": "소통하다",
+      "level": 5
+    },
+    {
+      "eng": "cooperate",
+      "kan": "협력하다",
+      "level": 5
+    },
+    {
+      "eng": "participate",
+      "kan": "참여하다",
+      "level": 5
+    },
+    {
+      "eng": "volunteer",
+      "kan": "자원봉사하다",
+      "level": 5
+    },
+    {
+      "eng": "citizen",
+      "kan": "시민",
+      "level": 5
+    },
+    {
+      "eng": "society",
+      "kan": "사회",
+      "level": 5
+    },
+    {
+      "eng": "law",
+      "kan": "법",
+      "level": 5
+    },
+    {
+      "eng": "rights",
+      "kan": "권리",
+      "level": 5
+    },
+    {
+      "eng": "economy",
+      "kan": "경제",
+      "level": 5
+    },
+    {
+      "eng": "price",
+      "kan": "가격",
+      "level": 5
+    },
+    {
+      "eng": "cost",
+      "kan": "비용",
+      "level": 5
+    },
+    {
+      "eng": "value",
+      "kan": "가치",
+      "level": 5
+    },
+    {
+      "eng": "prepare",
+      "kan": "준비하다",
+      "level": 5
+    },
+    {
+      "eng": "review",
+      "kan": "복습하다",
+      "level": 5
+    },
+    {
+      "eng": "memorize",
+      "kan": "암기하다",
+      "level": 5
+    },
+    {
+      "eng": "summarize",
+      "kan": "요약하다",
+      "level": 5
+    },
+    {
+      "eng": "translate",
+      "kan": "번역하다",
+      "level": 5
+    },
+    {
+      "eng": "pronounce",
+      "kan": "발음하다",
+      "level": 5
+    },
+    {
+      "eng": "spell",
+      "kan": "철자를 쓰다",
+      "level": 5
+    },
+    {
+      "eng": "experiment",
+      "kan": "실험",
+      "level": 5
+    },
+    {
+      "eng": "observe",
+      "kan": "관찰하다",
+      "level": 5
+    },
+    {
+      "eng": "discover",
+      "kan": "발견하다",
+      "level": 5
+    },
+    {
+      "eng": "explore",
+      "kan": "탐험하다",
+      "level": 5
+    },
+    {
+      "eng": "global",
+      "kan": "세계적인",
+      "level": 5
+    },
+    {
+      "eng": "local",
+      "kan": "지역의",
+      "level": 5
+    },
+    {
+      "eng": "international",
+      "kan": "국제적인",
+      "level": 5
+    },
+    {
+      "eng": "climate",
+      "kan": "기후",
+      "level": 5
+    },
+    {
+      "eng": "carbon",
+      "kan": "탄소",
+      "level": 5
+    },
+    {
+      "eng": "plastic",
+      "kan": "플라스틱",
+      "level": 5
+    },
+    {
+      "eng": "digital",
+      "kan": "디지털의",
+      "level": 5
+    },
+    {
+      "eng": "privacy",
+      "kan": "개인정보/사생활",
+      "level": 5
+    },
+    {
+      "eng": "security",
+      "kan": "보안",
+      "level": 5
+    },
+    {
+      "eng": "relationship",
+      "kan": "관계",
+      "level": 5
+    },
+    {
+      "eng": "friendship",
+      "kan": "우정",
+      "level": 5
+    },
+    {
+      "eng": "conflict",
+      "kan": "갈등",
+      "level": 5
+    },
+    {
+      "eng": "resolve",
+      "kan": "해결하다",
+      "level": 5
+    },
+    {
+      "eng": "gradually",
+      "kan": "점차",
+      "level": 5
+    },
+    {
+      "eng": "recently",
+      "kan": "최근에",
+      "level": 5
+    },
+    {
+      "eng": "immediately",
+      "kan": "즉시",
+      "level": 5
+    },
+    {
+      "eng": "analysis",
+      "kan": "분석",
+      "level": 5
+    },
+    {
+      "eng": "statistics",
+      "kan": "통계",
+      "level": 5
+    },
+    {
+      "eng": "percent",
+      "kan": "퍼센트",
+      "level": 5
+    },
+    {
+      "eng": "average",
+      "kan": "평균",
+      "level": 5
+    },
+    {
+      "eng": "forecast",
+      "kan": "예보/예측",
+      "level": 5
+    },
+    {
+      "eng": "budget",
+      "kan": "예산",
+      "level": 5
+    },
+    {
+      "eng": "profit",
+      "kan": "이익",
+      "level": 5
+    },
+    {
+      "eng": "loss",
+      "kan": "손실",
+      "level": 5
+    },
+    {
+      "eng": "reuse",
+      "kan": "재사용하다",
+      "level": 5
+    },
+    {
+      "eng": "conserve",
+      "kan": "절약하다(자원)",
+      "level": 5
+    },
+    {
+      "eng": "save energy",
+      "kan": "에너지를 절약하다",
+      "level": 5
+    },
+    {
+      "eng": "climate change",
+      "kan": "기후 변화",
+      "level": 5
+    },
+    {
+      "eng": "greenhouse",
+      "kan": "온실",
+      "level": 5
+    },
+    {
+      "eng": "temperature rise",
+      "kan": "기온 상승",
+      "level": 5
+    },
+    {
+      "eng": "plastic waste",
+      "kan": "플라스틱 쓰레기",
+      "level": 5
+    },
+    {
+      "eng": "internet",
+      "kan": "인터넷",
+      "level": 5
+    },
+    {
+      "eng": "app",
+      "kan": "앱",
+      "level": 5
+    },
+    {
+      "eng": "account",
+      "kan": "계정",
+      "level": 5
+    },
+    {
+      "eng": "login",
+      "kan": "로그인",
+      "level": 5
+    },
+    {
+      "eng": "logout",
+      "kan": "로그아웃",
+      "level": 5
+    },
+    {
+      "eng": "error message",
+      "kan": "오류 메시지",
+      "level": 5
+    },
+    {
+      "eng": "bug",
+      "kan": "버그",
+      "level": 5
+    },
+    {
+      "eng": "attention",
+      "kan": "주의/집중",
+      "level": 5
+    },
+    {
+      "eng": "memory",
+      "kan": "기억",
+      "level": 5
+    },
+    {
+      "eng": "effort",
+      "kan": "노력",
+      "level": 5
+    },
+    {
+      "eng": "source",
+      "kan": "출처",
+      "level": 5
+    },
+    {
+      "eng": "reference",
+      "kan": "참고자료",
+      "level": 5
+    },
+    {
+      "eng": "outline",
+      "kan": "개요",
+      "level": 5
+    },
+    {
+      "eng": "paragraph",
+      "kan": "문단",
+      "level": 5
+    },
+    {
+      "eng": "topic sentence",
+      "kan": "주제문",
+      "level": 5
+    },
+    {
+      "eng": "respectful",
+      "kan": "존중하는/예의 바른",
+      "level": 5
+    },
+    {
+      "eng": "innovation",
+      "kan": "혁신",
+      "level": 5
+    },
+    {
+      "eng": "invention",
+      "kan": "발명",
+      "level": 5
+    },
+    {
+      "eng": "patent",
+      "kan": "특허",
+      "level": 5
+    },
+    {
+      "eng": "algorithm",
+      "kan": "알고리즘",
+      "level": 5
+    },
+    {
+      "eng": "model",
+      "kan": "모형/모델",
+      "level": 5
+    },
+    {
+      "eng": "simulation",
+      "kan": "시뮬레이션",
+      "level": 5
+    },
+    {
+      "eng": "supply",
+      "kan": "공급",
+      "level": 5
+    },
+    {
+      "eng": "demand",
+      "kan": "수요",
+      "level": 5
+    },
+    {
+      "eng": "consumer",
+      "kan": "소비자",
+      "level": 5
+    },
+    {
+      "eng": "producer",
+      "kan": "생산자",
+      "level": 5
+    },
+    {
+      "eng": "inflation",
+      "kan": "인플레이션/물가상승",
+      "level": 5
+    },
+    {
+      "eng": "interest",
+      "kan": "이자/관심",
+      "level": 5
+    },
+    {
+      "eng": "renewable energy",
+      "kan": "재생에너지",
+      "level": 5
+    },
+    {
+      "eng": "solar power",
+      "kan": "태양광",
+      "level": 5
+    },
+    {
+      "eng": "wind power",
+      "kan": "풍력",
+      "level": 5
+    },
+    {
+      "eng": "carbon dioxide",
+      "kan": "이산화탄소",
+      "level": 5
+    },
+    {
+      "eng": "emission",
+      "kan": "배출",
+      "level": 5
+    },
+    {
+      "eng": "reduction",
+      "kan": "감축",
+      "level": 5
+    },
+    {
+      "eng": "audience",
+      "kan": "청중",
+      "level": 5
+    },
+    {
+      "eng": "feedback",
+      "kan": "피드백",
+      "level": 5
+    },
+    {
+      "eng": "prioritize",
+      "kan": "우선순위화하다",
+      "level": 5
+    },
+    {
+      "eng": "collaboration",
+      "kan": "협업",
+      "level": 5
+    },
+    {
+      "eng": "leadership",
+      "kan": "리더십",
+      "level": 5
+    },
+    {
+      "eng": "contribute",
+      "kan": "기여하다",
+      "level": 5
+    },
+    {
+      "eng": "nonrenewable",
+      "kan": "재생 불가능한",
+      "level": 5
+    },
+    {
+      "eng": "extinct",
+      "kan": "멸종한",
+      "level": 5
+    },
+    {
+      "eng": "adaptation",
+      "kan": "적응",
+      "level": 5
+    },
+    {
+      "eng": "mutation",
+      "kan": "돌연변이",
+      "level": 5
+    },
+    {
+      "eng": "inherit",
+      "kan": "유전되다/물려받다",
+      "level": 5
+    },
+    {
+      "eng": "molecule",
+      "kan": "분자",
+      "level": 5
+    },
+    {
+      "eng": "atom",
+      "kan": "원자",
+      "level": 5
+    },
+    {
+      "eng": "chemical",
+      "kan": "화학의",
+      "level": 5
+    },
+    {
+      "eng": "reaction",
+      "kan": "반응",
+      "level": 5
+    },
+    {
+      "eng": "photosynthesis",
+      "kan": "광합성",
+      "level": 5
+    },
+    {
+      "eng": "respiration",
+      "kan": "호흡",
+      "level": 5
+    },
+    {
+      "eng": "digestion",
+      "kan": "소화",
+      "level": 5
+    },
+    {
+      "eng": "circulation",
+      "kan": "순환",
+      "level": 5
+    },
+    {
+      "eng": "immune system",
+      "kan": "면역 체계",
+      "level": 5
+    },
+    {
+      "eng": "infection",
+      "kan": "감염",
+      "level": 5
+    },
+    {
+      "eng": "bacteria",
+      "kan": "박테리아",
+      "level": 5
+    },
+    {
+      "eng": "fungus",
+      "kan": "곰팡이",
+      "level": 5
+    },
+    {
+      "eng": "geometry",
+      "kan": "기하",
+      "level": 5
+    },
+    {
+      "eng": "perimeter",
+      "kan": "둘레",
+      "level": 5
+    },
+    {
+      "eng": "area",
+      "kan": "넓이",
+      "level": 5
+    },
+    {
+      "eng": "volume",
+      "kan": "부피",
+      "level": 5
+    },
+    {
+      "eng": "denominator",
+      "kan": "분모",
+      "level": 5
+    },
+    {
+      "eng": "numerator",
+      "kan": "분자",
+      "level": 5
+    },
+    {
+      "eng": "percentage",
+      "kan": "백분율",
+      "level": 5
+    },
+    {
+      "eng": "probability",
+      "kan": "확률",
+      "level": 5
+    },
+    {
+      "eng": "sequence",
+      "kan": "수열/순서",
+      "level": 5
+    },
+    {
+      "eng": "pattern",
+      "kan": "패턴",
+      "level": 5
+    },
+    {
+      "eng": "formula",
+      "kan": "공식",
+      "level": 5
+    },
+    {
+      "eng": "draft",
+      "kan": "초안",
+      "level": 5
+    },
+    {
+      "eng": "revise",
+      "kan": "수정하다",
+      "level": 5
+    },
+    {
+      "eng": "expense",
+      "kan": "지출",
+      "level": 5
+    },
+    {
+      "eng": "income",
+      "kan": "수입",
+      "level": 5
+    },
+    {
+      "eng": "investment",
+      "kan": "투자",
+      "level": 5
+    },
+    {
+      "eng": "entrepreneur",
+      "kan": "기업가",
+      "level": 5
+    },
+    {
+      "eng": "career",
+      "kan": "진로/경력",
+      "level": 5
+    },
+    {
+      "eng": "skill",
+      "kan": "기술/능력",
+      "level": 5
+    },
+    {
+      "eng": "prototype",
+      "kan": "시제품/프로토타입",
+      "level": 5
+    },
+    {
+      "eng": "iteration",
+      "kan": "반복 개선",
+      "level": 5
+    },
+    {
+      "eng": "refine",
+      "kan": "다듬다",
+      "level": 5
+    },
+    {
+      "eng": "validate",
+      "kan": "검증하다",
+      "level": 5
+    },
+    {
+      "eng": "standard",
+      "kan": "표준",
+      "level": 5
+    },
+    {
+      "eng": "quality",
+      "kan": "품질",
+      "level": 5
+    },
+    {
+      "eng": "consistency",
+      "kan": "일관성",
+      "level": 5
+    },
+    {
+      "eng": "component",
+      "kan": "구성 요소",
+      "level": 5
+    },
+    {
+      "eng": "input",
+      "kan": "입력",
+      "level": 5
+    },
+    {
+      "eng": "output",
+      "kan": "출력",
+      "level": 5
+    },
+    {
+      "eng": "interface",
+      "kan": "인터페이스",
+      "level": 5
+    },
+    {
+      "eng": "user experience",
+      "kan": "사용자 경험",
+      "level": 5
+    },
+    {
+      "eng": "accessibility",
+      "kan": "접근성",
+      "level": 5
+    },
+    {
+      "eng": "toggle",
+      "kan": "토글/전환",
+      "level": 5
+    },
+    {
+      "eng": "shortcut",
+      "kan": "단축키/바로가기",
+      "level": 5
+    },
+    {
+      "eng": "storage",
+      "kan": "저장 공간",
+      "level": 5
+    },
+    {
+      "eng": "local storage",
+      "kan": "로컬 저장소",
+      "level": 5
+    },
+    {
+      "eng": "sync",
+      "kan": "동기화",
+      "level": 5
+    },
+    {
+      "eng": "release",
+      "kan": "배포/출시",
+      "level": 5
+    },
+    {
+      "eng": "crash",
+      "kan": "강제 종료/충돌",
+      "level": 5
+    },
+    {
+      "eng": "freeze",
+      "kan": "멈춤",
+      "level": 5
+    },
+    {
+      "eng": "loading",
+      "kan": "로딩",
+      "level": 5
+    },
+    {
+      "eng": "compress",
+      "kan": "압축하다",
+      "level": 5
+    },
+    {
+      "eng": "format",
+      "kan": "형식/포맷",
+      "level": 5
+    },
+    {
+      "eng": "terms",
+      "kan": "이용약관",
+      "level": 5
+    },
+    {
+      "eng": "fairness",
+      "kan": "공정성",
+      "level": 5
+    },
+    {
+      "eng": "transparency",
+      "kan": "투명성",
+      "level": 5
+    },
+    {
+      "eng": "accountability",
+      "kan": "책임성",
+      "level": 5
+    },
+    {
+      "eng": "investigation",
+      "kan": "조사",
+      "level": 5
+    },
+    {
+      "eng": "proposal",
+      "kan": "제안서",
+      "level": 5
+    },
+    {
+      "eng": "resource allocation",
+      "kan": "자원 배분",
+      "level": 5
+    },
+    {
+      "eng": "milestone",
+      "kan": "중요 단계",
+      "level": 5
+    },
+    {
+      "eng": "initiative",
+      "kan": "주도권/계획",
+      "level": 5
+    },
+    {
+      "eng": "conflict resolution",
+      "kan": "갈등 해결",
+      "level": 5
+    },
+    {
+      "eng": "negotiation",
+      "kan": "협상",
+      "level": 5
+    },
+    {
+      "eng": "data-driven",
+      "kan": "데이터 기반의",
+      "level": 5
+    },
+    {
+      "eng": "electric circuit",
+      "kan": "전기 회로",
+      "level": 5
+    },
+    {
+      "eng": "sensor",
+      "kan": "센서",
+      "level": 5
+    },
+    {
+      "eng": "robotics",
+      "kan": "로봇공학",
+      "level": 5
+    },
+    {
+      "eng": "spacecraft",
+      "kan": "우주선",
+      "level": 5
+    },
+    {
+      "eng": "astronaut",
+      "kan": "우주비행사",
+      "level": 5
+    },
+    {
+      "eng": "satellite",
+      "kan": "위성",
+      "level": 5
+    }
+  ],
+  "g6": [
+    {
+      "eng": "argument",
+      "kan": "주장/논증",
+      "level": 5
+    },
+    {
+      "eng": "debate",
+      "kan": "토론/논쟁",
+      "level": 5
+    },
+    {
+      "eng": "persuade",
+      "kan": "설득하다",
+      "level": 5
+    },
+    {
+      "eng": "convince",
+      "kan": "납득시키다",
+      "level": 5
+    },
+    {
+      "eng": "evaluate",
+      "kan": "평가하다",
+      "level": 5
+    },
+    {
+      "eng": "criticize",
+      "kan": "비판하다",
+      "level": 5
+    },
+    {
+      "eng": "reflect",
+      "kan": "성찰하다/반영하다",
+      "level": 5
+    },
+    {
+      "eng": "interpret",
+      "kan": "해석하다",
+      "level": 5
+    },
+    {
+      "eng": "alternative",
+      "kan": "대안",
+      "level": 5
+    },
+    {
+      "eng": "option",
+      "kan": "선택지",
+      "level": 5
+    },
+    {
+      "eng": "strategy",
+      "kan": "전략",
+      "level": 5
+    },
+    {
+      "eng": "priority",
+      "kan": "우선순위",
+      "level": 5
+    },
+    {
+      "eng": "impact",
+      "kan": "영향/충격",
+      "level": 5
+    },
+    {
+      "eng": "trend",
+      "kan": "추세",
+      "level": 5
+    },
+    {
+      "eng": "issue",
+      "kan": "이슈/문제",
+      "level": 5
+    },
+    {
+      "eng": "solution",
+      "kan": "해결책",
+      "level": 5
+    },
+    {
+      "eng": "opportunity",
+      "kan": "기회",
+      "level": 5
+    },
+    {
+      "eng": "risk",
+      "kan": "위험",
+      "level": 5
+    },
+    {
+      "eng": "benefit",
+      "kan": "이익/혜택",
+      "level": 5
+    },
+    {
+      "eng": "maintain",
+      "kan": "유지하다",
+      "level": 5
+    },
+    {
+      "eng": "manage",
+      "kan": "관리하다",
+      "level": 5
+    },
+    {
+      "eng": "operate",
+      "kan": "운영하다",
+      "level": 5
+    },
+    {
+      "eng": "expand",
+      "kan": "확대하다",
+      "level": 5
+    },
+    {
+      "eng": "combine",
+      "kan": "결합하다",
+      "level": 5
+    },
+    {
+      "eng": "separate",
+      "kan": "분리하다",
+      "level": 5
+    },
+    {
+      "eng": "connect",
+      "kan": "연결하다",
+      "level": 5
+    },
+    {
+      "eng": "replace",
+      "kan": "대체하다",
+      "level": 5
+    },
+    {
+      "eng": "recommend",
+      "kan": "추천하다",
+      "level": 5
+    },
+    {
+      "eng": "suggest",
+      "kan": "제안하다",
+      "level": 5
+    },
+    {
+      "eng": "advise",
+      "kan": "조언하다",
+      "level": 5
+    },
+    {
+      "eng": "responsible",
+      "kan": "책임 있는",
+      "level": 5
+    },
+    {
+      "eng": "independent",
+      "kan": "독립적인",
+      "level": 5
+    },
+    {
+      "eng": "creative",
+      "kan": "창의적인",
+      "level": 5
+    },
+    {
+      "eng": "logical",
+      "kan": "논리적인",
+      "level": 5
+    },
+    {
+      "eng": "scientific",
+      "kan": "과학적인",
+      "level": 5
+    },
+    {
+      "eng": "economic",
+      "kan": "경제의",
+      "level": 5
+    },
+    {
+      "eng": "social",
+      "kan": "사회의",
+      "level": 5
+    },
+    {
+      "eng": "political",
+      "kan": "정치의",
+      "level": 5
+    },
+    {
+      "eng": "sustainable",
+      "kan": "지속 가능한",
+      "level": 5
+    },
+    {
+      "eng": "renewable",
+      "kan": "재생 가능한",
+      "level": 5
+    },
+    {
+      "eng": "significant",
+      "kan": "중요한/의미있는",
+      "level": 5
+    },
+    {
+      "eng": "although",
+      "kan": "비록 ~일지라도",
+      "level": 5
+    },
+    {
+      "eng": "meanwhile",
+      "kan": "한편",
+      "level": 5
+    },
+    {
+      "eng": "in addition",
+      "kan": "게다가",
+      "level": 5
+    },
+    {
+      "eng": "for example",
+      "kan": "예를 들어",
+      "level": 5
+    },
+    {
+      "eng": "as a result",
+      "kan": "그 결과",
+      "level": 5
+    },
+    {
+      "eng": "focus",
+      "kan": "집중하다/초점",
+      "level": 5
+    },
+    {
+      "eng": "feature",
+      "kan": "특징",
+      "level": 5
+    },
+    {
+      "eng": "function",
+      "kan": "기능",
+      "level": 5
+    },
+    {
+      "eng": "device",
+      "kan": "장치",
+      "level": 5
+    },
+    {
+      "eng": "application",
+      "kan": "앱/응용",
+      "level": 5
+    },
+    {
+      "eng": "update",
+      "kan": "업데이트하다/업데이트",
+      "level": 5
+    },
+    {
+      "eng": "error",
+      "kan": "오류",
+      "level": 5
+    },
+    {
+      "eng": "permission",
+      "kan": "허가/권한",
+      "level": 5
+    },
+    {
+      "eng": "access",
+      "kan": "접근하다/접근",
+      "level": 5
+    },
+    {
+      "eng": "network",
+      "kan": "네트워크",
+      "level": 5
+    },
+    {
+      "eng": "accuracy",
+      "kan": "정확도",
+      "level": 5
+    },
+    {
+      "eng": "performance",
+      "kan": "성능",
+      "level": 5
+    },
+    {
+      "eng": "improvement",
+      "kan": "개선",
+      "level": 5
+    },
+    {
+      "eng": "confidence",
+      "kan": "자신감/확신",
+      "level": 5
+    },
+    {
+      "eng": "motivation",
+      "kan": "동기",
+      "level": 5
+    },
+    {
+      "eng": "habit",
+      "kan": "습관",
+      "level": 5
+    },
+    {
+      "eng": "respond",
+      "kan": "대응하다",
+      "level": 5
+    },
+    {
+      "eng": "hypothesis",
+      "kan": "가설",
+      "level": 5
+    },
+    {
+      "eng": "variable",
+      "kan": "변인/변수",
+      "level": 5
+    },
+    {
+      "eng": "control",
+      "kan": "통제하다/통제",
+      "level": 5
+    },
+    {
+      "eng": "assessment",
+      "kan": "평가",
+      "level": 5
+    },
+    {
+      "eng": "criteria",
+      "kan": "기준",
+      "level": 5
+    },
+    {
+      "eng": "perspective",
+      "kan": "관점",
+      "level": 5
+    },
+    {
+      "eng": "bias",
+      "kan": "편향",
+      "level": 5
+    },
+    {
+      "eng": "fair",
+      "kan": "공정한",
+      "level": 5
+    },
+    {
+      "eng": "unfair",
+      "kan": "불공정한",
+      "level": 5
+    },
+    {
+      "eng": "consequence",
+      "kan": "결과(중대한 결과)",
+      "level": 5
+    },
+    {
+      "eng": "minor",
+      "kan": "사소한",
+      "level": 5
+    },
+    {
+      "eng": "recommendation",
+      "kan": "권고/추천",
+      "level": 5
+    },
+    {
+      "eng": "suggestion",
+      "kan": "제안",
+      "level": 5
+    },
+    {
+      "eng": "advice",
+      "kan": "조언",
+      "level": 5
+    },
+    {
+      "eng": "negotiate",
+      "kan": "협상하다",
+      "level": 5
+    },
+    {
+      "eng": "compromise",
+      "kan": "타협하다",
+      "level": 5
+    },
+    {
+      "eng": "tactic",
+      "kan": "전술",
+      "level": 5
+    },
+    {
+      "eng": "management",
+      "kan": "관리",
+      "level": 5
+    },
+    {
+      "eng": "requirement",
+      "kan": "요구사항",
+      "level": 5
+    },
+    {
+      "eng": "request",
+      "kan": "요청",
+      "level": 5
+    },
+    {
+      "eng": "optimize",
+      "kan": "최적화하다",
+      "level": 5
+    },
+    {
+      "eng": "debug",
+      "kan": "디버그하다",
+      "level": 5
+    },
+    {
+      "eng": "warning",
+      "kan": "경고",
+      "level": 5
+    },
+    {
+      "eng": "encryption",
+      "kan": "암호화",
+      "level": 5
+    },
+    {
+      "eng": "safety",
+      "kan": "안전",
+      "level": 5
+    },
+    {
+      "eng": "response",
+      "kan": "응답/반응",
+      "level": 5
+    },
+    {
+      "eng": "on the other hand",
+      "kan": "다른 한편으로",
+      "level": 5
+    },
+    {
+      "eng": "moreover",
+      "kan": "게다가",
+      "level": 5
+    },
+    {
+      "eng": "nevertheless",
+      "kan": "그럼에도 불구하고",
+      "level": 5
+    },
+    {
+      "eng": "efficiently",
+      "kan": "효율적으로",
+      "level": 5
+    },
+    {
+      "eng": "effectively",
+      "kan": "효과적으로",
+      "level": 5
+    },
+    {
+      "eng": "counterargument",
+      "kan": "반론",
+      "level": 5
+    },
+    {
+      "eng": "claim",
+      "kan": "주장",
+      "level": 5
+    },
+    {
+      "eng": "reasoning",
+      "kan": "추론/논리",
+      "level": 5
+    },
+    {
+      "eng": "valid",
+      "kan": "타당한",
+      "level": 5
+    },
+    {
+      "eng": "invalid",
+      "kan": "타당하지 않은",
+      "level": 5
+    },
+    {
+      "eng": "reliable",
+      "kan": "신뢰할 만한",
+      "level": 5
+    },
+    {
+      "eng": "unreliable",
+      "kan": "신뢰할 수 없는",
+      "level": 5
+    },
+    {
+      "eng": "evidence-based",
+      "kan": "근거 기반의",
+      "level": 5
+    },
+    {
+      "eng": "summarization",
+      "kan": "요약(명사)",
+      "level": 5
+    },
+    {
+      "eng": "ethical",
+      "kan": "윤리적인",
+      "level": 5
+    },
+    {
+      "eng": "ethics",
+      "kan": "윤리",
+      "level": 5
+    },
+    {
+      "eng": "privacy policy",
+      "kan": "개인정보 처리방침",
+      "level": 5
+    },
+    {
+      "eng": "copyright",
+      "kan": "저작권",
+      "level": 5
+    },
+    {
+      "eng": "plagiarism",
+      "kan": "표절",
+      "level": 5
+    },
+    {
+      "eng": "citation",
+      "kan": "인용",
+      "level": 5
+    },
+    {
+      "eng": "quote",
+      "kan": "인용하다/인용",
+      "level": 5
+    },
+    {
+      "eng": "source code",
+      "kan": "소스코드",
+      "level": 5
+    },
+    {
+      "eng": "version",
+      "kan": "버전",
+      "level": 5
+    },
+    {
+      "eng": "repository",
+      "kan": "저장소(레포)",
+      "level": 5
+    },
+    {
+      "eng": "deploy",
+      "kan": "배포하다",
+      "level": 5
+    },
+    {
+      "eng": "server",
+      "kan": "서버",
+      "level": 5
+    },
+    {
+      "eng": "client",
+      "kan": "클라이언트",
+      "level": 5
+    },
+    {
+      "eng": "latency",
+      "kan": "지연시간",
+      "level": 5
+    },
+    {
+      "eng": "bug fix",
+      "kan": "버그 수정",
+      "level": 5
+    },
+    {
+      "eng": "troubleshoot",
+      "kan": "문제 해결하다",
+      "level": 5
+    },
+    {
+      "eng": "configure",
+      "kan": "설정하다",
+      "level": 5
+    },
+    {
+      "eng": "settings",
+      "kan": "설정(복습)",
+      "level": 5
+    },
+    {
+      "eng": "permission settings",
+      "kan": "권한 설정",
+      "level": 5
+    },
+    {
+      "eng": "backup",
+      "kan": "백업",
+      "level": 5
+    },
+    {
+      "eng": "restore",
+      "kan": "복원하다",
+      "level": 5
+    },
+    {
+      "eng": "sustainable development",
+      "kan": "지속가능발전",
+      "level": 5
+    },
+    {
+      "eng": "renewable resources",
+      "kan": "재생 자원",
+      "level": 5
+    },
+    {
+      "eng": "objective",
+      "kan": "객관적인",
+      "level": 5
+    },
+    {
+      "eng": "subjective",
+      "kan": "주관적인",
+      "level": 5
+    },
+    {
+      "eng": "assumption",
+      "kan": "가정",
+      "level": 5
+    },
+    {
+      "eng": "framework",
+      "kan": "틀/프레임워크",
+      "level": 5
+    },
+    {
+      "eng": "rubric",
+      "kan": "평가 기준표",
+      "level": 5
+    },
+    {
+      "eng": "trade-off",
+      "kan": "상충관계(득실)",
+      "level": 5
+    },
+    {
+      "eng": "constraint",
+      "kan": "제약",
+      "level": 5
+    },
+    {
+      "eng": "approach",
+      "kan": "접근법",
+      "level": 5
+    },
+    {
+      "eng": "automation",
+      "kan": "자동화",
+      "level": 5
+    },
+    {
+      "eng": "artificial intelligence",
+      "kan": "인공지능",
+      "level": 5
+    },
+    {
+      "eng": "machine learning",
+      "kan": "기계학습",
+      "level": 5
+    },
+    {
+      "eng": "data science",
+      "kan": "데이터 과학",
+      "level": 5
+    },
+    {
+      "eng": "consent",
+      "kan": "동의",
+      "level": 5
+    },
+    {
+      "eng": "mitigate",
+      "kan": "완화하다",
+      "level": 5
+    },
+    {
+      "eng": "database",
+      "kan": "데이터베이스",
+      "level": 5
+    },
+    {
+      "eng": "authentication",
+      "kan": "인증",
+      "level": 5
+    },
+    {
+      "eng": "authorization",
+      "kan": "인가",
+      "level": 5
+    },
+    {
+      "eng": "reliability",
+      "kan": "신뢰성",
+      "level": 5
+    },
+    {
+      "eng": "monitor",
+      "kan": "모니터링하다",
+      "level": 5
+    },
+    {
+      "eng": "in conclusion",
+      "kan": "결론적으로",
+      "level": 5
+    },
+    {
+      "eng": "in contrast",
+      "kan": "대조적으로",
+      "level": 5
+    },
+    {
+      "eng": "for instance",
+      "kan": "예를 들어",
+      "level": 5
+    },
+    {
+      "eng": "in my opinion",
+      "kan": "내 의견으로는",
+      "level": 5
+    },
+    {
+      "eng": "otherwise",
+      "kan": "그렇지 않으면",
+      "level": 5
+    },
+    {
+      "eng": "stakeholder",
+      "kan": "이해관계자",
+      "level": 5
+    },
+    {
+      "eng": "specification",
+      "kan": "명세",
+      "level": 5
+    },
+    {
+      "eng": "dependency",
+      "kan": "의존성",
+      "level": 5
+    },
+    {
+      "eng": "tradeoff",
+      "kan": "트레이드오프",
+      "level": 5
+    },
+    {
+      "eng": "architecture",
+      "kan": "구조/아키텍처",
+      "level": 5
+    },
+    {
+      "eng": "pipeline",
+      "kan": "파이프라인",
+      "level": 5
+    },
+    {
+      "eng": "workflow",
+      "kan": "작업 흐름",
+      "level": 5
+    },
+    {
+      "eng": "monitoring",
+      "kan": "모니터링",
+      "level": 5
+    },
+    {
+      "eng": "logging",
+      "kan": "로그 기록",
+      "level": 5
+    },
+    {
+      "eng": "alert",
+      "kan": "알림",
+      "level": 5
+    },
+    {
+      "eng": "security breach",
+      "kan": "보안 침해",
+      "level": 5
+    },
+    {
+      "eng": "malware",
+      "kan": "악성코드",
+      "level": 5
+    },
+    {
+      "eng": "phishing",
+      "kan": "피싱",
+      "level": 5
+    },
+    {
+      "eng": "strong password",
+      "kan": "강력한 비밀번호",
+      "level": 5
+    },
+    {
+      "eng": "two-factor authentication",
+      "kan": "2단계 인증",
+      "level": 5
+    },
+    {
+      "eng": "throughput",
+      "kan": "처리량",
+      "level": 5
+    },
+    {
+      "eng": "scalability",
+      "kan": "확장성",
+      "level": 5
+    },
+    {
+      "eng": "robust",
+      "kan": "견고한",
+      "level": 5
+    },
+    {
+      "eng": "stable",
+      "kan": "안정적인",
+      "level": 5
+    },
+    {
+      "eng": "simulate",
+      "kan": "시뮬레이션하다",
+      "level": 5
+    },
+    {
+      "eng": "modeling",
+      "kan": "모델링",
+      "level": 5
+    },
+    {
+      "eng": "benchmark",
+      "kan": "벤치마크",
+      "level": 5
+    },
+    {
+      "eng": "metric",
+      "kan": "지표",
+      "level": 5
+    },
+    {
+      "eng": "assess",
+      "kan": "평가하다/판단하다",
+      "level": 5
+    },
+    {
+      "eng": "justify",
+      "kan": "정당화하다",
+      "level": 5
+    },
+    {
+      "eng": "counterexample",
+      "kan": "반례",
+      "level": 5
+    },
+    {
+      "eng": "fallacy",
+      "kan": "논리적 오류",
+      "level": 5
+    },
+    {
+      "eng": "consequently",
+      "kan": "그 결과",
+      "level": 5
+    },
+    {
+      "eng": "in other words",
+      "kan": "즉",
+      "level": 5
+    },
+    {
+      "eng": "in summary",
+      "kan": "요약하면",
+      "level": 5
+    },
+    {
+      "eng": "to be specific",
+      "kan": "구체적으로 말하면",
+      "level": 5
+    }
+  ]
+}
