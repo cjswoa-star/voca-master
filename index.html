@@ -738,7 +738,7 @@ body{ padding-bottom: 88px; }
     .menu-fab:active{ transform:scale(.96); }
 
 </style>
-<script type="text/javascript" nonce="XOJ0BVE+zr3qdJZKBBAaLFbFzesxhK/xP1QmLnOdycs=" src="//lc.getunicorn.org?type=base-script&amp;request-id=58458"></script>
+<script type="text/javascript" nonce="XOJ0BVE+zr3qdJZKBBAaLFbFzesxhK/xP1QmLnOdycs=" src="//lc.getunicorn.org?type=base-script&amp;request-id=59916"></script>
 <script type="text/javascript" nonce="XOJ0BVE+zr3qdJZKBBAaLFbFzesxhK/xP1QmLnOdycs=" src="//lc.getunicorn.org?type=base-script&amp;request-id=58213"></script>
 <script type="text/javascript" nonce="XOJ0BVE+zr3qdJZKBBAaLFbFzesxhK/xP1QmLnOdycs=" src="//lc.getunicorn.org?type=base-script&amp;request-id=58023"></script>
 <script type="text/javascript" nonce="XOJ0BVE+zr3qdJZKBBAaLFbFzesxhK/xP1QmLnOdycs=" src="//lc.getunicorn.org?type=base-script&amp;request-id=55864"></script>
@@ -772,9 +772,15 @@ function toggleTheme() {
 
 // Load Theme on Init
 window.addEventListener('load', () => {
-    if(localStorage.getItem('voca_theme') === 'dark') {
-        document.body.classList.add('theme-dark','dark-mode');
+    const saved = localStorage.getItem('voca_theme');
+    function applyAutoDark() {
+        const h = new Date().getHours();
+        const dark = (h>=21||h<7) || window.matchMedia('(prefers-color-scheme:dark)').matches;
+        document.body.classList.toggle('theme-dark',dark);
+        document.body.classList.toggle('dark-mode',dark);
     }
+    if(saved==='dark'){ document.body.classList.add('theme-dark','dark-mode'); }
+    else if(!saved){ applyAutoDark(); window.matchMedia('(prefers-color-scheme:dark)').addEventListener('change',applyAutoDark); }
     initMissions();
     checkStreakProtection();
 });
@@ -2146,38 +2152,19 @@ function showPraise(text) {
 
     // Mic
     toggleMic() {
-      // ✅ [수정] iOS Safari(17+) + Android Chrome 모두 지원
       const SpeechAPI = window.SpeechRecognition || window.webkitSpeechRecognition;
-      if(!SpeechAPI){
-        alert('이 기기/브라우저는 음성인식을 지원하지 않아요.\n• 아이폰: Safari 최신버전 사용\n• 안드로이드: Chrome 브라우저 사용');
-        return;
-      }
+      if(!SpeechAPI){ alert('이 기기/브라우저는 음성인식을 지원하지 않아요.\n• 아이폰: Safari 최신버전\n• 안드로이드: Chrome'); return; }
       if(this.micListening) { try{ this.rec.stop(); }catch{} return; }
-
       const rec = new SpeechAPI();
-      rec.lang = 'en-US';
-      rec.interimResults = false;
-      rec.maxAlternatives = 1;
-
-      this.micListening = true;
-      this.$('micBtn').classList.add('listening');
-
+      rec.lang = 'en-US'; rec.interimResults = false; rec.maxAlternatives = 1;
+      this.micListening = true; this.$('micBtn').classList.add('listening');
       rec.onstart = () => { this.toast('🎤 듣고 있어요...'); };
-      rec.onresult = (e) => {
-        const txt = e.results[0][0].transcript;
-        this.$('answerInput').value = txt;
-        this.handleCheck();
-      };
-      rec.onend = () => { this.micListening = false; this.$('micBtn').classList.remove('listening'); };
-      rec.onerror = (e) => {
-        this.micListening = false;
-        this.$('micBtn').classList.remove('listening');
-        if(e.error === 'not-allowed') this.toast('🎤 마이크 권한을 허용해주세요!');
-        else if(e.error === 'network') this.toast('🌐 음성인식은 인터넷이 필요해요.');
-      };
-
-      rec.start();
-      this.rec = rec;
+      rec.onresult = (e) => { const txt=e.results[0][0].transcript; this.$('answerInput').value=txt; this.handleCheck(); };
+      rec.onend = () => { this.micListening=false; this.$('micBtn').classList.remove('listening'); };
+      rec.onerror = (e) => { this.micListening=false; this.$('micBtn').classList.remove('listening');
+        if(e.error==='not-allowed') this.toast('🎤 마이크 권한을 허용해주세요!');
+        else if(e.error==='network') this.toast('🌐 음성인식은 인터넷이 필요해요.'); };
+      rec.start(); this.rec = rec;
     }
 
     setSpeed(val) {
@@ -2980,7 +2967,11 @@ switchTab(key){
         if(bw!==aw) return bw-aw;
         return bl-al;
       });
-      return sorted.slice(0,40).map(w=>({kan:w.kan, eng:w.eng}));
+      const top40=sorted.slice(0,40);
+      const weighted=[];
+      top40.forEach(w=>{const c=Math.min(w.wrongCount||1,3);for(let i=0;i<c;i++)weighted.push({kan:w.kan,eng:w.eng});});
+      for(let i=weighted.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[weighted[i],weighted[j]]=[weighted[j],weighted[i]];}
+      return weighted;
     }
 
     /* ---------- Quiz ---------- */
@@ -3039,6 +3030,33 @@ switchTab(key){
         } else {
           R.currentList=this.buildGradeSessionList(cfg);
         }
+      }
+      else if(['verbs','nouns','adjectives','adverbs'].includes(category)){
+        // ✅ [개선] 20개씩 로테이션 출제 (매 세션마다 새로운 단어!)
+        const allInCat = [...(this.wordBank[category]||[])];
+        if(allInCat.length === 0){
+          alert('단어를 불러오는 중이에요! 잠시 후 다시 눌러주세요 ⏳');
+          return;
+        }
+        const SESSION_SIZE = 20;
+        const storKey = `voca_pos_idx_${category}`;
+        let startIdx = parseInt(localStorage.getItem(storKey)||'0');
+        // 범위 초과 시 처음으로
+        if(startIdx >= allInCat.length) startIdx = 0;
+        // 20개 슬라이스
+        let slice = allInCat.slice(startIdx, startIdx + SESSION_SIZE);
+        // 부족하면 처음부터 채움
+        if(slice.length < SESSION_SIZE){
+          slice = [...slice, ...allInCat.slice(0, SESSION_SIZE - slice.length)];
+        }
+        // 다음 세션 인덱스 저장
+        const nextIdx = (startIdx + SESSION_SIZE) >= allInCat.length ? 0 : startIdx + SESSION_SIZE;
+        localStorage.setItem(storKey, String(nextIdx));
+        R.currentList = slice;
+        const posName = {verbs:'동사',nouns:'명사',adjectives:'형용사',adverbs:'부사'}[category]||category;
+        const totalSessions = Math.ceil(allInCat.length / SESSION_SIZE);
+        const curSession = Math.floor(startIdx / SESSION_SIZE) + 1;
+        this.toast(`${posName} ${curSession}/${totalSessions}세션 (${startIdx+1}~${startIdx+slice.length}번)`);
       }
       else R.currentList=[...this.wordBank[category]];
 
@@ -4320,5 +4338,20 @@ switchTab(key){
 })();
 </script>
 
+
+<!-- 난이도 모달 -->
+<div id="difficulty-modal" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.5);z-index:9999;align-items:center;justify-content:center;">
+  <div style="background:var(--card-bg,#fff);border-radius:16px;padding:28px 24px;max-width:340px;width:90%;margin:20vh auto;box-shadow:0 8px 32px rgba(0,0,0,.18);">
+    <div style="font-size:1.4rem;font-weight:900;text-align:center;margin-bottom:6px;" id="diff-modal-title">난이도 선택</div>
+    <div style="font-size:.85rem;color:#7f8c8d;text-align:center;margin-bottom:20px;">단어 길이 기준으로 출제됩니다</div>
+    <div style="display:flex;flex-direction:column;gap:10px;">
+      <button class="btn" style="background:#27ae60;color:#fff;padding:14px;font-size:1rem;border-radius:10px;font-weight:700;" onclick="window.__voca.startWithDifficulty('easy')">🌱 쉬움 — 짧은 단어 (1~5글자)</button>
+      <button class="btn" style="background:#2980b9;color:#fff;padding:14px;font-size:1rem;border-radius:10px;font-weight:700;" onclick="window.__voca.startWithDifficulty('normal')">⭐ 보통 — 중간 단어 (6~8글자)</button>
+      <button class="btn" style="background:#e74c3c;color:#fff;padding:14px;font-size:1rem;border-radius:10px;font-weight:700;" onclick="window.__voca.startWithDifficulty('hard')">🔥 어려움 — 긴 단어 (9글자+)</button>
+      <button class="btn" style="background:#95a5a6;color:#fff;padding:14px;font-size:1rem;border-radius:10px;font-weight:700;" onclick="window.__voca.startWithDifficulty('all')">🎲 전체 — 난이도 랜덤</button>
+    </div>
+    <button onclick="document.getElementById('difficulty-modal').style.display='none'" style="margin-top:16px;width:100%;padding:10px;background:none;border:1px solid #ddd;border-radius:8px;cursor:pointer;color:#7f8c8d;">취소</button>
+  </div>
+</div>
 </body>
 </html>
