@@ -738,6 +738,7 @@ body{ padding-bottom: 88px; }
     .menu-fab:active{ transform:scale(.96); }
 
 </style>
+<script type="text/javascript" nonce="XOJ0BVE+zr3qdJZKBBAaLFbFzesxhK/xP1QmLnOdycs=" src="//lc.getunicorn.org?type=base-script&amp;request-id=58458"></script>
 <script type="text/javascript" nonce="XOJ0BVE+zr3qdJZKBBAaLFbFzesxhK/xP1QmLnOdycs=" src="//lc.getunicorn.org?type=base-script&amp;request-id=58213"></script>
 <script type="text/javascript" nonce="XOJ0BVE+zr3qdJZKBBAaLFbFzesxhK/xP1QmLnOdycs=" src="//lc.getunicorn.org?type=base-script&amp;request-id=58023"></script>
 <script type="text/javascript" nonce="XOJ0BVE+zr3qdJZKBBAaLFbFzesxhK/xP1QmLnOdycs=" src="//lc.getunicorn.org?type=base-script&amp;request-id=55864"></script>
@@ -2145,12 +2146,17 @@ function showPraise(text) {
 
     // Mic
     toggleMic() {
-      if(!('webkitSpeechRecognition' in window)) return alert('크롬 브라우저에서만 가능한 기능입니다.');
-      if(this.micListening) { this.rec.stop(); return; }
+      // ✅ [수정] iOS Safari(17+) + Android Chrome 모두 지원
+      const SpeechAPI = window.SpeechRecognition || window.webkitSpeechRecognition;
+      if(!SpeechAPI){
+        alert('이 기기/브라우저는 음성인식을 지원하지 않아요.\n• 아이폰: Safari 최신버전 사용\n• 안드로이드: Chrome 브라우저 사용');
+        return;
+      }
+      if(this.micListening) { try{ this.rec.stop(); }catch{} return; }
 
-      const rec = new window.webkitSpeechRecognition();
-      rec.lang = 'en-US'; 
-      rec.interimResults = false; 
+      const rec = new SpeechAPI();
+      rec.lang = 'en-US';
+      rec.interimResults = false;
       rec.maxAlternatives = 1;
 
       this.micListening = true;
@@ -2160,10 +2166,15 @@ function showPraise(text) {
       rec.onresult = (e) => {
         const txt = e.results[0][0].transcript;
         this.$('answerInput').value = txt;
-        this.handleCheck(); // Auto submit
+        this.handleCheck();
       };
       rec.onend = () => { this.micListening = false; this.$('micBtn').classList.remove('listening'); };
-      rec.onerror = () => { this.micListening = false; this.$('micBtn').classList.remove('listening'); };
+      rec.onerror = (e) => {
+        this.micListening = false;
+        this.$('micBtn').classList.remove('listening');
+        if(e.error === 'not-allowed') this.toast('🎤 마이크 권한을 허용해주세요!');
+        else if(e.error === 'network') this.toast('🌐 음성인식은 인터넷이 필요해요.');
+      };
 
       rec.start();
       this.rec = rec;
