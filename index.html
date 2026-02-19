@@ -3938,56 +3938,83 @@ switchTab(key){
     document.getElementById('manifest-placeholder').setAttribute('href',URL.createObjectURL(b));
 
     if('serviceWorker' in navigator){
-      const sw=`const CACHE_NAME='voca-v3-cache';
-const CORE=['./'];
-self.addEventListener('install',e=>{
-  e.waitUntil(caches.open(CACHE_NAME).then(c=>c.addAll(CORE)));
+      const BUILD = (window.__vocaBuild || '2026-02-19-JSONFIX1');
+      const sw = `self.__BUILD = '${BUILD}';
+` + `const BUILD = (self.__BUILD || '0');
+const CACHE_NAME = 'voca-v4-cache-' + BUILD;
+const CORE = ['./'];
+
+self.addEventListener('install', (e) => {
+  e.waitUntil(caches.open(CACHE_NAME).then(c => c.addAll(CORE)));
   self.skipWaiting();
 });
-self.addEventListener('activate',e=>{
-  e.waitUntil(caches.keys().then(keys=>Promise.all(keys.map(k=>k!==CACHE_NAME && caches.delete(k)))));
+
+self.addEventListener('activate', (e) => {
+  e.waitUntil(
+    caches.keys().then(keys => Promise.all(keys.map(k => (k !== CACHE_NAME) ? caches.delete(k) : Promise.resolve(true))))
+  );
   self.clients.claim();
 });
-self.addEventListener('fetch',e=>{
-  const req=e.request;
-  const url=new URL(req.url);
 
-  // Only handle same-origin requests
-  if(url.origin!==location.origin) return;
+self.addEventListener('fetch', (e) => {
+  const req = e.request;
+  const url = new URL(req.url);
 
-  // JSON should be network-first, and we do NOT overwrite-cache on success
-  if(url.pathname.endsWith('.json')){
+  // same-origin only
+  if (url.origin !== location.origin) return;
+
+  // ✅ JSON (word banks) = network-first + cache update (fallback to cache)
+  const isWordJson = url.pathname.endsWith('/grade_words.json') || url.pathname.endsWith('/pos_words.json');
+  if (isWordJson) {
     e.respondWith(
-      fetch(req, {cache:'no-store'}).catch(()=>caches.match(req))
+      fetch(req, { cache: 'no-store' })
+        .then(res => {
+          if (res && res.ok) {
+            const copy = res.clone();
+            caches.open(CACHE_NAME).then(c => c.put(req, copy));
+          }
+          return res;
+        })
+        .catch(() => caches.match(req))
     );
     return;
   }
 
-  // Navigations: network-first, fallback to cache
-  if(req.mode==='navigate'){
+  // navigations: network-first, fallback to cache
+  if (req.mode === 'navigate') {
     e.respondWith(
-      fetch(req).then(res=>{
-        const copy=res.clone();
-        caches.open(CACHE_NAME).then(c=>c.put(req, copy));
+      fetch(req).then(res => {
+        const copy = res.clone();
+        caches.open(CACHE_NAME).then(c => c.put(req, copy));
         return res;
-      }).catch(()=>caches.match('./'))
+      }).catch(() => caches.match('./'))
     );
     return;
   }
 
-  // Other assets: cache-first, then network
+  // other assets: cache-first
   e.respondWith(
-    caches.match(req).then(cached=>{
-      if(cached) return cached;
-      return fetch(req).then(res=>{
-        const copy=res.clone();
-        caches.open(CACHE_NAME).then(c=>c.put(req, copy));
+    caches.match(req).then(cached => {
+      if (cached) return cached;
+      return fetch(req).then(res => {
+        const copy = res.clone();
+        caches.open(CACHE_NAME).then(c => c.put(req, copy));
         return res;
       });
     })
   );
-});`;
-      navigator.serviceWorker.register(URL.createObjectURL(new Blob([sw],{type:'application/javascript'})));
+});
+`;
+      navigator.serviceWorker.register(URL.createObjectURL(new Blob([sw],{type:'application/javascript'})))
+        .then(reg => {
+          try{ reg.update(); }catch{}
+          try{
+            navigator.serviceWorker.addEventListener('controllerchange', () => {
+              if(!window.__swReloaded){ window.__swReloaded=true; location.reload(); }
+            });
+          }catch{}
+        })
+        .catch(()=>{});
     }
     // Init Speed UI on load
     window.addEventListener('load', ()=>{ try{ window.__voca.updateSpeedUI(); }catch{} });
