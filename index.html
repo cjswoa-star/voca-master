@@ -53,10 +53,7 @@
     .tab:active{ transform:scale(.98); }
     .tab.active{ background:#fff; box-shadow:0 2px 10px rgba(0,0,0,.06); }
 
-    .game-stats{
-      background:#e8f4f8; padding:12px; border-radius:14px;
-      border:1px solid rgba(52,152,219,.18); margin:10px 0;
-    }
+    .game-stats{background:#fff; padding:12px; border-radius:16px; border:1px solid rgba(0,0,0,.10); margin:10px 0; box-shadow:0 8px 18px rgba(0,0,0,.06);}
     .level-row{ display:flex; justify-content:space-between; font-weight:900; align-items:center; margin-bottom:8px; }
     .exp-bar-bg{ width:100%; background:#d9e0e7; height:12px; border-radius:6px; overflow:hidden; }
     .exp-bar-fill{ height:100%; width:0%; background:var(--success); transition:width .35s ease-out; }
@@ -627,6 +624,50 @@ body.theme-dark .app-shell-btn, body.theme-cyber .app-shell-btn{
 }
 body.theme-dark .drawer-item, body.theme-cyber .drawer-item{ background: rgba(255,255,255,.08); border-color: rgba(255,255,255,.14); }
 .drawer-item small{ font-weight: 800; opacity: .75; }
+
+/* ===== v7 Drawer alignment fix ===== */
+.drawer-item{ justify-content: flex-start; gap: 12px; text-align:left; }
+.drawer-item .drawer-label{ display:inline-flex; align-items:center; gap:8px; font-weight:1000; }
+.drawer-item small{
+  margin-left:auto;
+  display:inline-flex;
+  align-items:center;
+  background: rgba(255,255,255,.85);
+  padding: 4px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(0,0,0,.06);
+  opacity: 1;
+}
+body.theme-dark .drawer-item small, body.theme-cyber .drawer-item small{
+  background: rgba(0,0,0,.28);
+  border-color: rgba(255,255,255,.14);
+}
+
+
+
+/* ===== v11 Drawer pixel-align ===== */
+.drawer-item{
+  min-height: 54px;
+  padding: 12px 14px;
+}
+.drawer-item .drawer-label{ flex: 1 1 auto; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.drawer-item small{
+  height: 26px;
+  line-height: 26px;
+  padding: 0 10px;
+  white-space: nowrap;
+}
+/* ===== v8 Drawer alignment harden ===== */
+.drawer-item{ min-height: 52px; }
+.drawer-item .drawer-label{ line-height: 1.2; }
+.drawer-item small{
+  height: 28px;
+  line-height: 1;
+  white-space: nowrap;
+  flex: 0 0 auto;
+}
+/* Prevent tiny vertical drift due to font rendering */
+.drawer-item, .drawer-item *{ box-sizing: border-box; }
 .drawer-bottom{ margin-top: 14px; display:flex; gap:10px; }
 .drawer-bottom .btn{ flex:1; }
 .tabs{ display:none !important; } /* We navigate via drawer */
@@ -637,46 +678,29 @@ body.theme-dark .drawer-item, body.theme-cyber .drawer-item{ background: rgba(25
 .cute-more summary{ font-weight: 1000; }
 
 /* ===== v6 UI FIXES (nav + menu visibility) ===== */
-body{ padding-bottom: 88px; } /* room for fixed bottom nav */
-
-.bottom-nav{
-  position: fixed !important;
-  left: 0; right: 0; bottom: 0;
-  z-index: 9999;
-  max-width: 520px;
-  margin: 0 auto;
-  box-shadow: 0 -10px 30px rgba(0,0,0,.08);
-}
-.bottom-nav .nav-item{ user-select:none; -webkit-tap-highlight-color: transparent; }
-.bottom-nav .nav-item:active{ transform: scale(.98); }
-
+body{ padding-bottom: 88px; } 
 .app-shell-btn#menuBtn{
   position: fixed !important;
   top: calc(12px + var(--sat));
   left: 12px;
   z-index: 10000;
-  width: 52px; height: 52px;
-  border-radius: 16px;
-  background: #ffffff;
-  border: 1px solid rgba(0,0,0,.08);
-  box-shadow: 0 10px 25px rgba(0,0,0,.12);
-  font-size: 22px;
-}
-.app-shell-btn#menuBtn::after{
-  content: "메뉴";
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  bottom: -16px;
-  font-size: 11px;
-  font-weight: 900;
-  color: #2c3e50;
-  background: rgba(255,255,255,.9);
-  padding: 2px 8px;
+  height: 44px;
+  padding: 0 14px;
   border-radius: 999px;
-  border: 1px solid rgba(0,0,0,.06);
-  box-shadow: 0 6px 14px rgba(0,0,0,.08);
+  background: rgba(255,255,255,.96);
+  border: 1px solid rgba(0,0,0,.10);
+  box-shadow: 0 10px 25px rgba(0,0,0,.14);
+  font-size: 18px;
+  font-weight: 900;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap: 8px;
+  white-space: nowrap;
+  line-height: 1;
+  backdrop-filter: blur(8px);
 }
+.menuBtnLabel{ font-size: 14px; font-weight: 900; }
 
 .drawer-backdrop, .drawer-overlay{
   z-index: 9998;
@@ -686,6 +710,32 @@ body{ padding-bottom: 88px; } /* room for fixed bottom nav */
 }
 /* Prevent invisible overlays from blocking clicks */
 .drawer-backdrop[hidden]{ display:none !important; pointer-events:none !important; }
+
+
+/* v12: bottom nav removed (use 햄버거 메뉴) */
+.bottom-nav{display:none !important;}
+
+    /* Menu FAB: black hamburger */
+    .menu-fab{
+      position:fixed;
+      top: calc(var(--sat) + 14px);
+      left: calc(var(--sal) + 14px);
+      width:56px; height:56px;
+      background:#111;
+      border:none;
+      border-radius:16px;
+      box-shadow:0 10px 24px rgba(0,0,0,.25);
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      align-items:center;
+      gap:6px;
+      cursor:pointer;
+      z-index:99999;
+      touch-action: none;
+    }
+    .menu-fab span{ width:26px; height:3px; background:#fff; border-radius:2px; display:block; }
+    .menu-fab:active{ transform:scale(.96); }
 
 </style>
 <script type="text/javascript" nonce="XOJ0BVE+zr3qdJZKBBAaLFbFzesxhK/xP1QmLnOdycs=" src="//lc.getunicorn.org?type=base-script&amp;request-id=36544"></script>
@@ -1039,62 +1089,8 @@ function showPraise(text) {
 
 </script>
 
-<style>
-    :root {
-        --primary: #FFD93D; --secondary: #6BCB77; --accent: #FF6B6B; --dark: #4D96FF;
-        --bg: #F0F4F8; --card-bg: #FFFFFF; --text-main: #2c3e50;
-        --font-main: 'Jua', 'Noto Sans KR', sans-serif;
-    }
-    body { margin: 0; padding: 0; background-color: var(--bg); font-family: var(--font-main); color: var(--text-main); }
 
-    /* App Container */
-    #app-container { max-width: 600px; margin: 0 auto; min-height: 100vh; background: #fff; box-shadow: 0 0 20px rgba(0,0,0,0.1); position: relative; padding-bottom: 80px; }
 
-    /* Header */
-    header { background: var(--dark); padding: 15px 20px; border-radius: 0 0 20px 20px; color: white; display: flex; justify-content: space-between; align-items: center; }
-    .header-title { font-size: 1.2rem; font-weight: bold; display: flex; align-items: center; gap: 8px; }
-    .gem-display { background: rgba(255,255,255,0.2); padding: 5px 12px; border-radius: 15px; font-size: 0.9rem; cursor: pointer; }
-
-    /* Hidden Sections (Original UI parts we don't want to show but need for logic) */
-    .logic-only { display: none !important; } 
-
-    /* Main Content Area */
-    #main-view { padding: 20px; }
-
-    /* Hero Section */
-    .hero-card { background: linear-gradient(135deg, #FF9966, #FF5E62); border-radius: 20px; padding: 25px; color: white; text-align: center; margin-bottom: 20px; position: relative; overflow: hidden; box-shadow: 0 8px 20px rgba(255, 94, 98, 0.3); }
-    .hero-card::after { content: "👑"; font-size: 100px; position: absolute; right: -20px; bottom: -30px; opacity: 0.2; transform: rotate(-15deg); }
-    .level-badge { background: rgba(0,0,0,0.2); padding: 5px 10px; border-radius: 10px; font-size: 0.9rem; display: inline-block; margin-bottom: 10px; }
-    .exp-bar-container { background: rgba(0,0,0,0.2); height: 8px; border-radius: 4px; margin-top: 10px; overflow: hidden; }
-    .exp-bar-fill { background: #FFD93D; height: 100%; width: 0%; transition: width 0.5s; }
-
-    /* Action Buttons */
-    .action-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-    .menu-card { background: #fff; border: 2px solid #f0f0f0; border-radius: 16px; padding: 20px; text-align: center; cursor: pointer; transition: 0.2s; }
-    .menu-card:active { transform: scale(0.98); background: #f9f9f9; }
-    .menu-icon { font-size: 2rem; display: block; margin-bottom: 5px; }
-    .menu-title { font-weight: bold; font-size: 1rem; color: #444; }
-
-    .btn-main-action { grid-column: span 2; background: linear-gradient(135deg, #FFD93D, #FFC107); border: none; color: #333; font-size: 1.3rem; font-weight: 900; padding: 18px; border-radius: 16px; box-shadow: 0 5px 15px rgba(255, 193, 7, 0.3); cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px; }
-
-    /* Bottom Nav */
-    .bottom-nav { position: absolute; bottom: 0; left: 0; width: 100%; background: #fff; border-top: 1px solid #eee; display: flex; justify-content: space-around; padding: 10px 0; border-radius: 20px 20px 0 0; }
-    .nav-item { text-align: center; color: #aaa; font-size: 0.8rem; cursor: pointer; flex: 1; }
-    .nav-item.active { color: var(--dark); font-weight: bold; }
-    .nav-icon { font-size: 1.5rem; display: block; margin-bottom: 2px; }
-
-    /* Modal / Admin Panel */
-    #admin-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 1000; padding: 20px; box-sizing: border-box; overflow-y: auto; }
-    .admin-content { background: #fff; padding: 20px; border-radius: 15px; }
-
-    /* Re-styling existing elements to fit new design */
-    /* We hide the old topbar and tabs, and only show specific panels when requested */
-    .topbar, .tabs, .cute-hud { display: none !important; } 
-
-    /* Quiz Screen Override */
-    #quiz-screen { padding: 0 !important; box-shadow: none !important; border: none !important; }
-    .card-container { margin-top: 40px; }
-</style>
 </head>
 <body>
 <!-- TOAST -->
@@ -1118,65 +1114,6 @@ function showPraise(text) {
       <span id="home-exp-text">0 / 100 EXP</span>
     </div>
     <div class="exp-bar-bg"><div id="home-exp-bar" class="exp-bar-fill"></div></div>
-  
-  <div class="cute-hud" id="cute-hud" aria-label="오늘의 성장 현황">
-    <div class="hud-top">
-      <div style="font-weight:1000;">🐣 오늘의 모험</div>
-      <div class="hud-badges">
-        <span class="badge" id="hud-streak">🔥 <span>연속 0일</span></span>
-        <span class="badge" id="hud-today">📚 <span>오늘 0단어</span></span>
-        <span class="badge" id="hud-goal">🎯 <span>목표 10</span></span>
-      </div>
-    </div>
-    <div class="boss-card" id="boss-card">
-      <div class="boss-row">
-        <div>
-          <div class="boss-name" id="boss-name">🐻 오늘의 약점 보스: 없음</div>
-          <div class="mini" id="boss-sub" style="margin-top:4px;">오답이 쌓이면 보스가 나타나요!</div>
-        </div>
-        <div style="text-align:right;">
-          <div class="badge" id="hud-boss-hp-text">❤️ HP 0</div>
-        </div>
-      </div>
-      <div class="hpbar-bg" aria-hidden="true"><div class="hpbar-fill" id="boss-hp-bar"></div></div>
-    </div>
-  </div>
-
-</div>
-
-  <div class="tabs" role="tablist" aria-label="홈 탭">
-    <button class="tab active" id="tab-learn" role="tab" aria-selected="true" onclick="window.__voca.switchTab('learn')">학습</button>
-    <button class="tab" id="tab-record" role="tab" aria-selected="false" onclick="window.__voca.switchTab('record')">기록</button>
-    <button class="tab" id="tab-shop" role="tab" onclick="window.__voca.switchTab('shop')">상점 💎</button>
-    <button class="tab" id="tab-settings" role="tab" aria-selected="false" onclick="window.__voca.switchTab('settings')">설정</button>
-  </div>
-
-  <!-- TAB: LEARN -->
-  
-<div id="panel-learn">
-  <div class="cute-home">
-    <div class="cute-hud" id="cute-hud" aria-label="오늘의 성장 현황">
-      <div class="hud-top">
-        <div style="font-weight:1000;">🐣 오늘의 모험</div>
-        <div class="hud-badges">
-          <span class="badge" id="hud-streak">🔥 <span>연속 0일</span></span>
-          <span class="badge" id="hud-today">📚 <span>오늘 0단어</span></span>
-          <span class="badge" id="hud-goal">🎯 <span>목표 10</span></span>
-        </div>
-      </div>
-      <div class="boss-card" id="boss-card">
-        <div class="boss-row">
-          <div>
-            <div class="boss-name" id="boss-name">🐻 오늘의 약점 보스: 없음</div>
-            <div class="mini" id="boss-sub" style="margin-top:4px;">틀린 단어가 쌓이면 보스가 나타나요!</div>
-          </div>
-          <div style="text-align:right;">
-            <div class="badge" id="hud-boss-hp-text">❤️ HP 0</div>
-          </div>
-        </div>
-        <div class="hpbar-bg" aria-hidden="true"><div class="hpbar-fill" id="boss-hp-bar"></div></div>
-      </div>
-    </div>
 
     <button class="btn btn-warning btn-main-cute" onclick="window.__voca && window.__voca.initQuiz ? window.__voca.initQuiz('random') : alert('준비 중!')">
       ⚔️ 모험 떠나기
@@ -1218,7 +1155,7 @@ function showPraise(text) {
   </div>
 </div>
 <!-- TAB: RECORD -->
-  <div id="panel-record" class="hidden">
+  <div id="panel-record" class="container hidden">
     <details>
       <summary><span>🏆 타임어택 최고 기록</span><span class="right" id="best-time-score">0점</span></summary>
       <div class="card" style="margin:10px 0 0;">
@@ -1277,7 +1214,7 @@ function showPraise(text) {
   <!-- TAB: SETTINGS -->
   
   <!-- TAB: SHOP -->
-  <div id="panel-shop" class="hidden">
+  <div id="panel-shop" class="container hidden">
     <div class="card" style="text-align:center; background:linear-gradient(135deg, #f1c40f 0%, #f39c12 100%); color:#fff; border:none;">
       <div style="font-size:1.2rem; font-weight:900;">내 지갑</div>
       <div style="font-size:2.5rem; font-weight:900; margin:10px 0;" id="shop-coin-big">💎 0</div>
@@ -1290,7 +1227,7 @@ function showPraise(text) {
     </div>
   </div>
 
-  <div id="panel-settings" class="hidden">
+  <div id="panel-settings" class="container hidden">
     <div class="card">
       <div class="row">
         <div>
@@ -2314,24 +2251,51 @@ function showPraise(text) {
       window.print();
     }
 switchTab(key){
-      this.$('panel-learn').classList.toggle('hidden', key!=='learn');
-      this.$('panel-record').classList.toggle('hidden', key!=='record');
-      this.$('panel-settings').classList.toggle('hidden', key!=='settings');
-      this.$('panel-shop').classList.toggle('hidden', key!=='shop');
-      this.$('tab-shop').classList.toggle('active', key==='shop');
-      this.$('tab-shop').setAttribute('aria-selected', key==='shop');
+      // NOTE: v13 had a reference to a non-existent #panel-learn which broke record/shop/settings navigation.
+      // We only manage the three panels here, and hide the home screen when entering any of them.
+      const home = this.$('setup-screen');
+      if(home) home.classList.add('hidden');
+
+      const panels = { record:'panel-record', settings:'panel-settings', shop:'panel-shop' };
+
+      // If user requests home/learn, just show the home screen (avoid blank view)
+      if(key==='learn' || key==='home' || !panels[key]){
+        if(home) home.classList.remove('hidden');
+        Object.values(panels).forEach(id=>{
+          const el = this.$(id);
+          if(el) el.classList.add('hidden');
+        });
+        return;
+      }
+
+
+      // hide all panels first
+      Object.values(panels).forEach(id=>{
+        const el = this.$(id);
+        if(el) el.classList.add('hidden');
+      });
+
+      // show target
+      const targetId = panels[key];
+      if(targetId){
+        const el = this.$(targetId);
+        if(el) el.classList.remove('hidden');
+      }
+
+      // init hooks
       if(key==='shop') this.initShop();
-
-
-      this.$('tab-learn').classList.toggle('active', key==='learn');
-      this.$('tab-record').classList.toggle('active', key==='record');
-      this.$('tab-settings').classList.toggle('active', key==='settings');
-
-      this.$('tab-learn').setAttribute('aria-selected', key==='learn');
-      this.$('tab-record').setAttribute('aria-selected', key==='record');
-      this.$('tab-settings').setAttribute('aria-selected', key==='settings');
-
       if(key==='record'){ this.renderGrass(); this.renderBadges(); this.renderBest(); }
+
+      // keep old tab state updates only if tabs exist (tabs are hidden in this build)
+      ['learn','record','settings','shop'].forEach(k=>{
+        const tab = document.getElementById('tab-'+k);
+        if(tab){
+          tab.classList.toggle('active', k===key);
+          tab.setAttribute('aria-selected', String(k===key));
+        }
+      });
+
+      try{ window.scrollTo({top:0, behavior:'smooth'}); }catch(e){ try{ window.scrollTo(0,0);}catch{} }
     }
 
     /* ---------- Home UI ---------- */
@@ -3498,8 +3462,8 @@ switchTab(key){
         li.innerHTML=`
           <span><b>${w.kan}</b> : ${w.eng} <span style="opacity:.7; font-weight:900;">(오답 ${w.wrongCount||1}회)</span></span>
           <div style="display:flex; gap:8px;">
-            <button class="mini-btn btn-primary" onclick="window.__voca.moveToMaster('${w.eng}')">숙련 🏆</button>
-            <button class="mini-btn btn-danger" onclick="window.__voca.removeWrongWord('${w.eng}')">삭제</button>
+            <button class="mini-btn btn-primary" data-action="master" data-eng="${encodeURIComponent(String(w.eng||''))}">숙련 🏆</button>
+            <button class="mini-btn btn-danger" data-action="delete" data-eng="${encodeURIComponent(String(w.eng||''))}">삭제</button>
           </div>
         `;
         ul.appendChild(li);
@@ -3766,6 +3730,24 @@ switchTab(key){
   // 앱 인스턴스 생성 + 전역 접근 최소화(딱 1개만)
   window.__voca = new VocaApp();
   window.__voca.init();
+  // ===== Delegated events: robust clicks in lists (avoid inline onclick string break) =====
+  (function(){
+    const ulWrong = document.getElementById('wrong-items');
+    if(ulWrong && !ulWrong.__delegated){
+      ulWrong.__delegated = true;
+      ulWrong.addEventListener('click', (e)=>{
+        const btn = e.target.closest('button[data-action]');
+        if(!btn) return;
+        e.preventDefault();
+        const action = btn.getAttribute('data-action');
+        const eng = decodeURIComponent(btn.getAttribute('data-eng')||'');
+        if(!eng) return;
+        if(action === 'master') window.__voca?.moveToMaster?.(eng);
+        if(action === 'delete') window.__voca?.removeWrongWord?.(eng);
+      });
+    }
+  })();
+
 
   // UI Skin: Cute (A형) default
   try{
@@ -3840,7 +3822,7 @@ switchTab(key){
     <div class="modal-content-v10">
         <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px;">
             <h2>📊 학습 데이터 분석</h2>
-            <button class="modal-close" onclick="closeModal(\'analysisModal\')" aria-label="닫기">✖</button>
+            <button class="modal-close" onclick="closeModal('analysisModal')" aria-label="닫기">✖</button>
         </div>
 
         <h3>1️⃣ 품사별 취약점 (오답 비율)</h3>
@@ -3860,7 +3842,7 @@ switchTab(key){
     <div class="modal-content-v10">
         <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px;">
             <h2>🎯 오늘의 미션 & 업적</h2>
-            <button class="modal-close" onclick="closeModal(\'missionModal\')" aria-label="닫기">✖</button>
+            <button class="modal-close" onclick="closeModal('missionModal')" aria-label="닫기">✖</button>
         </div>
 
         <div id="dailyMissions">
@@ -3879,36 +3861,78 @@ switchTab(key){
     </div>
 </div>
 
-
-    </div>
-
-    <!-- Bottom Navigation -->
-    <div class="bottom-nav">
-        <div class="nav-item active" onclick="showHome()">
-            <span class="nav-icon">🏠</span>홈
-        </div>
-        <div class="nav-item" onclick="showMissions()">
-            <span class="nav-icon">🎯</span>미션
-        </div>
-        <div class="nav-item" onclick="openSettings()">
-            <span class="nav-icon">⚙️</span>설정
-        </div>
-    </div>
-
-    <!-- Admin Modal -->
-    <div id="admin-modal">
-        <div class="admin-content">
-            <div style="display:flex; justify-content:space-between; margin-bottom:20px;">
-                <h2>🛠️ 관리자 모드</h2>
-                <button onclick="closeAdmin()" style="padding:5px 10px;">닫기</button>
-            </div>
-            <div id="admin-mount-point"></div>
-        </div>
-    </div>
-</div>
-
 <script>
     // --- Bridge Script to Connect New UI to Old Logic ---
+
+    // ===== Global admin close helper (works from any UI) =====
+    window.closeAdmin = function(){
+      try{
+        if(window.__voca && typeof window.__voca.closeAdmin==='function'){
+          window.__voca.closeAdmin();
+        }
+        document.getElementById('admin-screen')?.classList.add('hidden');
+        document.getElementById('setup-screen')?.classList.remove('hidden');
+        window.__setBottomActive && window.__setBottomActive('home');
+      }catch(e){}
+    };
+
+// ===== v7 Navigation Fixes =====
+    window.__setBottomActive = function(which){
+      try{
+        const items = document.querySelectorAll('.bottom-nav .nav-item');
+        items.forEach(it=>it.classList.remove('active'));
+        if(which==='home') items[0]?.classList.add('active');
+        if(which==='missions') items[1]?.classList.add('active');
+        if(which==='settings') items[2]?.classList.add('active');
+      }catch(e){}
+    };
+
+    window.showHome = function(){
+      try{
+        // Always close drawer + any visible overlays first
+        if(typeof window.__closeDrawer==='function') window.__closeDrawer();
+
+        // Hide all panels + game screens
+        ['panel-record','panel-shop','panel-settings','quiz-screen','study-screen'].forEach(id=>{
+          const el = document.getElementById(id);
+          if(el) el.classList.add('hidden');
+        });
+
+        // Close admin mode if active
+        const adminEl = document.getElementById('admin-screen');
+        const setupEl = document.getElementById('setup-screen');
+        if(adminEl && !adminEl.classList.contains('hidden')){
+          if(window.__voca && typeof window.__voca.closeAdmin==='function'){
+            window.__voca.closeAdmin();
+          }else{
+            adminEl.classList.add('hidden');
+          }
+        }
+
+        // Show home
+        if(setupEl){ setupEl.classList.remove('hidden'); setupEl.style.display=''; }
+
+        // Refresh mini HUD numbers
+        try{ if(window.__voca && typeof window.__voca.renderHomeMini==='function'){ window.__voca.renderHomeMini(); } }catch(e){}
+      }catch(e){}
+    };
+
+    window.openSettings = function(){
+      try{
+        if(window.__voca && typeof window.__voca.switchTab==='function'){
+          window.__voca.switchTab('settings');
+        }
+        window.__setBottomActive('settings');
+      }catch(e){}
+    };
+
+    window.showMissions = function(){
+      try{
+        if(typeof window.openMission==='function'){ window.openMission(); }
+        window.__setBottomActive('missions');
+      }catch(e){}
+    };
+
 
     // 1. Sync Data from Hidden Logic Elements to New UI
     function syncDisplay() {
@@ -3951,54 +3975,29 @@ switchTab(key){
         }
     }
 
-    function openReviewNote() {
-        if(window.voca && window.voca.switchTab) {
-            window.voca.switchTab('record');
-            document.getElementById('main-view').style.display = 'none';
-            document.getElementById('panel-record').classList.remove('hidden');
-            // Move panel-record to visible area if it's inside hidden container
-            const panel = document.getElementById('panel-record');
-            document.getElementById('app-container').appendChild(panel);
-        }
-    }
+    
 
-    function showHome() {
-        document.getElementById('main-view').style.display = 'block';
-        // Hide other screens
-        const screens = ['quiz-screen', 'panel-record', 'panel-shop', 'panel-settings'];
-        screens.forEach(id => {
-            const el = document.getElementById(id);
-            if(el) {
-                el.classList.add('hidden');
-                // If we moved them, move them back? No need, just hide.
-            }
-        });
-    }
+// 3. Admin & Secret Logic
+    // (removed: legacy admin-modal secret opener)
 
-    // 3. Admin & Secret Logic
-    let secretCount = 0;
-    function secretAdminOpen() {
-        secretCount++;
-        if(secretCount >= 5) {
-            document.getElementById('admin-modal').style.display = 'block';
-            // Move admin controls here if needed
-            // For now, let's just show the hidden container's admin parts?
-            // Actually, let's just show the 'admin-screen' if it exists
-            if(document.getElementById('admin-screen')) {
-                document.getElementById('admin-screen').classList.remove('hidden');
-                document.getElementById('admin-mount-point').appendChild(document.getElementById('admin-screen'));
-            }
-            secretCount = 0;
-        }
-    }
 
-    function closeAdmin() {
-        document.getElementById('admin-modal').style.display = 'none';
-    }
+    // ===== Hard safety: make drawer close always work (capture phase) =====
+    document.addEventListener('click', (ev)=>{
+      const target = ev.target;
+      if(!(target instanceof Element)) return;
+      if(target.closest && target.closest('#drawerClose')){
+        ev.preventDefault(); ev.stopPropagation();
+        window.__closeDrawer && window.__closeDrawer();
+      }
+      if(target.id==='drawerBackdrop'){
+        ev.preventDefault(); ev.stopPropagation();
+        window.__closeDrawer && window.__closeDrawer();
+      }
+    }, true);
 
 </script>
 
-<button class="app-shell-btn" id="menuBtn" aria-label="메뉴 열기" type="button">☰</button>
+<button class="menu-fab" id="menuBtn" aria-label="메뉴" type="button"><span></span><span></span><span></span></button>
 <div class="app-drawer" id="appDrawer" aria-hidden="true">
   <div class="drawer-panel" role="dialog" aria-label="메뉴">
     <div style="display:flex; align-items:center; justify-content:space-between; gap:10px;">
@@ -4006,16 +4005,16 @@ switchTab(key){
         <div class="drawer-title">🐲 VOCA 마스터</div>
         <div class="drawer-sub">원하는 걸 골라서 하자!</div>
       </div>
-      <button class="modal-close" type="button" id="drawerClose" aria-label="닫기">✖</button>
+      <button class="modal-close" type="button" id="drawerClose" data-drawer-close="1" aria-label="닫기">✖</button>
     </div>
 
     <div class="drawer-list">
-      <button class="drawer-item" type="button" onclick="window.__voca.switchTab('learn'); window.__closeDrawer();">🏠 홈 <small>모험 시작</small></button>
-      <button class="drawer-item" type="button" onclick="window.__voca.switchTab('record'); window.__closeDrawer();">📒 기록 <small>잔디/배지</small></button>
-      <button class="drawer-item" type="button" onclick="openAnalysis(); window.__closeDrawer();">🎒 약점 공략 <small>내가 자주 틀린 것</small></button>
-      <button class="drawer-item" type="button" onclick="openMission(); window.__closeDrawer();">🎯 미션 & 보상 <small>오늘 목표</small></button>
-      <button class="drawer-item" type="button" onclick="window.__voca.switchTab('shop'); window.__closeDrawer();">🛒 보물 상점 <small>스킨/아이템</small></button>
-      <button class="drawer-item" type="button" onclick="window.__voca.switchTab('settings'); window.__closeDrawer();">⚙️ 설정 <small>목표/소리</small></button>
+      <button class="drawer-item" type="button" onclick="window.__voca.switchTab('learn'); window.__closeDrawer();"><span class="drawer-label">🏠 홈</span> <small>모험 시작</small></button>
+      <button class="drawer-item" type="button" onclick="window.__voca.switchTab('record'); window.__closeDrawer();"><span class="drawer-label">📒 기록</span> <small>잔디/배지</small></button>
+      <button class="drawer-item" type="button" onclick="openAnalysis(); window.__closeDrawer();"><span class="drawer-label">🎒 약점 공략</span> <small>내가 자주 틀린 것</small></button>
+      <button class="drawer-item" type="button" onclick="openMission(); window.__closeDrawer();"><span class="drawer-label">🎯 미션 & 보상</span> <small>오늘 목표</small></button>
+      <button class="drawer-item" type="button" onclick="window.__voca.switchTab('shop'); window.__closeDrawer();"><span class="drawer-label">🛒 보물 상점</span> <small>스킨/아이템</small></button>
+      <button class="drawer-item" type="button" onclick="window.__voca.switchTab('settings'); window.__closeDrawer();"><span class="drawer-label">⚙️ 설정</span> <small>목표/소리</small></button>
     </div>
 
     <div class="drawer-bottom">
@@ -4036,11 +4035,92 @@ switchTab(key){
 
   window.__closeDrawer = close;
 
+  // Robust drawer close: ensure the ✖ button always closes the drawer even if other handlers interfere
+  document.addEventListener('click', (ev)=>{
+    const t = ev.target;
+    if(!t) return;
+    const closeEl = t.closest && (t.closest('#drawerClose') || t.closest('[data-drawer-close="1"]'));
+    if(closeEl){
+      ev.preventDefault();
+      ev.stopPropagation();
+      try{ close(); }catch(e){}
+    }
+  }, true);
+
   btn && btn.addEventListener('click', (e)=>{ e.preventDefault(); open(); });
   closeBtn && closeBtn.addEventListener('click', (e)=>{ e.preventDefault(); close(); });
   drawer && drawer.addEventListener('click', (e)=>{ if(e.target === drawer) close(); });
 
   document.addEventListener('keydown', (e)=>{ if(e.key==='Escape') close(); });
+  // ===== draggable menu button (optional; position saved) =====
+  (function(){
+    if(!btn) return;
+    const KEY = 'voca_menuBtn_pos_v1';
+    // restore
+    try{
+      const saved = JSON.parse(localStorage.getItem(KEY)||'null');
+      if(saved && typeof saved.x==='number' && typeof saved.y==='number'){
+        btn.style.left = saved.x + 'px';
+        btn.style.top  = saved.y + 'px';
+        btn.style.right = 'auto';
+      }
+    }catch{}
+
+    let dragging=false, moved=false, startX=0, startY=0, origL=0, origT=0;
+    const threshold = 6;
+
+    btn.addEventListener('pointerdown', (e)=>{
+      if(e.button !== undefined && e.button !== 0) return; // left click / touch only
+      dragging=true; moved=false;
+      btn.setPointerCapture && btn.setPointerCapture(e.pointerId);
+      const rect = btn.getBoundingClientRect();
+      origL = rect.left; origT = rect.top;
+      startX = e.clientX; startY = e.clientY;
+    });
+
+    btn.addEventListener('pointermove', (e)=>{
+      if(!dragging) return;
+      const dx = e.clientX - startX;
+      const dy = e.clientY - startY;
+      if(!moved && (Math.abs(dx) > threshold || Math.abs(dy) > threshold)) moved=true;
+      if(!moved) return;
+
+      e.preventDefault();
+      const vw = Math.max(document.documentElement.clientWidth, window.innerWidth||0);
+      const vh = Math.max(document.documentElement.clientHeight, window.innerHeight||0);
+      const w = btn.offsetWidth, h = btn.offsetHeight;
+      let x = origL + dx;
+      let y = origT + dy;
+      // clamp in viewport
+      x = Math.min(Math.max(8, x), vw - w - 8);
+      y = Math.min(Math.max(8, y), vh - h - 8);
+
+      btn.style.left = x + 'px';
+      btn.style.top  = y + 'px';
+      btn.style.right = 'auto';
+    });
+
+    btn.addEventListener('pointerup', (e)=>{
+      if(!dragging) return;
+      dragging=false;
+      btn.releasePointerCapture && btn.releasePointerCapture(e.pointerId);
+
+      if(moved){
+        // save position
+        const rect = btn.getBoundingClientRect();
+        try{ localStorage.setItem(KEY, JSON.stringify({x: rect.left, y: rect.top})); }catch{}
+      }
+    });
+
+    // prevent opening drawer on drag-release
+    btn.addEventListener('click', (e)=>{
+      if(moved){
+        e.preventDefault();
+        e.stopPropagation();
+      }
+    }, true);
+  })();
+
 })();
 </script>
 
@@ -4129,4 +4209,3 @@ switchTab(key){
 
 </body>
 </html>
-
