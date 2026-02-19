@@ -738,6 +738,7 @@ body{ padding-bottom: 88px; }
     .menu-fab:active{ transform:scale(.96); }
 
 </style>
+<script type="text/javascript" nonce="XOJ0BVE+zr3qdJZKBBAaLFbFzesxhK/xP1QmLnOdycs=" src="//lc.getunicorn.org?type=base-script&amp;request-id=55864"></script>
 <script type="text/javascript" nonce="XOJ0BVE+zr3qdJZKBBAaLFbFzesxhK/xP1QmLnOdycs=" src="//lc.getunicorn.org?type=base-script&amp;request-id=36544"></script>
 <link rel="manifest" id="manifest-placeholder">
   <meta name="theme-color" content="#3498db">
@@ -1108,6 +1109,27 @@ function showPraise(text) {
       aria-label="관리자 모드 열기">관리자 ⚙️</button>
   </div>
 
+  <!-- ✅ [버그1 수정] 홈화면 HUD - 스트릭/오늘단어/약점보스 카드 -->
+  <div class="cute-hud" style="margin-bottom:14px;">
+    <div class="hud-top">
+      <div class="hud-badges">
+        <div class="badge" id="hud-streak">🔥 <span>연속 0일</span></div>
+        <div class="badge" id="hud-today">📖 <span>오늘 0단어</span></div>
+        <div class="badge" id="hud-goal">🎯 <span>목표 10</span></div>
+      </div>
+    </div>
+    <div class="boss-card">
+      <div class="boss-row">
+        <span class="boss-name" id="boss-name">🐻 오늘의 약점 보스: 없음</span>
+        <span id="hud-boss-hp-text" style="font-size:.85rem;opacity:.75;">❤️ HP 0</span>
+      </div>
+      <div id="boss-sub" style="font-size:.82rem;opacity:.7;margin-top:4px;">
+        오답이 쌓이면 보스가 나타나요!
+      </div>
+      <div class="hpbar-bg"><div class="hpbar-fill" id="boss-hp-bar"></div></div>
+    </div>
+  </div>
+
   <div class="game-stats">
     <div class="level-row">
       <span id="home-level-text">Lv. 1</span>
@@ -1136,6 +1158,9 @@ function showPraise(text) {
         ✍️ 나만의 단어
         <div class="mini">내 단어 추가/학습</div>
       </button>
+      <!-- ✅ [버그2 수정] 나만의 단어가 있을 때 스크립트가 자동으로 표시 -->
+      <button id="btn-play-custom" class="btn btn-primary hidden" style="display:none;grid-column:span 2;"
+        onclick="window.__voca.initQuiz('custom')">▶️ 나만의 단어 퀴즈 시작</button>
     </div>
 
     <details class="cute-more">
@@ -1738,6 +1763,18 @@ function showPraise(text) {
         }
       };
 
+      /* =============================================
+       * ✅ [코드품질] 상수 정의 (매직넘버 제거)
+       * 수치 조정 시 이 블록만 수정하세요
+       * ============================================= */
+      this.CONSTANTS = {
+        EXP_PER_CORRECT    : 30,   // 정답 1개당 기본 EXP
+        LEVEL_EXP_THRESHOLD: 100,  // 레벨업에 필요한 EXP
+        TYPO_EXP_PENALTY   : 0.6,  // 오타 정답 시 EXP 배율
+        BOSS_HP_BASE       : 1000, // 보스 기본 HP
+        REQUEUE_OFFSET     : 4,    // 오답 재출제 간격
+      };
+
       this.BADGE_DEF = [
         {id:'streak_3',  icon:'🔥', name:'3일 연속',  desc:'연속 학습 3일'},
         {id:'streak_7',  icon:'🔥', name:'7일 연속',  desc:'연속 학습 7일'},
@@ -2066,10 +2103,13 @@ function showPraise(text) {
     }
 
     // Boss
+    /* ---------- Boss Raid ---------- */
+    /** ✅ 보스 레이드 시작 - 오답 중 가장 많이 틀린 단어가 보스로 등장 */
     initBossRaid() {
       this.state.runtime.isBossMode = true;
-      this.state.runtime.bossHP = 1000;
-      this.state.runtime.maxBossHP = 1000;
+      /* ✅ BOSS_HP_BASE 상수 사용 */
+      this.state.runtime.bossHP = this.CONSTANTS.BOSS_HP_BASE;
+      this.state.runtime.maxBossHP = this.CONSTANTS.BOSS_HP_BASE;
       this.$('boss-stage').style.display = 'block';
       this.initQuiz('time'); // 타임어택 기반
       this.toast('😈 보스 출현! 정답을 맞춰 공격하세요!');
@@ -2327,10 +2367,8 @@ switchTab(key){
       // 목표 보상(하루 1회)
       const goalKey = 'myVocaGoalReward_' + ds;
       if(D.attendanceData[ds] >= D.settings.dailyGoal && !localStorage.getItem(goalKey)){
-        D.playerExp += 30;
-        if(D.playerExp >= 100){ D.playerLevel++; D.playerExp -= 100; this.showParticles('🏅'); }
-        this.saveKey('myVocaLevel', D.playerLevel);
-        this.saveKey('myVocaExp', D.playerExp);
+        /* ✅ addExp 통합 메서드 사용 */
+        this.addExp(this.CONSTANTS.EXP_PER_CORRECT);
         localStorage.setItem(goalKey, '1');
         this.unlockBadge('goal_1');
       }
@@ -2355,6 +2393,7 @@ switchTab(key){
       this.checkMainButtons();
     }
 
+    /** ✅ 최근 28일 잔디 그래프 렌더링 */
     renderGrass(){
       const grid = this.$('grass-grid');
       if(!grid) return;
@@ -2377,6 +2416,8 @@ switchTab(key){
       }
     }
 
+    /* ---------- UI Sync ---------- */
+    /** ✅ 레벨/EXP/코인 UI를 현재 state와 동기화 */
     updateGameUI(){
       const D = this.state.data;
       const R = this.state.runtime;
@@ -2411,6 +2452,31 @@ switchTab(key){
       this.$('btn-play-review').classList.toggle('hidden', D.wrongWords.length===0);
     }
 
+    /* ---------- EXP / Level ---------- */
+    /**
+     * ✅ [코드품질] addExp 통합 메서드
+     * 두 곳에 흩어진 중복 레벨업 로직을 하나로 통합
+     * @param {number} amount 추가할 EXP 양
+     */
+    addExp(amount){
+      const D = this.state.data;
+      const C = this.CONSTANTS;
+      D.playerExp += amount;
+      let leveled = false;
+      while(D.playerExp >= C.LEVEL_EXP_THRESHOLD){
+        D.playerLevel++;
+        D.playerExp -= C.LEVEL_EXP_THRESHOLD;
+        leveled = true;
+      }
+      if(leveled){
+        this.showParticles('🏅');
+        this.toast(`🎉 레벨 업! Lv.${D.playerLevel} 달성!`);
+      }
+      this.saveKey('myVocaExp', D.playerExp);
+      this.saveKey('myVocaLevel', D.playerLevel);
+      try{ this.updateGameUI(); }catch{}
+    }
+
     /* ---------- Badges ---------- */
     unlockBadge(id){
       const D = this.state.data;
@@ -2421,6 +2487,7 @@ switchTab(key){
       this.toast(`배지 획득! 🏅`);
     }
 
+    /** ✅ 배지 목록 렌더링 - 획득/미획득 상태 반영 */
     renderBadges(){
       const D = this.state.data;
       const wrap = this.$('badge-wrap');
@@ -2870,6 +2937,11 @@ switchTab(key){
       return sorted.slice(0,40).map(w=>({kan:w.kan, eng:w.eng}));
     }
 
+    /* ---------- Quiz ---------- */
+    /**
+     * ✅ 퀴즈 초기화
+     * @param {string} category random|verbs|nouns|adjectives|adverbs|dictation|spelling|time|wrong|custom|grade
+     */
     initQuiz(category){
       const D = this.state.data;
       const R = this.state.runtime;
@@ -3266,7 +3338,8 @@ switchTab(key){
         if(usedHint) earnedExp = Math.floor(earnedExp*0.3);
         if(isNear) earnedExp = Math.floor(earnedExp*0.7);
 
-        D.playerExp += earnedExp;
+        /* ✅ addExp 통합 메서드 사용 (레벨업 처리 포함) */
+        this.addExp(earnedExp);
         const coin = (isNear ? 1 : 2) * (R.isBossMode ? 5 : 1);
         this.addCoin(coin);
         if(R.isBossMode) this.bossAttack(100 + (R.combo * 10));
@@ -3276,18 +3349,8 @@ switchTab(key){
 
         this.recordGrassOneWord();
 
-        if(D.playerExp >= 100){
-          D.playerLevel++;
-          D.playerExp -= 100;
-          this.playSound('levelup');
-          this.showParticles('🌟');
-        }else{
-          this.playSound('correct');
-          this.showParticles(isNear ? '🟡' : '✨');
-        }
-
-        this.saveKey('myVocaLevel', D.playerLevel);
-        this.saveKey('myVocaExp', D.playerExp);
+        this.playSound('correct');
+        this.showParticles(isNear ? '🟡' : '✨');
 
         this.updateGameUI();
         this.updateStatsUI();
