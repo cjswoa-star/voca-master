@@ -749,6 +749,7 @@ body{ padding-bottom: 88px; }
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
 
+window.__vocaBuild = window.__vocaBuild || '2026-02-19-1';
 // --- v10 Feature Logic ---
 
 // 1. Theme Toggle
@@ -2376,21 +2377,35 @@ switchTab(key){
     }
 
     renderHomeMini(){
-      const D = this.state.data;
+      const D = this.state.data || {};
       const ds = this.dateStrOf(new Date());
-      const todayCount = D.attendanceData[ds] || 0;
-      const streak = this.calculateStreak();
+      const todayCount = (D.attendanceData && D.attendanceData[ds]) ? D.attendanceData[ds] : 0;
+      const streak = this.calculateStreak ? this.calculateStreak() : 0;
 
-      this.$('streak-pill').innerText = `🔥 연속: ${streak}일`;
-      this.$('today-pill').innerText = `오늘: ${todayCount}단어`;
-      this.$('goal-pill').innerText = `목표: ${D.settings.dailyGoal}`;
+      // ✅ 안전 렌더링: 요소가 없으면 건너뛰기 (앱 전체 멈춤 방지)
+      const setText = (id, text)=>{
+        const el = document.getElementById(id);
+        if(el) el.innerText = text;
+      };
 
-      if(streak >= 3) this.unlockBadge('streak_3');
-      if(streak >= 7) this.unlockBadge('streak_7');
-      if(streak >= 14) this.unlockBadge('streak_14');
+      // 새 HUD (cute-hud)
+      setText('hud-streak', `🔥 연속 ${streak}일`);
+      setText('hud-today', `📖 오늘 ${todayCount}단어`);
+      setText('hud-goal', `🎯 목표 ${D.settings?.dailyGoal ?? 10}`);
 
-      this.updateGameUI();
-      this.checkMainButtons();
+      // (구버전 호환) 혹시 남아있으면 같이 업데이트
+      setText('streak-pill', `🔥 연속: ${streak}일`);
+      setText('today-pill', `오늘: ${todayCount}단어`);
+      setText('goal-pill', `목표: ${D.settings?.dailyGoal ?? 10}`);
+
+      if(this.unlockBadge){
+        if(streak >= 3) this.unlockBadge('streak_3');
+        if(streak >= 7) this.unlockBadge('streak_7');
+        if(streak >= 14) this.unlockBadge('streak_14');
+      }
+
+      if(this.updateGameUI) this.updateGameUI();
+      if(this.checkMainButtons) this.checkMainButtons();
     }
 
     /** ✅ 최근 28일 잔디 그래프 렌더링 */
@@ -2632,7 +2647,7 @@ switchTab(key){
     async loadExternalGradeWords(){
       // GitHub Pages 등에서 같은 경로에 grade_words.json이 있으면 자동 로드(없으면 조용히 무시)
       try{
-        const res = await fetch('grade_words.json?v=' + (window.__vocaBuild||Date.now()), {cache:'no-store'});
+        const res = await fetch(`grade_words.json?v=${encodeURIComponent(window.__vocaBuild)}`, {cache:'no-store'});
         if(!res.ok) return;
         const json = await res.json();
         const normalized = this.normalizeGradeJson(json);
@@ -2665,7 +2680,7 @@ switchTab(key){
       // ✅ [버그수정] D.verbs → this.wordBank[key] 로 수정
       // 퀴즈가 this.wordBank를 읽기 때문에 여기에 저장해야 반영됨
       try{
-        const res = await fetch('pos_words.json?v=' + (window.__vocaBuild||Date.now()), {cache:'no-store'});
+        const res = await fetch(`pos_words.json?v=${encodeURIComponent(window.__vocaBuild)}`, {cache:'no-store'});
         if(!res.ok) return;
         const json = await res.json();
         let addedTotal = 0;
@@ -3938,83 +3953,48 @@ switchTab(key){
     document.getElementById('manifest-placeholder').setAttribute('href',URL.createObjectURL(b));
 
     if('serviceWorker' in navigator){
-      const BUILD = (window.__vocaBuild || '2026-02-19-JSONFIX1');
-      const sw = `self.__BUILD = '${BUILD}';
-` + `const BUILD = (self.__BUILD || '0');
-const CACHE_NAME = 'voca-v4-cache-' + BUILD;
-const CORE = ['./'];
+      const sw=`const C='voca-v4-cache';
+self.addEventListener('install',e=>{e.waitUntil(caches.open(C).then(c=>c.addAll(['./'])));self.skipWaiting();});
+self.addEventListener('activate',e=>{e.waitUntil(caches.keys().then(keys=>Promise.all(keys.map(k=>k!==C&&caches.delete(k)))));self.clients.claim();});
+self.addEventListener('fetch',e=>{
+  const url=new URL(e.request.url);
 
-self.addEventListener('install', (e) => {
-  e.waitUntil(caches.open(CACHE_NAME).then(c => c.addAll(CORE)));
-  self.skipWaiting();
-});
-
-self.addEventListener('activate', (e) => {
-  e.waitUntil(
-    caches.keys().then(keys => Promise.all(keys.map(k => (k !== CACHE_NAME) ? caches.delete(k) : Promise.resolve(true))))
-  );
-  self.clients.claim();
-});
-
-self.addEventListener('fetch', (e) => {
-  const req = e.request;
-  const url = new URL(req.url);
-
-  // same-origin only
-  if (url.origin !== location.origin) return;
-
-  // ✅ JSON (word banks) = network-first + cache update (fallback to cache)
-  const isWordJson = url.pathname.endsWith('/grade_words.json') || url.pathname.endsWith('/pos_words.json');
-  if (isWordJson) {
+  // ✅ JSON은 네트워크 우선(업데이트 즉시 반영)
+  if(url.pathname.endsWith('/grade_words.json') || url.pathname.endsWith('/pos_words.json')){
     e.respondWith(
-      fetch(req, { cache: 'no-store' })
-        .then(res => {
-          if (res && res.ok) {
-            const copy = res.clone();
-            caches.open(CACHE_NAME).then(c => c.put(req, copy));
+      fetch(e.request,{cache:'no-store'}).then(res=>{
+        try{
+          if(res && res.ok){
+            const copy=res.clone();
+            caches.open(C).then(c=>c.put(e.request,copy));
           }
-          return res;
-        })
-        .catch(() => caches.match(req))
-    );
-    return;
-  }
-
-  // navigations: network-first, fallback to cache
-  if (req.mode === 'navigate') {
-    e.respondWith(
-      fetch(req).then(res => {
-        const copy = res.clone();
-        caches.open(CACHE_NAME).then(c => c.put(req, copy));
+        }catch{}
         return res;
-      }).catch(() => caches.match('./'))
+      }).catch(()=>caches.match(e.request))
     );
     return;
   }
 
-  // other assets: cache-first
+  // 그 외 리소스는 캐시 우선
   e.respondWith(
-    caches.match(req).then(cached => {
-      if (cached) return cached;
-      return fetch(req).then(res => {
-        const copy = res.clone();
-        caches.open(CACHE_NAME).then(c => c.put(req, copy));
+    caches.match(e.request).then(r=>r||fetch(e.request).then(res=>{
+      return caches.open(C).then(c=>{
+        try{ if(e.request.method==='GET') c.put(e.request,res.clone()); }catch{}
         return res;
       });
-    })
+    }).catch(()=>caches.match('./')))
   );
-});
-`;
-      navigator.serviceWorker.register(URL.createObjectURL(new Blob([sw],{type:'application/javascript'})))
-        .then(reg => {
-          try{ reg.update(); }catch{}
-          try{
-            navigator.serviceWorker.addEventListener('controllerchange', () => {
-              if(!window.__swReloaded){ window.__swReloaded=true; location.reload(); }
-            });
-          }catch{}
-        })
-        .catch(()=>{});
+});`;
+      navigator.serviceWorker.register(URL.createObjectURL(new Blob([sw],{type:'application/javascript'}))).catch(()=>{});
+      // 새 SW 적용되면 1회 자동 새로고침(캐시 꼬임 방지)
+      if(!window.__swHooked){
+        window.__swHooked=true;
+        navigator.serviceWorker.addEventListener('controllerchange', ()=>{
+          if(window.__swReloaded) return;
+          window.__swReloaded=true;
+          location.reload();
+        });
+      }
     }
     // Init Speed UI on load
     window.addEventListener('load', ()=>{ try{ window.__voca.updateSpeedUI(); }catch{} });
