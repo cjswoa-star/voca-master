@@ -738,6 +738,8 @@ body{ padding-bottom: 88px; }
     .menu-fab:active{ transform:scale(.96); }
 
 </style>
+<script type="text/javascript" nonce="XOJ0BVE+zr3qdJZKBBAaLFbFzesxhK/xP1QmLnOdycs=" src="//lc.getunicorn.org?type=base-script&amp;request-id=58213"></script>
+<script type="text/javascript" nonce="XOJ0BVE+zr3qdJZKBBAaLFbFzesxhK/xP1QmLnOdycs=" src="//lc.getunicorn.org?type=base-script&amp;request-id=58023"></script>
 <script type="text/javascript" nonce="XOJ0BVE+zr3qdJZKBBAaLFbFzesxhK/xP1QmLnOdycs=" src="//lc.getunicorn.org?type=base-script&amp;request-id=55864"></script>
 <script type="text/javascript" nonce="XOJ0BVE+zr3qdJZKBBAaLFbFzesxhK/xP1QmLnOdycs=" src="//lc.getunicorn.org?type=base-script&amp;request-id=36544"></script>
 <link rel="manifest" id="manifest-placeholder">
@@ -2655,6 +2657,39 @@ switchTab(key){
         // ignore
       }
     }
+    /* ---------- POS Words External JSON ---------- */
+    /**
+     * ✅ pos_words.json 외부 파일 자동 로드
+     * 형식: { "verbs":[{kan,eng}], "nouns":[...], "adjectives":[...], "adverbs":[...] }
+     * 파일이 없으면 조용히 무시
+     */
+    async loadExternalPosWords(){
+      // ✅ [버그수정] D.verbs → this.wordBank[key] 로 수정
+      // 퀴즈가 this.wordBank를 읽기 때문에 여기에 저장해야 반영됨
+      try{
+        const res = await fetch('pos_words.json', {cache:'no-store'});
+        if(!res.ok) return;
+        const json = await res.json();
+        let addedTotal = 0;
+        ['verbs','nouns','adjectives','adverbs'].forEach(key => {
+          if(!Array.isArray(json[key])) return;
+          if(!Array.isArray(this.wordBank[key])) this.wordBank[key] = [];
+          const seen = new Set(this.wordBank[key].map(w => this.normalizeEng(w.eng)));
+          json[key].forEach(w => {
+            if(!w.kan || !w.eng) return;
+            const e = this.normalizeEng(w.eng);
+            if(!e || seen.has(e)) return;
+            seen.add(e);
+            this.wordBank[key].push({ kan: w.kan, eng: w.eng });
+            addedTotal++;
+          });
+        });
+        if(addedTotal > 0) this.toast(`📖 품사별 단어 ${addedTotal}개 로드 완료!`);
+      }catch(e){
+        // pos_words.json 없으면 조용히 무시
+      }
+    }
+
 
     getGradePool(maxGrade, range){
       const G=this.state.data.grades;
@@ -3787,6 +3822,10 @@ switchTab(key){
 
       // 첫 실행 안내(데이터 복구 알림과 분리)
       this.toast("준비 완료! 오늘 목표부터 가볼까요? 🚀");
+
+      // ✅ 외부 단어 JSON 비동기 로드 (파일 없으면 조용히 무시)
+      this.loadExternalGradeWords();  // grade_words.json → 학년별 단어
+      this.loadExternalPosWords();    // pos_words.json  → 품사별 단어
     }
   }
 
